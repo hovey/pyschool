@@ -154,7 +154,7 @@ objects = []
 for item in items:
     object = sf.create(item)
     if object:
-        objects.append(sf.create(item))
+        objects.append(object)
     else:
         print('Item is None from factory, so not added to Client object list.')
 
