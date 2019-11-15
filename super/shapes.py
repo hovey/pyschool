@@ -45,7 +45,10 @@ class Shape(ABC):
 
     @dx.setter
     def dx(self, value):
-        self._dx = value
+        if value > 0:
+            self._dx = value
+        else:
+            raise ValueError('Dimension cannot be set to a negative value.  No change to existing dimension.')
 
     @property
     def dy(self):
@@ -53,7 +56,10 @@ class Shape(ABC):
 
     @dy.setter
     def dy(self, value):
-        self._dy = value
+        if value > 0:
+            self._dy = value
+        else:
+            raise ValueError('Dimension cannot be set to a negative value.  No change to existing dimension.')
 
 
 class Rectangle(Shape):
@@ -154,4 +160,5 @@ for item in items:
 
 for object in objects:
     object.dx = 2
+    # object.dy = -4  # will cause error, values must be positive
     object.metrics()
