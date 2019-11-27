@@ -30,6 +30,24 @@ Verbs, in general, can harbor lots of dead weight and bloat.  Instead of `set` o
 
 Thus, verbs, *in the service API*, invite the slippery slope of coupling client to a service's implementation, which is bad.  Prefer to couple the client to the service's interface.  That way, should the implementation change, it does not propagate changes to the client, forcing them to update how they use the service.
 
+## Code Smell
+
+Consider the string of `if` checking:
+```python
+  if barks:
+    # do something with Dog objects
+  
+  if meows:
+    # do something with Cat objects
+    
+  if tweets:
+    # do something with Bird objects
+```
+
+This is an example of `code smell`, which means the code has sufficent *function* but has weak *form*.  In this example, the client is forever checking the myriad of different `Animal` descendants.  As the number of `Animals` increases, clients must modify their code everyhere they used this smelly pattern.  
+
+More on this pattern later.
+
 ## References
 
 * [Effective-Python](https://hacktec.gitbooks.io/effective-python/content/en/Chapter1/Chapter1.html)
