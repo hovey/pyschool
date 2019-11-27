@@ -9,7 +9,7 @@ Strive for `D.R.Y.` (don't repeat yourself).  Avoid `W.E.T.` (write everything t
 
 ## Convention > Configuration
 
-Code should just run the first time, without clients needing to spend excessive amount of time configuring prior to the run.  Use default values.  Allow clients to modify the default values.
+Code should just run the first time, without clients needing to spend excessive amount of time configuring prior to the run.  Services should use default values.  Allow clients to modify the default values through the service's API.
 
 ## Kill all verbs
 
@@ -22,13 +22,13 @@ Consider
 ```
 versus
 ```python
-  color(self, value):  # lead
+  color(self, value):  # not bloated
     self._color = value
  ```
 
-Verbs, in general, can harbor lots of dead weight and bloat.  Instead of `set` other verbs that could be used with `color` are `calculate` (e.g., RBG or alpha channels) or `update` or `render` or `draw` or `paint` or `apply`... and really these verbs are hallmarks of implementation, not interface; they start to expose the service's internals for returning a color to the client.  
+Verbs, in general, can harbor lots of dead weight and bloat.  Instead of `set` other verbs that could be used with `color` are `calculate` (e.g., RBG or alpha channels) or `update` or `render` or `draw` or `paint` or `apply`... and really these verbs are hallmarks of implementation, not interface; they start to expose the service's internals for returning a color to the client.  And, they are unnecessary noise for the client, who either just wants to get or set the color, and not worry about how the same is implemented. 
 
-Thus, verbs invite the slippery slope of coupling client to a service's implementation, which is bad.  Prefer to couple the client to the service's interface.  That way, then the implementation needs to change, it does not propagate changes to the client, forcing them to update how they use the service.
+Thus, verbs, *in the service API*, invite the slippery slope of coupling client to a service's implementation, which is bad.  Prefer to couple the client to the service's interface.  That way, should the implementation change, it does not propagate changes to the client, forcing them to update how they use the service.
 
 ## References
 
