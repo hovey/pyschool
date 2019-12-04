@@ -35,7 +35,7 @@ Thus, verbs, *in the service API*, invite the slippery slope of coupling client 
 From the database standard, there are four main verbs that snap all tranactions: 
 
 * **CREATE** - aka calculate, generate, make, new
-* **READ** *this is **get***, copy
+* **READ** *this is **get***, copy, fetch
 * **UPDATE** *this is **set***, serialize, write
 * **DELETE** typically not used except for memory management
 
