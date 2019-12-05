@@ -1,11 +1,20 @@
 # pyschool
-Examples of Pythonic patterns
+Best Practices, Pythonic Patterns, Examples
 
-## Principles
+## Best Practices
 
 ## D.R.Y. it out
 
-Strive for `D.R.Y.` (don't repeat yourself).  Avoid `W.E.T.` (write everything twice).  When code is wet, dry it out.
+* `D.R.Y.` is don't repeat yourself.  
+* `W.E.T.` is write everything twice.
+* **Prefer dry code to wet code.**
+
+Dry code appears in the code base one and *only* one time.  Code that appears more than once it is not dry, it is wet.  
+
+When code is repeated `[2, 3, ...n]` times, it creates two code liabilities:
+
+1. **Maintainence** - a change to dry code requires only one update; the change is isolated to one location in the code base.  A change to wet code requires that all instances of the code snippet be updated, a tedious and potentially time consuming task when the repeated code is pervasive throughout the code base.  A project-wide search and replace may help find all instances, but requires additional maintainence effort.  
+2. **Bugs** -  moreover, wet code can be highly error prone.  A lurking instance of wet code that was not discovered when a maintainence update ocurred exposes the developer to risk code bugs stemming from unanticipated behavior.
 
 ## Convention > Configuration
 
@@ -32,7 +41,7 @@ Thus, verbs, *in the service API*, invite the slippery slope of coupling client 
 
 ### C.R.U.D.
 
-From the database standard, there are four main verbs that snap all tranactions: 
+From the database standard, there are four main verbs that span all tranactions: 
 
 * **CREATE** - aka calculate, generate, make, new
 * **READ** *this is **get***, copy, fetch
@@ -56,6 +65,53 @@ Consider the string of `if` checking:
 This is an example of `code smell`, which means the code has sufficent *function* but has weak *form*.  In this example, the client is forever checking the myriad of different `Animal` descendants.  As the number of `Animals` increases, clients must modify their code everyhere they used this smelly pattern.  
 
 More on this pattern later.
+
+## Pythonic Patterns
+
+### Attributes
+
+* See the [`get_set` example](get_set/README.md), which goes through a short code example, with evolution from bad, to better, to best implementations.  
+
+### Client-Service
+
+### Decorators
+
+### Error Checking (asking forgiveness, not permission)
+
+### Factory
+
+### Import
+
+* When [importing modules](importable/importable.md) from non-local directories.  Used often in client-service patterns.
+
+### Inheritance
+
+* A compact [`example`](inheritance_farm/readme.txt), showing a verb astraction (e.g., `speak`) and inheritance of behavior, with a simple client-service architecture.
+* [shapes](super/shapes.py)
+
+### Iteration
+
+* See [`for_loop_vs_iterator.py`](for_loop_v_iterator.py) for an example.
+
+### Model, View, Controller (MVC)
+
+* [shapes_mvc](super/shapes_mvc.py)
+
+## Examples
+
+### Computation
+
+* [Ordinary least squares](least_squares/ols.py)
+* Several examples in the `monkey_see` folder  
+
+### Matplotlib
+
+* [Anatomy of a figure](anatomy_of_figure/anatomy_of_figure.py), a reproduction of a well-known exposition of features available in Matplotlib.
+* [Element scale versus density](element_scale_v_density/element_scale_v_density.py), an example of a log-scale plot.
+* [Growth Charts](growth_charts/README.md), attributes of error checking, kwarg forwarding, fill between, and color transparency.
+* [Introductory tutorials](introductory_tutorials.py)
+* [Quartiles](quartiles/pfield.py)
+
 
 ## References
 
