@@ -76,7 +76,7 @@ More on this pattern later.
 
 ### Decorators
 
-### Error Checking (asking forgiveness, not permission)
+### Error Checking (ask for forgiveness, not permission)
 
 ### Factory
 
