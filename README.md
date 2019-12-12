@@ -64,8 +64,6 @@ Consider the string of `if` checking:
 
 This is an example of `code smell`, which means the code has sufficent *function* but has weak *form*.  In this example, the client is forever checking the myriad of different `Animal` descendants.  As the number of `Animals` increases, clients must modify their code everyhere they used this smelly pattern.  
 
-More on this pattern later.
-
 ## Pythonic Patterns
 
 ### Attributes
@@ -74,11 +72,21 @@ More on this pattern later.
 
 ### Client-Service
 
+* To come.
+
 ### Decorators
+
+* An [example](decorators.py), using factorial, `tic-toc` timing convention, and [memoization](https://en.wikipedia.org/wiki/Memoization).
+* See also [Real Python](https://realpython.com/primer-on-python-decorators/), [Wiki Python](https://wiki.python.org/moin/PythonDecorators), [Yasoob Khalid](http://book.pythontips.com/en/latest/decorators.html)
 
 ### Error Checking (ask for forgiveness, not permission)
 
+* To come.
+
 ### Factory
+
+* Creation of [shapes](super/shapes.py) with a dictionary.
+* *To do*: get Ani's reference to non-dictionary creation.
 
 ### Import
 
@@ -86,7 +94,7 @@ More on this pattern later.
 
 ### Inheritance
 
-* A compact [`example`](inheritance_farm/readme.txt), showing a verb astraction (e.g., `speak`) and inheritance of behavior, with a simple client-service architecture.
+* A compact [example](inheritance_farm/readme.txt), showing a verb astraction (e.g., `speak`) and inheritance of behavior, with a simple client-service architecture.
 * [shapes](super/shapes.py)
 
 ### Iteration
@@ -96,6 +104,11 @@ More on this pattern later.
 ### Model, View, Controller (MVC)
 
 * [shapes_mvc](super/shapes_mvc.py)
+
+### Unit Test
+
+* An [example](test_unittest.py), using the [unittest.mock](https://docs.python.org/3/library/unittest.mock.html#) library for testing in Python.
+* [Real Python](https://realpython.com/python-mock-library/) article.  
 
 ## Examples
 
