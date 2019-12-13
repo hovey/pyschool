@@ -76,6 +76,7 @@ This is an example of `code smell`, which means the code has sufficent *function
 
 ### Decorators
 
+* An [example](logging_decorator.py) of a logging decorator pattern, which can help D.R.Y. out code (based on [this example](http://book.pythontips.com/en/latest/decorators.html#logging)).
 * An [example](decorators.py), using factorial, `tic-toc` timing convention, and [memoization](https://en.wikipedia.org/wiki/Memoization).
 * See also [Real Python](https://realpython.com/primer-on-python-decorators/), [Wiki Python](https://wiki.python.org/moin/PythonDecorators), [Yasoob Khalid](http://book.pythontips.com/en/latest/decorators.html)
 
