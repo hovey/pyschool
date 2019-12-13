@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-import os
 from functools import wraps
 
 # def log_to_file  # to come
