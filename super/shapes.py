@@ -24,24 +24,19 @@ class Shape(ABC):
         print(f'  perimeter is {self.perimeter()}.\n')
 
     @abstractmethod
-    def area(self):
-        pass
+    def area(self): pass
 
     @abstractmethod
-    def perimeter(self):
-        pass
+    def perimeter(self): pass
 
     @property
-    def name(self):
-        return self._name
+    def name(self): return self._name
 
     @name.setter
-    def name(self, value):
-        self._name = value
+    def name(self, value): self._name = value
 
     @property
-    def dx(self):
-        return self._dx
+    def dx(self): return self._dx
 
     @dx.setter
     def dx(self, value):
@@ -51,8 +46,7 @@ class Shape(ABC):
             raise ValueError('Dimension cannot be set to a negative value.  No change to existing dimension.')
 
     @property
-    def dy(self):
-        return self._dy
+    def dy(self): return self._dy
 
     @dy.setter
     def dy(self, value):
@@ -66,7 +60,7 @@ class Rectangle(Shape):
     def __init__(self, dx=1, dy=1):
     # def __init__(self):
         super().__init__(dx, dy)
-        self.name = 'Rectangle'
+        self.name = 'Rectangle'  # use the setter
         print(self.name + f' constructor called with length={dx}, width={dy}.')
 
     def area(self):  # override
@@ -79,7 +73,7 @@ class Rectangle(Shape):
 class Square(Rectangle):
     def __init__(self, dx=1):
         super().__init__(dx, dx)
-        self.name = 'Square'
+        self.name = 'Square'  # use the setter
         print(self.name + f' constructor called with length={dx}.')
 
     @property

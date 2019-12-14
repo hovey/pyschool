@@ -64,6 +64,14 @@ Consider the string of `if` checking:
 
 This is an example of `code smell`, which means the code has sufficent *function* but has weak *form*.  In this example, the client is forever checking the myriad of different `Animal` descendants.  As the number of `Animals` increases, clients must modify their code everyhere they used this smelly pattern.  
 
+## Client-Service Decoupling
+
+Services should expose client functionality through a service API.  The API will be better when it [avoids verbs](README.md#kill-all-non-crud-verbs-in-apis).  Services should not expose implementation.  
+
+Clients should code to a service's interface, not implementation.  This allows the client to be only loosely coupled to the service, which is good.  Tight coupling is bad.  Loose coupling allows the client and the service to change over time independent from one another.  A change to the service that also requires a change to any and all clients who have used the service in the past is an example of [code smell](README.md#code-smell).
+
+
+
 ## Pythonic Patterns
 
 ### Attributes
@@ -84,10 +92,8 @@ This is an example of `code smell`, which means the code has sufficent *function
 
 * To come.
 
-### Factory
+### [Factory](factory.md)
 
-* Creation of [shapes](super/shapes.py) with a dictionary.
-* *To do*: get Ani's reference to non-dictionary creation.
 
 ### Import
 
