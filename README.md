@@ -26,8 +26,8 @@ Code should just run the first time, without clients needing to spend excessive 
 
 Consider
 ```python
-  set_color(self, new_color):  # bloated
-    self._color = new_color
+  set_color(self, value):  # bloated
+    self._color = value
 ```
 versus
 ```python
