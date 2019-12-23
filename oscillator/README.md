@@ -3,6 +3,7 @@
 ## References
 
 * Gundes YYYY 2dof oscillator
+* Jasper repo (private) Jasper/vision/script/two_dof_oscillator.m
 * Koumlis 2019 strain rate open cell foam
 * Rao 2011 mechanical vibrations 5th edition
 * SciPy Cookbook 2018, Coupled spring-mass system, https://scipy-cookbook.readthedocs.io/items/CoupledSpringMassSystem.html, accessed 2019-12-23.
