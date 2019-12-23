@@ -1,11 +1,9 @@
 #!/usr/bin/env python
-
 import sys
 import numpy as np
 from scipy.integrate import odeint
+from scipy import linalg
 import json
-# import dudt_rhs as rhs
-
 
 def dudt_rhs(state_variables, time, parameters=[1, 1, 1, 1]):
     """ Returns the right-hand-side (RHS) vector for the system of 
@@ -36,10 +34,6 @@ def dudt_rhs(state_variables, time, parameters=[1, 1, 1, 1]):
     u1, u2, u3, u4 = state_variables
     m1, m2, k1, k2 = parameters
 
-    M = np.array([[m1, 0.0], [0.0, m2]])
-    K = np.array([[k1 + k2, -k2], [-k2, k2]])
-
-    # eigenvalues = linalg.eigvals(M, K)
 
     rhs = [u3,
             u4,
@@ -53,6 +47,7 @@ def main(argv):
 
     try:
         input_file = argv[0]
+        input_file_base = input_file.split('.')[0]
     except IndexError as error:
         print(f'Error: {error}.')
         print('Check script pattern: ' + help_string)
@@ -98,12 +93,27 @@ def main(argv):
     parameters = [m1, m2, k1, k2]
     initial_conditions = [u1_at_0, u2_at_0, u1dot_at_0, u2dot_at_0]
 
+    M = np.array([[m1, 0.0], [0.0, m2]])
+    K = np.array([[k1 + k2, -k2], [-k2, k2]])
+
+    eigenvalues = linalg.eigvals(K, M)
+    frequencies = np.sqrt(eigenvalues)
+
+    print('Initial frequency and period content:')
+    for i, freq in enumerate(frequencies, start=1):
+        period = 2 * np.pi / freq
+        print(f'  frequency {i}: {freq} radians/second    =>    period {i}: {period} seconds.')
+
     solution = odeint(dudt_rhs, initial_conditions, t, args=(parameters,), atol=abs_error, rtol=rel_error)
 
+    # write solution to a file, write each channel as a separate file
+    channel_strings = ['u1', 'u2', 'u1dot', 'u2dot']
 
+    for i, str in enumerate(channel_strings, start=0):
+        file_string = input_file_base + '_t_' + str + '.csv'
+        np.savetxt(file_string, np.transpose([t, solution[:,i]]), delimiter=',')
+        print(f'Saved file: {file_string}')
 
-    a = 4
-    
 
 if __name__ == '__main__':
     main(sys.argv[1:])

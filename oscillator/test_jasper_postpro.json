@@ -1,0 +1,44 @@
+{
+    "u1": {
+        "class": "model",
+        "folder": "../oscillator",
+        "file": "test_jasper_t_u1.csv",
+        "skip_rows": 0,
+        "inverted": 0,
+        "xoffset": 0.0,
+        "plot_kwargs": {
+            "color": "red",
+            "label": "u1",
+            "linestyle": "-",
+            "linewidth": 2
+        }
+    },
+    "u2": {
+        "class": "model",
+        "folder": "../oscillator",
+        "file": "test_jasper_t_u2.csv",
+        "skip_rows": 0,
+        "inverted": 0,
+        "xoffset": 0.0,
+        "plot_kwargs": {
+            "color": "green",
+            "label": "u2",
+            "linestyle": "-",
+            "linewidth": 2
+        }
+    },
+    "displacement": {
+        "class": "view",
+        "folder": ".",
+        "file": "test_jasper_postpro_u.pdf",
+        "figure_args": {
+            "figsize": "(8.0, 6.0)"
+        },
+        "title": "test jasper displements",
+        "xlabel": "time (s)",
+        "ylabel": "displacement (m)",
+        "display": 1,
+        "latex": 1,
+        "serialize": 1
+    }
+}
