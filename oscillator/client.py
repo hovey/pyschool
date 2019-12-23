@@ -4,39 +4,52 @@ import sys
 import numpy as np
 from scipy.integrate import odeint
 import json
+# import dudt_rhs as rhs
 
-# ----------------
-# input file begin
 
-# parameters
-# m1 = 1.0  # kg
-# k1 = 100  # N/m
-# 
-# m2 = 1.0  # kg
-# k2 = 10  # N/m
-# 
-# # initial conditions
-# u1_at_0 = 0  # m
-# u1dot_at_0 = -1  # m/s
-# 
-# u2_at_0 = 0 # m
-# u2dot_at_0 = -1  # m/s
-# 
-# # ODE solver paramters
-# abs_error = 1.0e-8
-# rel_error = 1.0e-6
-# 
-# # simulation
-# t_start = 0.0  # seconds
-# t_stop = 2 * np.pi  # seconds
-# dt = 0.01  # seconds, delta_t time step; 100 Hz equivalent
+def dudt_rhs(state_variables, time, parameters=[1, 1, 1, 1]):
+    """ Returns the right-hand-side (RHS) vector for the system of 
+    first-order ordinary differential equations describing the two
+    degree of freedom (DOF) spring mass system.
 
-# input file end
-# --------------
+    No gravity.
+
+    m1 u1'' + (k1 + k2) u1 - k2 u2 = 0
+    m2 u2''       - k2  u1 + k2 u2 = 0
+
+    Let
+        u3 = u1'  # velocity of u1
+        u4 = u2'  # velocity of u2
+
+    Then
+
+        LHS = RHS
+        LHS = [u1', u2', u3', u4'] = dydt
+        
+        RHS = 
+            [ u3,
+              u4,
+              ( (k1 + k2) u1 - k2 u2 ) / (-m1),
+              ( -k2 u1 + k2 u2 ) / (-m2)
+            ]
+    """
+    u1, u2, u3, u4 = state_variables
+    m1, m2, k1, k2 = parameters
+
+    M = np.array([[m1, 0.0], [0.0, m2]])
+    K = np.array([[k1 + k2, -k2], [-k2, k2]])
+
+    # eigenvalues = linalg.eigvals(M, K)
+
+    rhs = [u3,
+            u4,
+            ( (k1 + k2) * u1 - k2 * u2) / (-1.0 * m1),
+            ( -k2 * u1 + k2 * u2 / (-1.0 * m2))]
+    return rhs
 
 def main(argv):
 
-    help_string = '$ python two_dof_oscillator_client input_file.json'
+    help_string = '$ python client.py input_file.json'
 
     try:
         input_file = argv[0]
@@ -80,6 +93,15 @@ def main(argv):
         sys.exit('Error in time parameters input.')  # early exit 
     
     t = np.linspace(t_start, t_stop, num=nts, endpoint=True)
+
+    # collect parameters and initial conditions
+    parameters = [m1, m2, k1, k2]
+    initial_conditions = [u1_at_0, u2_at_0, u1dot_at_0, u2dot_at_0]
+
+    solution = odeint(dudt_rhs, initial_conditions, t, args=(parameters,), atol=abs_error, rtol=rel_error)
+
+
+
     a = 4
     
 
