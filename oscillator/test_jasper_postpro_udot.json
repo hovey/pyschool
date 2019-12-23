@@ -1,42 +1,42 @@
 {
-    "u1": {
+    "u1dot": {
         "class": "model",
         "folder": "../oscillator",
-        "file": "test_jasper_t_u1.csv",
+        "file": "test_jasper_t_u1dot.csv",
         "skip_rows": 0,
         "inverted": 0,
         "xoffset": 0.0,
         "plot_kwargs": {
             "color": "red",
-            "label": "u1",
+            "label": "$\\dot{u}_1$",
             "linestyle": "-",
             "linewidth": 2
         }
     },
-    "u2": {
+    "u2dot": {
         "class": "model",
         "folder": "../oscillator",
-        "file": "test_jasper_t_u2.csv",
+        "file": "test_jasper_t_u2dot.csv",
         "skip_rows": 0,
         "inverted": 0,
         "xoffset": 0.0,
         "plot_kwargs": {
             "color": "green",
-            "label": "u2",
+            "label": "$\\dot{u}_2$",
             "linestyle": "-",
             "linewidth": 2
         }
     },
-    "displacement": {
+    "velocity": {
         "class": "view",
-        "folder": ".",
-        "file": "test_jasper_postpro_u.pdf",
+        "folder": "../oscillator",
+        "file": "test_jasper_postpro_udot.pdf",
         "figure_args": {
             "figsize": "(8.0, 6.0)"
         },
-        "title": "test jasper displements",
+        "title": "test jasper velocities",
         "xlabel": "time (s)",
-        "ylabel": "displacement (m)",
+        "ylabel": "velocity $\\dot{u}_i$ (m/s)",
         "display": 1,
         "latex": 1,
         "serialize": 1
