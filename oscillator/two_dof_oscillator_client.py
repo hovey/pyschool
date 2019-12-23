@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# [base_directory]: $ python two_dof_oscillator_client input_file.json
 
 import sys
 import numpy as np
@@ -35,6 +34,18 @@ dt = 0.01  # seconds, delta_t time step; 100 Hz equivalent
 # input file end
 # --------------
 
+def main(argv):
+
+    help_string = '$ python two_dof_oscillator_client input_file.json'
+
+    try:
+        input_file = argv[0]
+    except IndexError as error:
+        print(f'Error: {error}.')
+        print('Check script pattern: ' + help_string)
+        print('Abnormal script termination.')
+        sys.exit('No input file specified.')
+
 if t_stop > t_start:
     nts = int((t_stop - t_start) / dt)
 else:
@@ -42,3 +53,7 @@ else:
     sys.exit('Error in time parameters input.')  # early exit 
 
 t = np.linspace(t_start, t_stop, num=nts, endpoint=True)
+
+
+if __name__ == '__main__':
+    main(sys.argv[1:])
