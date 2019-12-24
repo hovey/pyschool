@@ -69,7 +69,7 @@
         "figure_args": {
             "figsize": "(8.0, 6.0)"
         },
-        "title": "MHSRS Figure 11: (DOT, Bob) translational, helmet, hemi",
+        "title": "MHSRS Figure 11: DOT translational, helmet, hemi",
         "xlabel": "time (s)",
         "ylabel": "deceleration (Gs)",
         "display": 1,
