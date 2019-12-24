@@ -2,6 +2,7 @@
 import sys
 import numpy as np
 from scipy.integrate import odeint
+from scipy.integrate import solve_ivp
 from scipy import linalg
 import json
 
@@ -36,9 +37,47 @@ def dudt_rhs(state_variables, time, parameters=[1, 1, 1, 1]):
 
 
     rhs = [u3,
-            u4,
-            ( (k1 + k2) * u1 - k2 * u2) / (-1.0 * m1),
-            ( -k2 * u1 + k2 * u2 / (-1.0 * m2))]
+           u4,
+           ( (k1 + k2) * u1 - k2 * u2) / (-1.0 * m1),
+           ( -k2 * u1 + k2 * u2 / (-1.0 * m2))]
+    return rhs
+
+    
+def dudt_rhs_ivp(t, y, m1, m2, k1, k2):
+    """ Returns the right-hand-side (RHS) vector for the system of 
+    first-order ordinary differential equations describing the two
+    degree of freedom (DOF) spring mass system.
+
+    No gravity.
+
+    m1 u1'' + (k1 + k2) u1 - k2 u2 = 0
+    m2 u2''       - k2  u1 + k2 u2 = 0
+
+    Let
+        u3 = u1'  # velocity of u1
+        u4 = u2'  # velocity of u2
+
+    Then
+
+        LHS = RHS
+        LHS = [u1', u2', u3', u4'] = dydt
+        
+        RHS = 
+            [ u3,
+              u4,
+              ( (k1 + k2) u1 - k2 u2 ) / (-m1),
+              ( -k2 u1 + k2 u2 ) / (-m2)
+            ]
+    """
+    # u1, u2, u3, u4 = state_variables
+    u1, u2, u3, u4 = y
+    # m1, m2, k1, k2 = parameters
+
+
+    rhs = [u3,
+           u4,
+           ( (k1 + k2) * u1 - k2 * u2) / (-1.0 * m1),
+           ( -k2 * u1 + k2 * u2 / (-1.0 * m2))]
     return rhs
 
 def dvdt(t, v):
@@ -46,8 +85,8 @@ def dvdt(t, v):
     # test = 1
     # if test:
     #     nts = 4
-    #     t = t[0:nts]  # overwrite a small back for testing
-    #     v = v[0:nts]  # overwrite a small back for testing
+    #     t = t[0:nts]  # overwrite a small block for testing
+    #     v = v[0:nts]
 
     dt_initial = np.array([t[1] - t[0]])
     dt_internal = np.array([t[i+1] - t[i-1] for i in range(1, nts-1)])
@@ -125,24 +164,55 @@ def main(argv):
         period = 2 * np.pi / freq
         print(f'  frequency {i}: {freq} radians/second    =>    period {i}: {period} seconds.')
 
-    # solution = odeint(dudt_rhs, initial_conditions, t, args=(parameters,), atol=abs_error, rtol=rel_error)
-    # solution = odeint(dudt_rhs, initial_conditions, t, args=(parameters,), atol=abs_error, rtol=rel_error, printmessg=1)
-    solution = odeint(dudt_rhs, initial_conditions, t, args=(parameters,), printmessg=1)
+    solver_odeint = 0
+    
+    if solver_odeint:
+        # solution = odeint(dudt_rhs, initial_conditions, t, args=(parameters,), atol=abs_error, rtol=rel_error)
+        # solution = odeint(dudt_rhs, initial_conditions, t, args=(parameters,), atol=abs_error, rtol=rel_error, printmessg=1)
+        solution = odeint(dudt_rhs, initial_conditions, t, args=(parameters,), printmessg=1)
+        # unpack displacements
+        u1 = solution[:, 0]
+        u2 = solution[:, 1]
 
-    u1ddot = dvdt(t, solution[:,2])
-    u2ddot = dvdt(t, solution[:,3])
+        # unpack velocities
+        u1dot = solution[:, 2]
+        u2dot = solution[:, 3]
+
+    else:
+        solution_ivp = solve_ivp(fun=lambda t, y: dudt_rhs_ivp(t, y, m1, m2, k1, k2), t_span=(t[0], t[-1]), y0=initial_conditions, method='RK45', t_eval=t)
+
+        t = solution_ivp.t  # overwrite existing times and use from hereon
+
+        # unpack displacements
+        u1 = solution_ivp.y[0, :]
+        u2 = solution_ivp.y[1, :]
+    
+        # unpack velocities
+        u1dot = solution_ivp.y[2, :]
+        u2dot = solution_ivp.y[3, :]
+
+    # accelerations
+    u1ddot = dvdt(t, u1dot)
+    u2ddot = dvdt(t, u2dot)
+
+    # energies
+    ke1 = 0.5 * m1 * np.multiply(u1dot, u1dot)  # 1/2 m v^2
+    ke2 = 0.5 * m2 * np.multiply(u2dot, u2dot)
+    ke = ke1 + ke2
+
+    delta2 = u2 - u1
+    ie1 = 0.5 * k1 * np.multiply(u1, u1)  # u1 is the same as delta1, relative displacement
+    ie2 = 0.5 * k2 * np.multiply(delta2, delta2)
+    ie = ie1 + ie2
+
+    te = ke + ie   # total energy of the system, no gravity so no potential energy
 
     # write solution to a file, write each channel as a separate file
-    channel_strings = ['u1', 'u2', 'u1dot', 'u2dot', 'u1ddot', 'u2ddot']
+    channel_strings = ["u1", "u2", "u1dot", "u2dot", "u1ddot", "u2ddot", "ke", "ie", "te"]
 
-    for i, str in enumerate(channel_strings, start=0):
+    for str in channel_strings:
         file_string = input_file_base + '_t_' + str + '.csv'
-        if i < 4:
-            np.savetxt(file_string, np.transpose([t, solution[:,i]]), delimiter=',')
-        elif i < 5:
-            np.savetxt(file_string, np.transpose([t, u1ddot]), delimiter=',')
-        else:  # i = 5
-            np.savetxt(file_string, np.transpose([t, u2ddot]), delimiter=',')
+        np.savetxt(file_string, np.transpose([t, eval(str)]), delimiter=',')
         print(f'Saved file: {file_string}')
 
 

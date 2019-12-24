@@ -38,7 +38,7 @@
         "xlabel": "time (s)",
         "ylabel": "acceleration $\\ddot{u}_i$ (m/s$^2$)",
         "display": 1,
-        "latex": 1,
-        "serialize": 1
+        "latex": 0,
+        "serialize": 0
     }
 }

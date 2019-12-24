@@ -38,7 +38,7 @@
         "xlabel": "time (s)",
         "ylabel": "displacement $u_i$ (m)",
         "display": 1,
-        "latex": 1,
-        "serialize": 1
+        "latex": 0,
+        "serialize": 0
     }
 }
