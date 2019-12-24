@@ -80,26 +80,6 @@ def dudt_rhs_ivp(t, y, m1, m2, k1, k2):
            ( -k2 * u1 + k2 * u2 ) / (-1.0 * m2)]
     return rhs
 
-def dvdt(t, v):
-    nts = t.size
-    # test = 1
-    # if test:
-    #     nts = 4
-    #     t = t[0:nts]  # overwrite a small block for testing
-    #     v = v[0:nts]
-
-    dt_initial = np.array([t[1] - t[0]])
-    dt_internal = np.array([t[i+1] - t[i-1] for i in range(1, nts-1)])
-    dt_final = np.array([t[-1] - t[-2]])
-    dt = np.concatenate((dt_initial, dt_internal, dt_final))
-
-    dv_initial = np.array([v[1] - v[0]])
-    dv_internal = np.array([v[i+1] - v[i-1] for i in range(1, nts-1)])
-    dv_final = np.array([v[-1] - v[-2]])
-    dv = np.concatenate((dv_initial, dv_internal, dv_final))
-
-    a = np.divide(dv, dt)
-    return a
 
 def main(argv):
 
@@ -195,8 +175,8 @@ def main(argv):
         u2dot = solution_ivp.y[3, :]
 
     # accelerations
-    u1ddot = dvdt(t, u1dot)
-    u2ddot = dvdt(t, u2dot)
+    u1ddot = np.gradient(u1dot, t, edge_order=2)
+    u2ddot = np.gradient(u2dot, t, edge_order=2)
 
     # energies
     ke1 = 0.5 * m1 * np.multiply(u1dot, u1dot)  # 1/2 m v^2
