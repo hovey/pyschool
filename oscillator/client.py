@@ -125,6 +125,19 @@ def main(argv):
     k1 = model.get("k1", 1.0)  # N/m
     k2 = model.get("k2", 1.0)  # N/m
 
+    M = np.array([[m1, 0.0], [0.0, m2]])
+    K = np.array([[k1 + k2, -k2], [-k2, k2]])
+
+    eigenvalues = linalg.eigvals(K, M)
+    frequencies = np.sqrt(eigenvalues)
+
+    print('Initial frequency and period content:')
+    for i, freq in enumerate(frequencies, start=1):
+        period = 2 * np.pi / np.real(freq)
+        print(f'  frequency {i}: {freq} radians/second    =>    period {i}: {period} seconds.')
+
+    period_max = 2 * np.pi / np.real(np.min(frequencies))  # second
+
     # initial conditions
     u1_at_0 = model.get("u1_at_0", 0.1)  # m
     u2_at_0 = model.get("u2_at_0", 0.0)  # m
@@ -138,7 +151,7 @@ def main(argv):
 
     # simulation
     t_start = model.get("time_start", 0.0)  # seconds
-    t_stop = model.get("time_stop", 1.0)  # seconds
+    t_stop = model.get("time_stop", 0.5 * period_max)  # seconds
     dt = model.get("time_step", 0.1)  # seconds, delta_t time step; 10 Hz equivalent default
 
     if t_stop > t_start:
@@ -153,16 +166,6 @@ def main(argv):
     parameters = [m1, m2, k1, k2]
     initial_conditions = [u1_at_0, u2_at_0, u1dot_at_0, u2dot_at_0]
 
-    M = np.array([[m1, 0.0], [0.0, m2]])
-    K = np.array([[k1 + k2, -k2], [-k2, k2]])
-
-    eigenvalues = linalg.eigvals(K, M)
-    frequencies = np.sqrt(eigenvalues)
-
-    print('Initial frequency and period content:')
-    for i, freq in enumerate(frequencies, start=1):
-        period = 2 * np.pi / freq
-        print(f'  frequency {i}: {freq} radians/second    =>    period {i}: {period} seconds.')
 
     solver_odeint = 0
     
@@ -214,7 +217,6 @@ def main(argv):
         file_string = input_file_base + '_t_' + str + '.csv'
         np.savetxt(file_string, np.transpose([t, eval(str)]), delimiter=',')
         print(f'Saved file: {file_string}')
-
 
 
 if __name__ == '__main__':
