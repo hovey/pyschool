@@ -52,7 +52,7 @@
         "xlabel": "time (s)",
         "ylabel": "energy $E$ (J)",
         "display": 1,
-        "latex": 0,
-        "serialize": 0
+        "latex": 1,
+        "serialize": 1
     }
 }
