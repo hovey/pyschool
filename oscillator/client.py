@@ -39,7 +39,7 @@ def dudt_rhs(state_variables, time, parameters=[1, 1, 1, 1]):
     rhs = [u3,
            u4,
            ( (k1 + k2) * u1 - k2 * u2) / (-1.0 * m1),
-           ( -k2 * u1 + k2 * u2 / (-1.0 * m2))]
+           ( -k2 * u1 + k2 * u2 ) / (-1.0 * m2)]
     return rhs
 
     
@@ -77,7 +77,7 @@ def dudt_rhs_ivp(t, y, m1, m2, k1, k2):
     rhs = [u3,
            u4,
            ( (k1 + k2) * u1 - k2 * u2) / (-1.0 * m1),
-           ( -k2 * u1 + k2 * u2 / (-1.0 * m2))]
+           ( -k2 * u1 + k2 * u2 ) / (-1.0 * m2)]
     return rhs
 
 def dvdt(t, v):
