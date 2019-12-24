@@ -30,7 +30,7 @@
     "acceleration": {
         "class": "view",
         "folder": "../oscillator",
-        "file": "test_jasper_postpro_uddot.pdf",
+        "file": "test_jasper_uddot.pdf",
         "figure_args": {
             "figsize": "(8.0, 6.0)"
         },
