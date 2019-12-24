@@ -1,0 +1,44 @@
+{
+    "u1ddot": {
+        "class": "model",
+        "folder": "../oscillator",
+        "file": "parameter_search_t_u1ddot.csv",
+        "skip_rows": 0,
+        "inverted": 0,
+        "xoffset": 0.0,
+        "plot_kwargs": {
+            "color": "red",
+            "label": "$\\ddot{u}_1$",
+            "linestyle": "-",
+            "linewidth": 2
+        }
+    },
+    "u2ddot": {
+        "class": "model",
+        "folder": "../oscillator",
+        "file": "parameter_search_t_u2ddot.csv",
+        "skip_rows": 0,
+        "inverted": 0,
+        "xoffset": 0.0,
+        "plot_kwargs": {
+            "color": "green",
+            "label": "$\\ddot{u}_2$",
+            "linestyle": "-",
+            "linewidth": 2
+        }
+    },
+    "acceleration": {
+        "class": "view",
+        "folder": "../oscillator",
+        "file": "parameter_search_uddot.pdf",
+        "figure_args": {
+            "figsize": "(8.0, 6.0)"
+        },
+        "title": "parameter search accelerations",
+        "xlabel": "time (s)",
+        "ylabel": "acceleration $\\ddot{u}_i$ (m/s$^2$)",
+        "display": 1,
+        "latex": 0,
+        "serialize": 0
+    }
+}
