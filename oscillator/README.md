@@ -1,5 +1,9 @@
 # Oscillator
 
+Reproduce the MATLAB implementation of a two degree-of-freedom oscillator, from the repository `Jasper/vision/script/two_dof_oscillator.m`: 
+
+![image](configuration_t_1640_ms.png)
+
 ## References
 
 * Gundes YYYY 2dof oscillator
