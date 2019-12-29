@@ -9,7 +9,7 @@
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/XYFigure_client.py",
-            "args": ["../oscillator/test_jasper_postpro.json"],
+            "args": ["../oscillator/test_jasper_u.json"],
             "console": "integratedTerminal"
         }
     ]

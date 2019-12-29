@@ -106,8 +106,13 @@ class XYView(XYBase):
     def figure(self):
         """Create a figure (view) of the registered models to the screen."""
         if self._figure is None:
+            figsize_tuple = eval(self._figure_args['figsize'])
+            #fig.set_size_inches(figsize_tuple)  # https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure.set_size_inches
+
             # fig, ax = plt.subplots(nrows=1, **self._figure_args)
-            fig, ax = plt.subplots(nrows=1)  # temporary
+            # fig, ax = plt.subplots(nrows=1)  # temporary
+            fig, ax = plt.subplots(nrows=1, figsize=figsize_tuple)
+
             for model in self._models:
                 if model.is_inverted:
                     ax.plot(model.x + model._xoffset, -1.0 * model.y, **model.plot_kwargs)
