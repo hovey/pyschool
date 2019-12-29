@@ -37,6 +37,10 @@
         "title": "test jasper accelerations",
         "xlabel": "time (s)",
         "ylabel": "acceleration $\\ddot{u}_i$ (m/s$^2$)",
+        "yaxis_rhs": {
+            "scale": 9.81,
+            "label": "acceleration $\\ddot{u}_i$ (G)"
+        },
         "display": 1,
         "latex": 1,
         "serialize": 1

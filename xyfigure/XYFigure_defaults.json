@@ -23,11 +23,15 @@
 #         "folder": "output",  # target folder, peer to .json file
 #         "file": "XYFigure.pdf",
 #         "figure_args": {
-#             "figsize": "(8.0, 6.0)"  # currently 2019-12-18 not working, matplotlib default is used
+#             "figsize": "(8.0, 6.0)"
 #         },
 #         "title": "Figure 2: DOT, Bot, Bob translational, no helmet, MEP",  #  default is the "file" parameters, and YYYY-MM-DD post-fix
 #         "xlabel": "time (s)",  # default is "default x axis label"
 #         "ylabel": "acceleration (Gs)",  # default is "default y axis label"
+#         "yaxis_rhs": {  # optional, default is None (no right-hand-side yaxis)
+#             "scale": 10,
+#             "label": "acceleration $\\ddot{u}_i$ (G)"
+#         },
 #         "display": 1,  # bool, default is 1 (true), which shows to screen
 #         "latex": 0,  # bool, default is 0 (false), which is matplotlib fast
 #         "serialize": 0  # bool, default is 0 (false), which does not save to disc

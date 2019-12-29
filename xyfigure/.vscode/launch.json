@@ -5,11 +5,23 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: XYFigure_client",
+            "name": "XYFigure_client MHSRS exp",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/XYFigure_client.py",
-            "args": ["../oscillator/test_jasper_u.json"],
+            "args": [
+                "XYFigure_MHSRS_exp_only.json"
+            ],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "XYFigure_client oscillator",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/XYFigure_client.py",
+            "args": [
+                "../oscillator/test_jasper_uddot.json"
+            ],
             "console": "integratedTerminal"
         }
     ]

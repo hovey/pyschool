@@ -80,6 +80,9 @@ class XYView(XYBase):
         self._xlabel = kwargs.get('xlabel', 'default x axis label')
         self._ylabel = kwargs.get('ylabel', 'default y axis label')
 
+        # default = {'scale': 1, 'label': 'ylabel_rhs', 'verification': 0}
+        self._yaxis_rhs = kwargs.get('yaxis_rhs', None)
+
         # default value if figure_kwargs not client-supplied
         default = {'figsize': (11.0, 8.5)}  # inches, U.S. paper, landscape
         self._figure_args = kwargs.get('figure_args', default)
@@ -118,6 +121,17 @@ class XYView(XYBase):
                     ax.plot(model.x + model._xoffset, -1.0 * model.y, **model.plot_kwargs)
                 else:
                     ax.plot(model.x + model._xoffset, model.y, **model.plot_kwargs)
+
+            if self._yaxis_rhs:
+                rhs_axis_scale = self._yaxis_rhs.get('scale', 1)
+                rhs_axis_label = self._yaxis_rhs.get('label', None)
+
+                ax_rhs = fig.add_subplot(111, sharex=ax, frameon=False)
+                bottom, top = ax.get_ylim()
+                ax_rhs.set_ylim(rhs_axis_scale * bottom, rhs_axis_scale * top)
+                ax_rhs.yaxis.tick_right()
+                ax_rhs.yaxis.set_label_position('right')
+                ax_rhs.set_ylabel(rhs_axis_label)
 
             fig.suptitle(self._title)
             ax.set_xlabel(self._xlabel)
