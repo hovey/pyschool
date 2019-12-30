@@ -4,7 +4,7 @@
 
 Reproduce the MATLAB implementation of a two degree-of-freedom oscillator, from the repository `Jasper/vision/script/two_dof_oscillator.m`: 
 
-![image_system_configuration](configuration_t_1640_ms.png)
+![image_system_configuration](fig/configuration_t_1640_ms.png)
 
 ## Workflow
 
@@ -38,7 +38,7 @@ To plot `u2ddot` for example, post-processes as
 
 which will show the figure below, and save it as `test_jasper_uddot.pdf`.
 
-![image_acceleration](test_jasper_uddot.png)
+![image_acceleration](fig/test_jasper_uddot.png)
 
 ### Parameter Optimization
 
@@ -51,10 +51,10 @@ As a verification step, prior to the use of real experimental data, the closed-f
 The closed-form solution can be found in Rao 2011, with excerpts below:
 
 > Rao 2011:
-> ![Rao_2011_p472](Rao_2011_p472.png)
-![Rao_2011_p475](Rao_2011_p475.png)
-![Rao_2011_p476](Rao_2011_p476.png)
-![Rao_2011_p477](Rao_2011_p477.png)
+> ![Rao_2011_p472](fig/Rao_2011_p472.png)
+![Rao_2011_p475](fig/Rao_2011_p475.png)
+![Rao_2011_p476](fig/Rao_2011_p476.png)
+![Rao_2011_p477](fig/Rao_2011_p477.png)
 
 The Python script to generate the experimental response, both real and surrogate, is
 
