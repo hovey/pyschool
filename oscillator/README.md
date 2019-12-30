@@ -50,7 +50,8 @@ As a verification step, prior to the use of real experimental data, the closed-f
 
 The closed-form solution can be found in Rao 2011, with excerpts below:
 
-![Rao_2011_p472](Rao_2011_p472.png)
+> Rao 2011:
+> ![Rao_2011_p472](Rao_2011_p472.png)
 ![Rao_2011_p475](Rao_2011_p475.png)
 ![Rao_2011_p476](Rao_2011_p476.png)
 ![Rao_2011_p477](Rao_2011_p477.png)
