@@ -5,10 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: client.py",
+            "name": "client.py",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/client.py",
+            "args": ["test_jasper.json"],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "client_experiment.py",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/client_experiment.py",
             "args": ["test_jasper.json"],
             "console": "integratedTerminal"
         }
