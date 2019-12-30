@@ -64,13 +64,16 @@ $ python client_experiment.py test_jasper.json
 
 which will produce
 
+* Saved file: `test_jasper_t_u1_exp.csv`
+* Saved file: `test_jasper_t_u2_exp.csv`
 * Saved file: `test_jasper_t_u2ddot_exp_f1.csv`
 * Saved file: `test_jasper_t_u2ddot_exp_f2.csv`
 * Saved file: `test_jasper_t_u2ddot_exp.csv`
 
-which are the component signal and combined signal.  To post-process
+which are the component signal and combined signal.  To post-process, use:
 
 ```bash
+[~/pyschool/oscillator] $ python ../xyfigure/XYFigure_client.py test_jasper_u_exp.json
 [~/pyschool/oscillator] $ python ../xyfigure/XYFigure_client.py test_jasper_uddot_exp.json
 ```
 
