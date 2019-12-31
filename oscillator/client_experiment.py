@@ -136,12 +136,18 @@ def main(argv):
         X1_mode_1a = r2 * u1_at_0 - u2_at_0
         X1_mode_1b = (-r2 * u1dot_at_0 + u2dot_at_0) / omega_mode_1
 
-        X1_mode_1 = 1.0 / (r2 - r1) * np.sqrt( np.power(X1_mode_1a, 2) + np.power(X1_mode_1b, 2) )
+        # X1_mode_1 = 1.0 / (r2 - r1) * np.sqrt( np.power(X1_mode_1a, 2) + np.power(X1_mode_1b, 2) )
+        X1_mode_1 = -1.0 / (r2 - r1) * np.sqrt( np.power(X1_mode_1a, 2) + np.power(X1_mode_1b, 2) )
+        # X1_mode_1 = 1.0 / (r2 - r1) * np.sqrt( np.power(r2 * u1_at_0 - u2_at_0, 2) + np.power(-r2 * u1dot_at_0 - u2dot_at_0, 2) / omega_squared_mode_1 )
+        # X1_mode_1 = np.abs( 1.0 / (r2 - r1) * np.sqrt( np.power(r2 * u1_at_0 - u2_at_0, 2) + np.power(-r2 * u1dot_at_0 - u2dot_at_0, 2) / omega_squared_mode_1 ))
 
         X1_mode_2a = -r1 * u1_at_0 + u2_at_0
         X1_mode_2b = (r1 * u1dot_at_0 - u2dot_at_0) / omega_mode_2
         
-        X1_mode_2 = 1.0 / (r2 - r1) * np.sqrt( np.power(X1_mode_2a, 2) + np.power(X1_mode_2b, 2) )
+        # X1_mode_2 = 1.0 / (r2 - r1) * np.sqrt( np.power(X1_mode_2a, 2) + np.power(X1_mode_2b, 2) )
+        X1_mode_2 = -1.0 / (r2 - r1) * np.sqrt( np.power(X1_mode_2a, 2) + np.power(X1_mode_2b, 2) )
+        # X1_mode_2 = 1.0 / (r2 - r1) * np.sqrt( np.power(-r1 * u1_at_0 + u2_at_0, 2) + np.power(r1 * u1dot_at_0 - u2dot_at_0, 2) / omega_squared_mode_2 )
+        # X1_mode_2 = np.abs(1.0 / (r2 - r1) * np.sqrt( np.power(-r1 * u1_at_0 + u2_at_0, 2) + np.power(r1 * u1dot_at_0 - u2dot_at_0, 2) / omega_squared_mode_2 ))
 
         phi_1 = np.arctan(X1_mode_1b / X1_mode_1a)
         phi_2 = np.arctan(X1_mode_2b / X1_mode_2a)
@@ -156,8 +162,8 @@ def main(argv):
             print(f'  phase {i}: {phase} radians.')
 
         # displacements
-        u1_exp = X1_mode_1 * np.cos(omega_mode_1 * t + phi_1) + X1_mode_2 * np.cos(omega_mode_2 * t + phi_2)
-        u2_exp = r1 * X1_mode_1 * np.cos(omega_mode_1 * t + phi_1) + r2 * X1_mode_2 * np.cos(omega_mode_2 * t + phi_2)
+        u1 = X1_mode_1 * np.cos(omega_mode_1 * t + phi_1) + X1_mode_2 * np.cos(omega_mode_2 * t + phi_2)
+        u2 = r1 * X1_mode_1 * np.cos(omega_mode_1 * t + phi_1) + r2 * X1_mode_2 * np.cos(omega_mode_2 * t + phi_2)
 
 
     # # energies
@@ -175,7 +181,8 @@ def main(argv):
     # # write solution to a file, write each channel as a separate file
     # channel_strings = ["u1", "u2", "u1dot", "u2dot", "u1ddot", "u2ddot", "ke", "ie", "te"]
     # channel_strings = ["u1_exp", "u2_exp", "u2ddot_exp_f1", "u2ddot_exp_f2", "u2ddot_exp"]
-    channel_strings = ["u1_exp", "u2_exp"]
+    # channel_strings = ["u1_exp", "u2_exp"]
+    channel_strings = ["u1", "u2"]
 
     for str in channel_strings:
         file_string = input_file_base + '_t_' + str + '.csv'

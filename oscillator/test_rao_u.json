@@ -2,13 +2,13 @@
     "u1": {
         "class": "model",
         "folder": "../oscillator",
-        "file": "test_jasper_t_u1.csv",
+        "file": "test_rao_t_u1.csv",
         "skip_rows": 0,
         "inverted": 0,
         "xoffset": 0.0,
         "plot_kwargs": {
             "color": "red",
-            "label": "$u_1$",
+            "label": "$u_1$ Rao Ex 5.17, p517",
             "linestyle": "-",
             "linewidth": 2
         }
@@ -16,13 +16,13 @@
     "u2": {
         "class": "model",
         "folder": "../oscillator",
-        "file": "test_jasper_t_u2.csv",
+        "file": "test_rao_t_u2.csv",
         "skip_rows": 0,
         "inverted": 0,
         "xoffset": 0.0,
         "plot_kwargs": {
             "color": "green",
-            "label": "$u_2$",
+            "label": "$u_2$ Rao Ex 5.17, p517",
             "linestyle": "-",
             "linewidth": 2
         }
@@ -30,11 +30,11 @@
     "displacement": {
         "class": "view",
         "folder": "../oscillator",
-        "file": "test_jasper_u.pdf",
+        "file": "test_rao_u.pdf",
         "figure_args": {
             "figsize": "(8.0, 6.0)"
         },
-        "title": "test jasper displacements",
+        "title": "test Rao Ex 5.17, p517 displacements",
         "xlabel": "time (s)",
         "ylabel": "displacement $u_i$ (m)",
         "display": 0,
