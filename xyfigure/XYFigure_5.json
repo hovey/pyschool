@@ -1,8 +1,7 @@
-
 {
     "exp-ave": {
         "class": "model",
-        "folder": "dot-exp-helmet-0305-hemi-001",
+        "folder": "../../casco_sim/dot-exp-helmet-0305-hemi-001",
         "file": "shells-impacts-ave.csv",
         "skip_rows": 1,
         "inverted": 0,
@@ -15,7 +14,7 @@
     },
     "exp-1": {
         "class": "model",
-        "folder": "dot-exp-helmet-0305-hemi-001",
+        "folder": "../../casco_sim/dot-exp-helmet-0305-hemi-001",
         "file": "shell-2-impact-1.csv",
         "skip_rows": 1,
         "inverted": 0,
@@ -27,7 +26,7 @@
     },
     "exp-2": {
         "class": "model",
-        "folder": "dot-exp-helmet-0305-hemi-001",
+        "folder": "../../casco_sim/dot-exp-helmet-0305-hemi-001",
         "file": "shell-2-impact-2.csv",
         "skip_rows": 1,
         "inverted": 0,
@@ -39,7 +38,7 @@
     },
     "exp-3": {
         "class": "model",
-        "folder": "dot-exp-helmet-0305-hemi-001",
+        "folder": "../../casco_sim/dot-exp-helmet-0305-hemi-001",
         "file": "shell-3-impact-1.csv",
         "skip_rows": 1,
         "inverted": 0,
@@ -51,7 +50,7 @@
     },
     "exp-4": {
         "class": "model",
-        "folder": "dot-exp-helmet-0305-hemi-001",
+        "folder": "../../casco_sim/dot-exp-helmet-0305-hemi-001",
         "file": "shell-3-impact-2.csv",
         "skip_rows": 1,
         "inverted": 0,
@@ -64,15 +63,15 @@
     "Figure_5": {
         "class": "view",
         "folder": "output",
-        "file": "XYFigure_5.pdf",
+        "file": "XYFigure_5.svg",
         "figure_args": {
             "figsize": "(8.0, 6.0)"
         },
-        "title": "Figure 5: (DOT, Bob) translational, helmet, hemi",
+        "title": "Figure 5: Work in progress (DOT, Bob) translational, helmet, hemi",
         "xlabel": "time (s)",
         "ylabel": "deceleration (Gs)",
         "display": 1,
-        "latex": 1,
+        "latex": 0,
         "serialize": 1
     }
 }

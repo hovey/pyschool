@@ -1,8 +1,7 @@
-
 {
     "bot-026": {
         "class": "model",
-        "folder": "bot-2mm-non-0305-mep-026",
+        "folder": "../../casco_sim/bot-2mm-non-0305-mep-026",
         "file": "out_a12.csv",
         "skip_rows": 1,
         "inverted": 1,
@@ -15,7 +14,7 @@
     },
     "bob-033": {
         "class": "model",
-        "folder": "bob-1mm-5kg-non-0305-mep-033",
+        "folder": "../../casco_sim/bob-1mm-5kg-non-0305-mep-033",
         "file": "bob-033-acg.csv",
         "skip_rows": 1,
         "inverted": 1,
@@ -29,7 +28,7 @@
     "Figure_3": {
         "class": "view",
         "folder": "output",
-        "file": "XYFigure_3.pdf",
+        "file": "XYFigure_3.svg",
         "figure_args": {
             "figsize": "(8.0, 6.0)"
         },
@@ -37,7 +36,7 @@
         "xlabel": "time (s)",
         "ylabel": "deceleration (Gs)",
         "display": 1,
-        "latex": 1,
+        "latex": 0,
         "serialize": 1 
     }
 }

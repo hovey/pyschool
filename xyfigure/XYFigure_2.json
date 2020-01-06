@@ -1,8 +1,7 @@
-
 {
     "dot-exp": {
         "class": "model",
-        "folder": "dot-exp-non-0305-mep-000",
+        "folder": "../../casco_sim/dot-exp-non-0305-mep-000",
         "file": "out_mean.csv",
         "skip_rows": 1,
         "inverted": 0,
@@ -15,7 +14,7 @@
     },
     "dot-025": {
         "class": "model",
-        "folder": "dot-5mm-non-0305-mep-025",
+        "folder": "../../casco_sim/dot-5mm-non-0305-mep-025",
         "file": "out_a_mid.csv",
         "skip_rows": 1,
         "inverted": 1,
@@ -29,7 +28,7 @@
     "Figure_2": {
         "class": "view",
         "folder": "output",
-        "file": "XYFigure_2.pdf",
+        "file": "XYFigure_2.svg",
         "figure_args": {
             "figsize": "(8.0, 6.0)"
         },
@@ -37,7 +36,7 @@
         "xlabel": "time (s)",
         "ylabel": "deceleration (Gs)",
         "display": 1,
-        "latex": 1,
+        "latex": 0,
         "serialize": 1
     }
 }

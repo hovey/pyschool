@@ -1,4 +1,3 @@
-
 {
     "exp-ave": {
         "class": "model",
@@ -65,7 +64,7 @@
     "Figure_MHSRS": {
         "class": "view",
         "folder": "output",
-        "file": "XYFigure_MHSRS.pdf",
+        "file": "XYFigure_MHSRS_exp_only.svg",
         "figure_args": {
             "figsize": "(8.0, 6.0)"
         },
@@ -74,6 +73,6 @@
         "ylabel": "deceleration (Gs)",
         "display": 1,
         "latex": 0,
-        "serialize": 0
+        "serialize": 1
     }
 }
