@@ -23,7 +23,9 @@
 #         "folder": "output",  # target folder, peer to .json file
 #         "file": "XYFigure.pdf",
 #         "figure_args": {
-#             "figsize": "(8.0, 6.0)"
+#             "figsize": "(8.0, 6.0)",  # otherwise, matplotlib default
+#             "xlim": "(-0.001, 0.0210)",  # otherwise, matplotlib autofit
+#             "ylim": "(-10, 80)"  # otherwise, maplotlib autofit
 #         },
 #         "title": "Figure 2: DOT, Bot, Bob translational, no helmet, MEP",  #  default is the "file" parameters, and YYYY-MM-DD post-fix
 #         "xlabel": "time (s)",  # default is "default x axis label"
@@ -59,7 +61,9 @@
         "folder": "output",
         "file": "XYFigure.pdf",
         "figure_args": {
-            "figsize": "(8.0, 6.0)"
+            "figsize": "(8.0, 6.0)",
+            "xlim": "(-0.001, 0.0210)",
+            "ylim": "(-10, 80)"
         },
         "title": "Figure 2: DOT, Bot, Bob translational, no helmet, MEP",
         "xlabel": "time (s)",

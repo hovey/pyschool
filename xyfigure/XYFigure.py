@@ -84,7 +84,7 @@ class XYView(XYBase):
         self._yaxis_rhs = kwargs.get('yaxis_rhs', None)
 
         # default value if figure_kwargs not client-supplied
-        default = {'figsize': (11.0, 8.5)}  # inches, U.S. paper, landscape
+        default = {'figsize': '(11.0, 8.5)'}  # inches, U.S. paper, landscape
         self._figure_args = kwargs.get('figure_args', default)
 
         self._display = kwargs.get('display', True)
@@ -109,12 +109,19 @@ class XYView(XYBase):
     def figure(self):
         """Create a figure (view) of the registered models to the screen."""
         if self._figure is None:
-            figsize_tuple = eval(self._figure_args['figsize'])
-            #fig.set_size_inches(figsize_tuple)  # https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure.set_size_inches
 
             # fig, ax = plt.subplots(nrows=1, **self._figure_args)
             # fig, ax = plt.subplots(nrows=1)  # temporary
-            fig, ax = plt.subplots(nrows=1, figsize=figsize_tuple)
+            # fig, ax = plt.subplots(nrows=1, figsize=figsize_tuple)
+            fig, ax = plt.subplots(nrows=1)
+
+            figsize_tuple_str = self._figure_args.get('figsize', None)
+            if figsize_tuple_str:
+                figsize_tuple = eval(figsize_tuple_str)
+                fig.set_size_inches(figsize_tuple)
+
+            #fig.set_size_inches(figsize_tuple)  # https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure.set_size_inches
+            # self._folder = kwargs.get('folder', None)
 
             for model in self._models:
                 if model.is_inverted:
@@ -132,6 +139,14 @@ class XYView(XYBase):
                 ax_rhs.yaxis.tick_right()
                 ax_rhs.yaxis.set_label_position('right')
                 ax_rhs.set_ylabel(rhs_axis_label)
+
+            xlim_tuple_str = self._figure_args.get('xlim', None)
+            if xlim_tuple_str:
+                ax.set_xlim(eval(xlim_tuple_str))
+
+            ylim_tuple_str = self._figure_args.get('ylim', None)
+            if ylim_tuple_str:
+                ax.set_ylim(eval(ylim_tuple_str))
 
             fig.suptitle(self._title)
             ax.set_xlabel(self._xlabel)

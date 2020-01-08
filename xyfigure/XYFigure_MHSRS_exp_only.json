@@ -64,9 +64,11 @@
     "Figure_MHSRS": {
         "class": "view",
         "folder": "output",
-        "file": "XYFigure_MHSRS_exp_only.svg",
+        "file": "XYFigure_MHSRS_exp_only.pdf",
         "figure_args": {
-            "figsize": "(8.0, 6.0)"
+            "figsize": "(8.0, 6.0)",
+            "xlim": "(-0.001, 0.0210)",
+            "ylim": "(-10, 80)"
         },
         "title": "MHSRS Figure 11: DOT translational, helmet, hemi",
         "xlabel": "time (s)",
