@@ -1,0 +1,10 @@
+{
+  "circle": {
+    "name": "circle 0",
+    "radius": 5
+  },
+  "square": {
+    "name": "square 0",
+    "side_length": 5
+  }
+}
