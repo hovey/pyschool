@@ -94,7 +94,7 @@ Clients should code to a service's interface, not implementation.  This allows t
 
 ### Error Checking (ask for forgiveness, not permission)
 
-* To come.
+* See [examples](error_check.md).
 
 ### [Factory](factory.md)
 
