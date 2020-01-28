@@ -88,6 +88,10 @@ Clients should code to a service's interface, not implementation.  This allows t
 * An [example](decorators.py), using factorial, `tic-toc` timing convention, and [memoization](https://en.wikipedia.org/wiki/Memoization).
 * See also [Real Python](https://realpython.com/primer-on-python-decorators/), [Wiki Python](https://wiki.python.org/moin/PythonDecorators), [Yasoob Khalid](http://book.pythontips.com/en/latest/decorators.html)
 
+### Docstrings
+
+* See [Google docstring format](http://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings)
+
 ### Error Checking (ask for forgiveness, not permission)
 
 * To come.
