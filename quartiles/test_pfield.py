@@ -1,20 +1,24 @@
-import unittest
 import os
-import pfield as pf
+import unittest
+from quartiles import pfield as pf
 
 
 class MyTestCase(unittest.TestCase):
     """
     This is the unittest of the pfield.py script.
     To test on command line:
-    $ python -m unittest -v pfield_test.py
+    $ cd ~/pyschool
+    $ python -m unittest -v quartiles/test_pfield.py
     """
     def test_input_folder_and_file(self):
-        input_folder = 'input'
-        self.assertTrue(os.path.isdir(input_folder))
-        print('Searching for input folder: ' + str(input_folder))
+        input_folder = 'quartiles/input'
+        abs_path = os.path.join(os.getcwd(), input_folder)
+        print(f'Using absolute path: {abs_path}')
+        # self.assertTrue(os.path.isdir(abs_path))
+        # print(f'Searching for input folder: {input_folder}')
 
-        os.chdir(input_folder)
+        # os.chdir(input_folder)
+        os.chdir(abs_path)
 
         input_file = 'input.csv'  # scheme requirement
         self.assertTrue(os.path.isfile(input_file))

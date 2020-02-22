@@ -15,24 +15,7 @@ class PostProcField:
 
     def __init__(self, folder):
         home = os.getcwd()
-        print('ProsProcField server initialized from folder' + str(home))
-        # a = np.array([1, 2, 3])
-        # print('numpy array a = ' + str(a))
-        # b = np.array([4, 5, 6])
-        # fix, ax = plt.subplots(nrows=1, figsize=(5, 5))
-        # ax.plot(a, b)
-        # plt.show()
-        # c = np.array([20, 2, 7, 1, 34])
-        # q0 = np.min(c)  # min, zeroth quartile
-        # q1 = np.quantile(c, 0.25)  # first quartile
-        # q2 = np.quantile(c, 0.50)  # second quartile, median
-        # q3 = np.quantile(c, 0.75)  # third quartile
-        # q4 = np.max(c)  # max
-        # print('Zeroth quartile = ' + str(q0))
-        # print('First quartile = ' + str(q1))
-        # print('Second quartile = ' + str(q2))
-        # print('Third quartile = ' + str(q3))
-        # print('Max = ' + str(q4))
+        print(f'pfield.py ProtProcField() server initialized from folder: {home}')
 
     def quartiles(self, array):
         q0 = np.min(array)
