@@ -10,7 +10,7 @@ class MyTestCase(unittest.TestCase):
     $ python -m unittest -v pfield_test.py
     """
     def test_input_folder_and_file(self):
-        input_folder = 'test_pfield'
+        input_folder = 'input'
         self.assertTrue(os.path.isdir(input_folder))
         print('Searching for input folder: ' + str(input_folder))
 
