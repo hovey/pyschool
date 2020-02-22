@@ -1,4 +1,5 @@
-![](https://github.com/hovey/pyschool/.github/workflows/calculator.yml/badge.svg)
+![](https://github.com/hovey/pyschool/workflows/calculator.yml/badge.svg)
+![CI](https://github.com/hovey/pyschool/workflows/CI/badge.svg)
 
 # pyschool
 Best Practices, Pythonic Patterns, Examples
