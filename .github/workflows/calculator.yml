@@ -17,4 +17,5 @@ jobs:
         echo test, and deploy your project.
     - name: Test with Pytest
       run: |
+        pip install pytest
         python -m pytest
