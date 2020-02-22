@@ -41,6 +41,10 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    strategy:
+	  max-parallel: 2
+	  matrix:
+	    python-version: [3.6, 3.7]
 
     steps:
     - uses: actions/checkout@v2
@@ -50,6 +54,13 @@ jobs:
       run: |
         echo Add other actions to build,
         echo test, and deploy your project.
+	- name: Set up Python ${{ matrix.python-version }}
+	  uses: actions/setup-python@v2
+	  with: 
+	    python-version: ${{ matrix.python-version }}
+	- name: Install dependencies
+	  run: |
+	    python -m pip install --upgrade pip
     - name: Test with Pytest
       run: |
 		pip install pytest
