@@ -42,9 +42,9 @@ jobs:
 
     runs-on: ubuntu-latest
     strategy:
-	  max-parallel: 2
-	  matrix:
-	    python-version: [3.6, 3.7]
+    max-parallel: 2
+    matrix:
+      python-version: [3.6, 3.7]
 
     steps:
     - uses: actions/checkout@v2
@@ -54,18 +54,17 @@ jobs:
       run: |
         echo Add other actions to build,
         echo test, and deploy your project.
-	- name: Set up Python ${{ matrix.python-version }}
-	  uses: actions/setup-python@v1
-	  with: 
-	    python-version: ${{ matrix.python-version }}
-	- name: Install dependencies
-	  run: |
-	    python -m pip install --upgrade pip
-		python -m pip install --user numpy scipy matplotlib
-    - name: Test with Pytest
+  - name: Set up Python ${{ matrix.python-version }}
+    uses: actions/setup-python@v1
+    with: 
+      python-version: ${{ matrix.python-version }}
+  - name: Install dependencies
+    run: |
+      python -m pip install --upgrade pip
+      python -m pip install --user numpy scipy matplotlib
+    - name: Test with unittest
       run: |
-		pip install pytest
-        python -m pytest
+        python -m unittest
 ```
 
 ## References
