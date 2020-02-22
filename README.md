@@ -1,5 +1,8 @@
+
 # pyschool
 Best Practices, Pythonic Patterns, Examples
+
+![](https://github.com/hovey/pyschool/.github/workflows/calculator.yml/badge.svg)
 
 ## Best Practices
 
