@@ -55,7 +55,7 @@ jobs:
         echo Add other actions to build,
         echo test, and deploy your project.
 	- name: Set up Python ${{ matrix.python-version }}
-	  uses: actions/setup-python@v2
+	  uses: actions/setup-python@v1
 	  with: 
 	    python-version: ${{ matrix.python-version }}
 	- name: Install dependencies
