@@ -1,4 +1,3 @@
-![](https://github.com/hovey/pyschool/workflows/calculator.yml/badge.svg)
 ![CI](https://github.com/hovey/pyschool/workflows/CI/badge.svg)
 
 # pyschool
