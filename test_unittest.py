@@ -1,12 +1,13 @@
 """
-This module demonstrates how to do unit testing in python
+This module demonstrates how to do unit testing in python.
+Run with
 
-run with python -m unittest test_unittest.py
+$ python -m unittest test_unittest.py
 
 Alternatively,
 
-python -m unittest runs all files that start with "test" in the current
-directory
+$ python -m unittest 
+runs all files that start with "test" in the current directory
 """
 
 import unittest
