@@ -71,4 +71,5 @@ jobs:
 ## References
 
 * [PrajjawalBanati](https://github.com/PrajjawalBanati/Python-actions)
+* [RealPython](https://realpython.com/python-continuous-integration/)
 
