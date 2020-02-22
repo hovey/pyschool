@@ -1,7 +1,7 @@
 ![CI](https://github.com/hovey/pyschool/workflows/CI/badge.svg)
 
 # pyschool
-Best Practices, Pythonic Patterns, Examples
+Examples of Best Practices and Pythonic Patterns
 
 ## Best Practices
 
