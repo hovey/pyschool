@@ -71,5 +71,5 @@ jobs:
 
 * [PrajjawalBanati](https://github.com/PrajjawalBanati/Python-actions)
 * [RealPython](https://realpython.com/python-continuous-integration/)
-* [YouTube GitHub Actions with CI/CD](https://youtu.be/E1OunoCyuhY) by Nat Friedman, GitHub CEO, and Jeremy Epling, Developer
+* [YouTube GitHub Actions with CI/CD](https://youtu.be/E1OunoCyuhY) by Nat Friedman (GitHub CEO), Jeremy Epling (GitHub Developer), and clients, on Aug 8, 2019.
 
