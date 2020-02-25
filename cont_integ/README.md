@@ -1,6 +1,6 @@
 # Continuous Integration
 
-## Step-by-Step
+## Build and Test
 
 * Create the Python file with basic calculator functionality (add, subtract, multiply, divide) to `calculator.py`.
 * Create a unit test called `test_calculator.py`.  Note:  The `test_...` format, e.g., `test_<module>.py`, is required for [Pytest](https://docs.pytest.org/en/latest/) to discover the unit tests.
@@ -66,6 +66,11 @@ jobs:
       run: |
         python -m unittest
 ```
+
+## Deploy
+
+Next, deploy the package.  
+* [example](https://packaging.python.org/tutorials/packaging-projects/)
 
 ## References
 
