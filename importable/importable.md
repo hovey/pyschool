@@ -81,7 +81,7 @@ from local_package import local_function
 
 ## Absolute versus Relative Imports
 
-* See [here](https://realpython.com/absolute-vs-relative-python-imports/)
+* [Real Python](https://realpython.com/absolute-vs-relative-python-imports/) discussion
 * Absolute imports are preferred to relative imports, for the following reasons:
 * Absolute imports
   * are clear and straightforward, 
