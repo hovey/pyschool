@@ -138,6 +138,19 @@ Clients should code to a service's interface, not implementation.  This allows t
 * [Introductory tutorials](introductory_tutorials.py)
 * [Quartiles](quartiles/pfield.py)
 
+### Production
+
+Once the code base has sufficient development, and it is ready for production, use the following steps:
+
+* TLC - timing, leaks, [coverage](https://github.com/marketplace/actions/coveralls-github-action)
+* Test
+  * Unit Test
+  * Integration Test
+* [Packaging](https://packaging.python.org/tutorials/packaging-projects/) (Build, Installer), and packaging [guide](https://packaging.python.org/guides/distributing-packages-using-setuptools/)
+* [Distribution](https://pypi.org/) with PyPI
+* Client Use
+  * Client [Installation](https://packaging.python.org/tutorials/installing-packages/)
+  * Client Bug Reports (https://github.com/hovey/pyschool/issues)
 
 ## References
 
