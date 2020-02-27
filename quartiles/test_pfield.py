@@ -13,7 +13,7 @@ class MyTestCase(unittest.TestCase):
     def test_input_folder_and_file(self):
         input_folder = 'quartiles/input'
         abs_path = os.path.join(os.getcwd(), input_folder)
-        print(f'Using absolute path: {abs_path}')
+        # print(f'Using absolute path: {abs_path}')
         # self.assertTrue(os.path.isdir(abs_path))
         # print(f'Searching for input folder: {input_folder}')
 
