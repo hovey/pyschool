@@ -21,7 +21,8 @@ class MyTestCase(unittest.TestCase):
         os.chdir(abs_path)
 
         input_file = 'input.csv'  # scheme requirement
-        self.assertTrue(os.path.isfile(input_file))
+        # self.assertTrue(os.path.isfile(input_file)) # uncomment me
+        self.assertFalse(os.path.isfile(input_file))  # planned fail for CI testing, delete me
 
 
     def test_constructor(self):
