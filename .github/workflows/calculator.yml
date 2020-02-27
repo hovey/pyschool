@@ -1,4 +1,4 @@
-name: ContInt
+name: CI
 
 on: [push]
 
