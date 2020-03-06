@@ -146,8 +146,8 @@ Once the code base has sufficient development, and it is ready for production, u
 * Test
   * Unit Test
   * Integration Test
-* [Packaging](https://packaging.python.org/tutorials/packaging-projects/) (Build, Installer), and packaging [guide](https://packaging.python.org/guides/distributing-packages-using-setuptools/)
-* [Distribution](https://pypi.org/) with PyPI
+* [Packaging](https://packaging.python.org/tutorials/packaging-projects/) (Build, Installer), and packaging [guide](https://packaging.python.org/guides/distributing-packages-using-setuptools/), and [distribution](https://pypi.org/) with PyPI.
+* [Packaging and Distribution](https://conda.io/projects/conda-build/en/latest/) with Conda to create a [Conda Package](https://conda.io/projects/conda/en/latest/user-guide/concepts/packages.html).  Building conda packages [from scratch](https://conda.io/projects/conda-build/en/latest/user-guide/tutorials/build-pkgs.html).
 * Client Use
   * Client [Installation](https://packaging.python.org/tutorials/installing-packages/)
   * Client Bug Reports (https://github.com/hovey/pyschool/issues)
@@ -156,4 +156,3 @@ Once the code base has sufficient development, and it is ready for production, u
 
 * [Effective-Python](https://hacktec.gitbooks.io/effective-python/content/en/Chapter1/Chapter1.html)
 * [GitHub build badge](https://help.github.com/en/actions/configuring-and-managing-workflows/configuring-a-workflow#adding-a-workflow-status-badge-to-your-repository)
-
