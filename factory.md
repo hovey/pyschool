@@ -18,7 +18,7 @@ The abstract factory is a **collection** of factory methods, with each factory m
 ## Examples
 
 * Creation of [shapes](super/shapes.py) with a dictionary.
-* *To do*: get Ani's reference to non-dictionary creation.
+* [Anirudh's factory](factory/) based on folders instead of dictionary creation.
 
 ## References
 
