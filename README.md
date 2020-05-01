@@ -135,6 +135,26 @@ $ python -m unittest xyfigure_test.TestImageDiff.test_same  # e.g., to test the 
 
 ## Examples
 
+### Debugger
+
+Example:  From `~/sibl/xyfigure/test` in VS Code, `Run | Open Configurations` and add to `launch.json` the following:
+
+```json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "/Users/Apollo/sibl/xyfigure/xyfigure.py",
+            "args": ["signal_process_serialize.json"],
+            "console": "integratedTerminal"
+        }
+    ]
+}
+```
+
 ### Computation
 
 * [Ordinary least squares](least_squares/ols.py)
