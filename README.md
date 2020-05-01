@@ -123,6 +123,16 @@ Clients should code to a service's interface, not implementation.  This allows t
 * An [example](test_unittest.py), using the [unittest.mock](https://docs.python.org/3/library/unittest.mock.html#) library for testing in Python.
 * [Real Python](https://realpython.com/python-mock-library/) article.  
 
+Examples from `xyfigure_test.py`:
+
+```bash
+$ python xyfigure_test.py                      # for terse interaction,
+$ python -m unittest xyfigure_test             # for default interaction,
+$ python -m unittest -v xyfigure_test          # for higher verbosity, and
+
+$ python -m unittest xyfigure_test.TestImageDiff.test_same  # e.g., to test the test_same() method
+```
+
 ## Examples
 
 ### Computation
