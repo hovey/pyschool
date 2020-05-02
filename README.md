@@ -135,6 +135,26 @@ $ python -m unittest xyfigure_test.TestImageDiff.test_same  # e.g., to test the 
 
 ## Examples
 
+### Conda
+
+```bash
+# from [Apollo/sibl]
+(base) conda create -n temp
+(base) conda activate temp
+(temp) conda install numpy scipy matplotlib
+(temp) conda install pip
+(temp) pip install -e .  # -e is development mode, if code updates, new pip install is not required
+(temp) conda list
+(temp) 
+(temp) conda deactivate
+(base) conda remove -n temp --all
+```
+
+### Computation
+
+* [Ordinary least squares](least_squares/ols.py)
+* Several examples in the `monkey_see` folder  
+
 ### Debugger
 
 Example:  From `~/sibl/xyfigure/test` in VS Code, `Run | Open Configurations` and add to `launch.json` the following:
@@ -154,11 +174,6 @@ Example:  From `~/sibl/xyfigure/test` in VS Code, `Run | Open Configurations` an
     ]
 }
 ```
-
-### Computation
-
-* [Ordinary least squares](least_squares/ols.py)
-* Several examples in the `monkey_see` folder  
 
 ### Matplotlib
 
