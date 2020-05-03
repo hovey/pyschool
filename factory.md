@@ -20,6 +20,50 @@ The abstract factory is a **collection** of factory methods, with each factory m
 * Creation of [shapes](super/shapes.py) with a dictionary.
 * [Anirudh's factory](factory/) based on folders instead of dictionary creation.
 
+### Dynamic Load of Module
+
+```python
+Reference:
+# https://www.blog.pythonlibrary.org/2016/05/27/python-201-an-intro-to-importlib/
+# https://airbrake.io/blog/python-exception-handling/importerror-and-modulenotfounderror
+
+def module(module_name):
+    """
+    Checks if module can be imported from the module_name.
+    If the module can be imported, it returns the module.
+    If the module can't be imported, it returns None.
+
+    Args:
+        module_name (string): The name of the module to be imported.
+
+    Returns:
+        The _module or None.
+    """
+    try:
+        _module_specification = ilu.find_spec(module_name)
+        if _module_specification: 
+            print(f'Module "{module_name}" is found and can be imported.')
+            _module = ilu.module_from_spec(_module_specification)
+            _module_specification.loader.exec_module(_module)
+            return _module
+    except ImportError as error:
+        print(f'Error: Module "{module_name}" is not found.')
+        print(error.__class__.__name__)
+        return None
+```
+
+### Client-Use of Dynamic Module Load
+
+```python
+key = next(iter(process_dict))
+value = process_dict[key]
+
+process_module = module(f'{key}.process')
+if process_module:
+    process_object = getattr(process_module, 'Process')
+    pobject = process_object(self._data, **value)
+```
+
 ## References
 
 * [Eckel](https://python-3-patterns-idioms-test.readthedocs.io/en/latest/Factory.html) B. Python 3 Patterns, Recipies, and Idioms.
