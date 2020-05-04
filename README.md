@@ -202,15 +202,24 @@ Once the code base has sufficient development, and it is ready for production, u
 # production server
 # -----------------
 $ cd ~/sibl
+$ rm -r xyfigure.egg-info/
+$ vim setup.py   # update setup.py, typically increment the version
 
-# update setup.py
-
+# update server if necessary
 $ python -m pip install --user --upgrade setuptools wheel
-$ python setup.py sdist bdist_wheel
 $ python -m pip install --user --upgrade twine
+
+# build to the dist/ subdirectory
+$ python setup.py sdist bdist_wheel
 
 # assure the PyPI API token for the server is created on pypi.org and saved on the server at ~/.pypirc
 
+# remove any old .gz and .whl files in dist/
+$ cd dist/
+$ rm old .gz and old .whl
+$ cd ../  # back to the ~/sibl/ directory
+
+# deploy
 $ python -m twine upload dist/*
 
 # ------
