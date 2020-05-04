@@ -191,7 +191,7 @@ Once the code base has sufficient development, and it is ready for production, u
 * Test
   * Unit Test
   * Integration Test
-* [Packaging](https://packaging.python.org/tutorials/packaging-projects/) (Build, Installer), and packaging [guide](https://packaging.python.org/guides/distributing-packages-using-setuptools/), and [distribution](https://pypi.org/) with PyPI.
+* [Packaging/Distribution/PyPI](https://packaging.python.org/tutorials/packaging-projects/) (Build, Installer), and packaging [guide](https://packaging.python.org/guides/distributing-packages-using-setuptools/), and [distribution](https://pypi.org/) with PyPI.
 * [Packaging and Distribution](https://conda.io/projects/conda-build/en/latest/) with Conda to create a [Conda Package](https://conda.io/projects/conda/en/latest/user-guide/concepts/packages.html).  Building conda packages [from scratch](https://conda.io/projects/conda-build/en/latest/user-guide/tutorials/build-pkgs.html).
 * Client Use
   * Client [Installation](https://packaging.python.org/tutorials/installing-packages/)
