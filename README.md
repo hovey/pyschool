@@ -197,6 +197,8 @@ Once the code base has sufficient development, and it is ready for production, u
   * Client [Installation](https://packaging.python.org/tutorials/installing-packages/)
   * Client Bug Reports (https://github.com/hovey/pyschool/issues)
   
+  #### Production/Distribution Notes
+  
 ```bash
 # -----------------
 # production server
