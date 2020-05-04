@@ -138,7 +138,7 @@ $ python -m unittest xyfigure_test.TestImageDiff.test_same  # e.g., to test the 
 ### Conda
 
 ```bash
-# from [Apollo/sibl]
+# from [Apollo/sibl] with all folders containin __init__.py file:
 (base) conda create -n temp
 (base) conda activate temp
 (temp) conda install numpy scipy matplotlib
