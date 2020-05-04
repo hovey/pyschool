@@ -196,6 +196,27 @@ Once the code base has sufficient development, and it is ready for production, u
 * Client Use
   * Client [Installation](https://packaging.python.org/tutorials/installing-packages/)
   * Client Bug Reports (https://github.com/hovey/pyschool/issues)
+  
+```bash
+# -----------------
+# production server
+# -----------------
+$ cd ~/sibl
+
+# update setup.py
+
+$ python -m pip install --user --upgrade setuptools wheel
+$ python setup.py sdist bdist_wheel
+$ python -m pip install --user --upgrade twine
+
+# assure the PyPI API token for the server is created on pypi.org and saved on the server at ~/.pypirc
+
+$ python -m twine upload dist/*
+
+# ------
+# client
+# ------
+```
 
 ## References
 
