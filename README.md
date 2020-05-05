@@ -217,8 +217,7 @@ $ python setup.py sdist bdist_wheel
 # assure the PyPI API token for the server is created on pypi.org and saved on the server at ~/.pypirc
 
 # remove any old .gz and .whl files in dist/
-$ cd dist/
-$ rm old .gz and old .whl
+$ cd dist/  #rm old .gz and old .whl
 $ cd ../  # back to the ~/sibl/ directory
 
 # deploy
