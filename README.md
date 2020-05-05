@@ -227,6 +227,11 @@ $ python -m twine upload dist/*
 # ------
 # client
 # ------
+$ pip list
+$ pip uninstall sibllib  # the old name
+$ cd /nscratch/chovey/casco_sim/temp/
+$ pip install --user xyfigure-0.0.4-py3-none-any.whl
+$ pip list
 ```
 
 ## References
