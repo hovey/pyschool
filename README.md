@@ -41,6 +41,10 @@ Verbs, in general, can harbor lots of dead weight and bloat.  Instead of `set` o
 
 Thus, verbs, *in the service API*, invite the slippery slope of coupling client to a service's implementation, which is bad.  Prefer to couple the client to the service's interface.  That way, should the implementation change, it does not propagate changes to the client, forcing them to update how they use the service.
 
+From the REST API notes, [How to Design a REST API](https://restfulapi.net/rest-api-design-tutorial-with-example/)
+
+> Notice that these URIs do not use any verb or operation. It’s very important to not include any verb in URIs. URIs should all be nouns only.
+
 ### C.R.U.D.
 
 From the database standard, there are four main verbs that span all tranactions: 
@@ -72,7 +76,9 @@ Services should expose client functionality through a service API.  The API will
 
 Clients should code to a service's interface, not implementation.  This allows the client to be only loosely coupled to the service, which is good.  Tight coupling is bad.  Loose coupling allows the client and the service to change over time independent from one another.  A change to the service that also requires a change to any and all clients who have used the service in the past is an example of [code smell](README.md#code-smell).
 
+## Singleton versus Collections
 
+To come.  [For now](https://restfulapi.net/resource-naming/)
 
 ## Pythonic Patterns
 
