@@ -83,6 +83,8 @@ $ cd htmlcov/
 $ open index.html
 ```
 
+* [coverage-badge.py](https://pypi.org/project/coverage-badge/)
+
 ## Client-Service Decoupling
 
 Services should expose client functionality through a service API.  The API will be better when it [avoids verbs](README.md#kill-all-non-crud-verbs-in-apis).  Services should not expose implementation.  
