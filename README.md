@@ -70,6 +70,19 @@ Consider the string of `if` checking:
 
 This is an example of `code smell`, which means the code has sufficent *function* but has weak *form*.  In this example, the client is forever checking the myriad of different `Animal` descendants.  As the number of `Animals` increases, clients must modify their code everyhere they used this smelly pattern.  
 
+## Coverage
+
+* coverage.py on [GitHub](https://github.com/nedbat/coveragepy) and on [PyPI](https://pypi.org/project/coverage/)
+
+```bash
+$ pip install coverage
+$ coverage run -m unittest
+$ coverage report
+$ coverage html
+$ cd htmlcov/
+$ open index.html
+```
+
 ## Client-Service Decoupling
 
 Services should expose client functionality through a service API.  The API will be better when it [avoids verbs](README.md#kill-all-non-crud-verbs-in-apis).  Services should not expose implementation.  
