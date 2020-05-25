@@ -158,6 +158,8 @@ $ python -m unittest xyfigure_test.TestImageDiff.test_same  # e.g., to test the 
 
 ### Conda
 
+* virual environment (venv)
+
 ```bash
 # from [Apollo/sibl] with all folders containin __init__.py file:
 (base) conda create -n temp
@@ -169,6 +171,14 @@ $ python -m unittest xyfigure_test.TestImageDiff.test_same  # e.g., to test the 
 (temp) 
 (temp) conda deactivate
 (base) conda remove -n temp --all
+# list all environments:
+(base) conda info --envs
+```
+
+* also, pip virtual environment (venv)
+
+```bash
+(base) python -m venv fire
 ```
 
 ### Computation
