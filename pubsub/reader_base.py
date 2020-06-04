@@ -47,16 +47,19 @@ class ReaderBase(IReader):
                 does not contain a valid dicom file.
         """
         if self._data is None:
-            self._data = self._read_data()
+            # self._data = self._read_data()  # <-- avoid passing back the data, just set the data
+            self._read_data()
 
-        return self._data
+        return self._data  # <-- now data can be passed back to the client
 
-    def _read_data(self) -> np.ndarray:
+    # def _read_data(self) -> np.ndarray:
+    def _read_data(self):
         """
         Reads the data from the specified file path.
 
         Returns:
-            data (np.ndarray): The data read from the file.
+            # data (np.ndarray): The data read from the file.
+            no return
 
         Raises:
             NotImplementedError: If _read_data has not been

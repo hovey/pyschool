@@ -6,7 +6,7 @@ Implements json.Reader
 import numpy as np
 # import pydicom as dicom
 
-import json
+# import json
 
 # from ptm.data.reader import ReaderBase
 # from pyschool.pubsub import ReaderBase
@@ -51,7 +51,7 @@ class Reader(ReaderBase):
         # data = dicom.dcmread(self.file_path).pixel_array
         # data = np.ndarray([1,2,3])
         with open(self.file_path) as fin:
-            self._data = json.load(fin)
+            self._data = np.genfromtxt(fin, dtype=float, comments='#', delimiter=',')
             a = 4
 
         # return data  # <-- no need to return, just set member data

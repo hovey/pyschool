@@ -42,6 +42,8 @@ class Factory:
         #                        package='pubsub')
         module = import_module(name=f'.{mode}.reader',
                                package='pubsub')
+        # module = import_module(name=f'{mode}.reader',
+        #                        package='pubsub')
         class_constructor = getattr(module, 'Reader')
 
         return class_constructor
