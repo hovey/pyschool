@@ -5,8 +5,8 @@ Implements Factory
 from importlib import import_module
 from typing import Callable
 
-from pubsub.command import Command
-from pubsub.ireader import IReader
+# from pubsub.command import Command
+# from pubsub.ireader import IReader
 
 class Factory:
     """
@@ -21,16 +21,34 @@ class Factory:
         # _data = _reader.data
         _reader_interface = self.reader_factory(mode='json')
         _reader = _reader_interface(command_file)
-        _commands = _reader.data
-        self._command_guids = []  # empty roster of commands, fill if a valid Command is created
+        # _commands = _reader.data
+        # self._command_guids = []  # empty roster of commands, fill if a valid Command is created
 
-        for item in _commands:
-            command_kwargs = _commands[item]
-            i = Command(item, **command_kwargs)
-            if i:
-                self._command_guids.append(i)
-            else:
-                print(f'Skipping command {i}, no valid Command implementation.')
+        # for item in _commands:
+        #     command_kwargs = _commands[item]
+        #     i = Command(item, **command_kwargs)
+        #     if i:
+        #         self._command_guids.append(item)
+        #     else:
+        #         print(f'Skipping command {i}, no valid Command implementation.')
+
+        _objects = []  # empty roster of objects, fill is a value Object is created
+        for item in _reader.data:
+            class_name = _reader.data[item]["class"]
+            module_dict = dict(name=f'.{class_name}', package='pubsub')
+            try: 
+                # the_module = import_module(name=f'.{class_name}', package='pubsub')
+                the_module = import_module(**module_dict)
+                try:
+                    the_class = getattr(the_module, class_name.capitalize())
+                    if the_class:
+                        _objects.append(the_class)
+                except AttributeError:
+                    print(f'Skipping module {the_module.__name__}; class {class_name.capitalize()} not found.')
+            except ModuleNotFoundError:
+                a = 4
+                print(f'Skipping module {module_dict["package"] + module_dict["name"]}; module not found.')
+
 
     @staticmethod
     # def reader_factory(mode: str = 'dicom') -> Callable:

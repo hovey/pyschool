@@ -7,8 +7,8 @@ class Command:
     def __init__(self, guid_command, **kwargs):
 
         self._guid = guid_command
-        a = kwargs
-        b = 4
+        self._kwargs = kwargs
+        a = 4
     
 
     @property

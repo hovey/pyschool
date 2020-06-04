@@ -36,10 +36,10 @@ def main(argv):
     if file_type == 'json':
         _factory = Factory(config_file)
 
-        if args.verbose:
-            print('The factor created items with the following guids:')
-            for item in _factory.items:
-                print(item.guid)
+        # if args.verbose:
+        #     print('The factory created items with the following guids:')
+        #     for item in _factory.items:
+        #         print(item.guid)
 
 
 if __name__ == '__main__':

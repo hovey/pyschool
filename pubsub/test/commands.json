@@ -29,5 +29,8 @@
         "display": 0,
         "latex": 0,
         "serialize": 1
+    },
+    "test_bad_class": {
+        "class": "model_nonsuch"
     }
 }
