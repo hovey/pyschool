@@ -2,6 +2,8 @@ from pathlib import Path # stop using os.path, use pathlib instead
 import sys
 import argparse
 
+# from pubsub.factory import Factory
+from pubsub.factory import Factory
 
 def main(argv):
     print('client main')
@@ -22,8 +24,11 @@ def main(argv):
         # print(f'Error: cannot find file {config_file}')
         sys.exit(f'Error: cannot find file {config_file}')
 
-
-
+    _factory = Factory()
+    _reader = _factory.reader_factory()
+    my_reader = _reader(config_file)
+    test_data = my_reader.data
+    a = 4
 
 
 
