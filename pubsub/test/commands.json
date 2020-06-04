@@ -12,18 +12,6 @@
             "alpha" : 0.5
         }
     },
-    "cosine-data": {
-        "class": "model",
-        "folder": ".",
-        "file": "data.csv",
-        "skip_rows": 1,
-        "ycolumn": 2,
-        "plot_kwargs": {
-            "label": "cos(2t)",
-            "linestyle": "-.",
-            "linewidth": 2
-        }
-    },
     "figure": {
         "class": "view",
         "folder": ".",

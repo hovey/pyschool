@@ -20,7 +20,7 @@
             "request": "launch",
             "program": "${file}",
             "args": [
-                "pubsub/test/config.json"
+                "pubsub/test/commands.json"
             ],
             "console": "integratedTerminal"
         }

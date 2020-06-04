@@ -13,17 +13,10 @@ def main(argv):
     parser.add_argument("--verbose", help="increased feedback in command line", action="store_true")
     args = parser.parse_args()
 
-    if args.verbose:
-        print('verbose is on')
-    else:
-        print('verbose is off')
-
     config_file = args.config
 
     if not Path('.', config_file).is_file():
-        # print(f'Error: cannot find file {config_file}')
         sys.exit(f'Error: cannot find file {config_file}')
-
 
     file_type = Path(config_file).suffix[1:]  # e.g., 'json' or 'csv'
 
@@ -33,8 +26,12 @@ def main(argv):
     _data = _reader.data
 
     if args.verbose:
-        print(f'Created a reader factory of type {file_type}, with data:')
-        print(f'{_data}')
+        print('verbose is on')
+        print(f'Created a reader factory of type {file_type}')
+        print('with data:')
+        print(_data)
+    else:
+        print('verbose is off')
 
 if __name__ == '__main__':
     main(sys.argv[1:])
