@@ -14,6 +14,7 @@
     },
     "figure": {
         "class": "view",
+        "model_keys": ["sine-data"],
         "folder": ".",
         "file": "recipe.svg",
         "size": [8.0, 6.0],
