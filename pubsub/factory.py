@@ -5,16 +5,32 @@ Implements Factory
 from importlib import import_module
 from typing import Callable
 
+from pubsub.command import Command
+from pubsub.ireader import IReader
 
 class Factory:
     """
     Provides a constructor of various classes.
     """
-    def __init__(self):
+    def __init__(self, command_file):
         """
         The init method of the Factory class.
         """
-        pass
+        # pass
+        # _reader = _reader_type(config_file)
+        # _data = _reader.data
+        _reader_interface = self.reader_factory(mode='json')
+        _reader = _reader_interface(command_file)
+        _commands = _reader.data
+        self._command_guids = []  # empty roster of commands, fill if a valid Command is created
+
+        for item in _commands:
+            command_kwargs = _commands[item]
+            i = Command(item, **command_kwargs)
+            if i:
+                self._command_guids.append(i)
+            else:
+                print(f'Skipping command {i}, no valid Command implementation.')
 
     @staticmethod
     # def reader_factory(mode: str = 'dicom') -> Callable:
@@ -47,6 +63,19 @@ class Factory:
         class_constructor = getattr(module, 'Reader')
 
         return class_constructor
+
+    @property
+    def items(self):
+        """
+        Returns:
+            The array of strings of guids created from client commands.
+
+        Raises:
+            To be determined.  
+        """
+        return self._command_guids
+
+
 
     # @staticmethod
     # def writer_factory(mode: str = 'numpy') -> Callable:
