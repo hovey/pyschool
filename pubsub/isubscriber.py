@@ -19,22 +19,37 @@ class ISubscriber(ABC):
         pass
 
     @abstractmethod
-    def update(self, message):
+    def update(self):
         """ Update is CRUD-style callback that publishers will trigger. """
+        pass
+
+    @property
+    @abstractmethod
+    def update_count(self):
+        """ (int) Returns the number of times a subscriber has been updated by
+        a publisher.  Useful to know if this number grows large, may suggest
+        the subscriber is over-subscribered.
+        """
         pass
 
 class SubscriberBase(ISubscriber):
     def __init__(self, **kwargs):
         super().__init__
-        print('MVC_Base.__init__()')
+        print('SubscriberBase.__init__()')
         self._kwargs = kwargs
+        self._update_count = 0
 
     def serialize(self):
-        print('MVC_Base.serialize()')
+        print('SubscriberBase.serialize()')
 
-    def update(self, message):
-        print('MVC_Base.update()')
+    def update(self):
+        self._update_count += 1
+        print('SubscriberBase.update()')
 
     @property
     def the_kwargs(self):
         return self._kwargs
+
+    @property
+    def update_count(self):
+        return self._update_count

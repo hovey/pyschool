@@ -66,7 +66,6 @@ class Factory:
         self._subscribers[who] = callback
         a = 4
 
-
     def publish(self):
         for subscriber, callback in self._subscribers.items():
             method = getattr(subscriber, callback)
@@ -96,10 +95,12 @@ class Factory:
         #                        package='ptm.data.reader')
         # module = import_module(name=f'.{mode}',
         #                        package='pubsub')
-        module = import_module(name=f'.{mode}.reader',
-                               package='pubsub')
+        # module = import_module(name=f'.{mode}.reader',
+        #                        package='pubsub')
         # module = import_module(name=f'{mode}.reader',
         #                        package='pubsub')
+        module_dict = dict(name=f'.{mode}.reader', package='pubsub')
+        module = import_module(**module_dict)
         class_constructor = getattr(module, 'Reader')
 
         return class_constructor
