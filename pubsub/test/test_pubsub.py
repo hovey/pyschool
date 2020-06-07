@@ -9,7 +9,7 @@ from pubsub.isubscriber import SubscriberBase
 class TestPubSub(TestCase):
 
     def test_same(self):
-        "The most basic of unit tests, should always run true and quickly."
+        # The most basic of unit tests, should always run true and quickly.  
         self.assertTrue(1) 
 
     def test_empty_dict_on_startup(self):
