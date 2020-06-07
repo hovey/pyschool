@@ -13,4 +13,7 @@ Observer design pattern, will be called called **pubsub** for short.
 * Allows clients to add new classes without code modification.
 * Allows clients to add new classes at run time.
 
-<img src="http://yuml.me/diagram/scruffy/class/[Customer]->[Address]->[AddressLine]" >
+## Implementation
+
+* [Unittest](test/client.py), illustrating simple flow of pubsub.
+* [Client](test/client.py), using a Factory design pattern in addition to pubsub.
