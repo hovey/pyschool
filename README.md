@@ -1,7 +1,7 @@
 ![unittest](https://github.com/hovey/pyschool/workflows/unittest/badge.svg)
 
 # pyschool
-Examples of Best Practices and Pythonic Patterns
+Examples of [Best Practices](#best-practices) and [Pythonic Patterns](#pythonic-patterns)
 
 ## Best Practices
 
@@ -121,6 +121,7 @@ To come.  [For now](https://restfulapi.net/resource-naming/)
 
 ### [Factory](factory.md)
 
+### [Publish-Subscribe](pubsub/README.md) (aka Observer)
 
 ### Import
 
