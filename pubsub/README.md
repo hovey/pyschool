@@ -17,3 +17,9 @@ Observer design pattern, will be called called **pubsub** for short.
 
 * [Unittest](test/client.py), illustrating simple flow of pubsub.
 * [Client](test/client.py), using a Factory design pattern in addition to pubsub.
+
+
+## References
+
+* [Aaron Maxwell](https://www.protechtraining.com/blog/post/tutorial-the-observer-pattern-in-python-879) Observer pattern examples
+
