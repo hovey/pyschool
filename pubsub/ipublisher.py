@@ -12,17 +12,25 @@ class IPublisher(ABC):
         super().__init__()
 
     @abstractmethod
-    def register(self, ISubscriber, callback=None):
+    def subscribe(self, ISubscriber, callback:str=None):
         """ 
-        Connects subscribers with the callback string, which is the same 
-        as the subsriber's callback method. 
+        Connects the subscriber with the callback string, 
+        which is the same as the subsriber's callback method. 
 
-        If no callback is specified, then default callback "update" is used.
-        The ISubscriber interface requires implementation of the "udpate" method.
+        If no callback is specified, then default callback 
+        "update" is used.
+
+        The ISubscriber interface requires implementation of 
+        the "udpate" method.
         """
         pass
 
-    # todo: unregister interface is needed too
+    @abstractmethod
+    def unsubscribe(self, ISubscriber):
+        """ 
+        Disconnects the subscriber from the publisher's subscriber list. 
+        """
+        pass
 
     @abstractmethod
     def publish(self):
@@ -48,11 +56,14 @@ class PublisherBase(IPublisher):
         print('PublisherBase.__init__()')
         self._subscribers = dict()
 
-    def register(self, subscriber, callback=None):
+    def subscribe(self, subscriber, callback:str=None):
         if callback == None:
             # callback = getattr(subscriber, 'update')
             callback = "update"
         self._subscribers[subscriber] = callback
+
+    def unsubscribe(self, subscriber):
+        del self._subscribers[subscriber]
 
     def publish(self):
         for subscriber, callback in self._subscribers.items():

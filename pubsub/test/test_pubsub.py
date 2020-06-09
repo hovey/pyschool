@@ -24,17 +24,21 @@ class TestPubSub(TestCase):
         Bob = SubscriberBase()
 
         self.assertEqual(wsj.subscriber_count, 0)
-        wsj.register(Alice)
-        wsj.register(Bob)
+        wsj.subscribe(Alice)
+        wsj.subscribe(Alice) # service should disallow mutiplie registers, this just overwrites same key
+        wsj.subscribe(Bob, "serialize")  # Bob's callback is serialize, not update
         self.assertEqual(wsj.subscriber_count, 2)
 
-        self.assertEqual(Alice.update_count, 0) # 0 updates prior is first state
+        self.assertEqual(Alice.update_count, 0) # b 0 updates prior is first state
         self.assertEqual(Bob.update_count, 0)
 
         wsj.publish()
 
-        self.assertEqual(Alice.update_count, 1) # 1 update after first publication 
-        self.assertEqual(Bob.update_count, 1)
+        self.assertEqual(Alice.update_count, 1) #  1 update after first publication 
+        self.assertEqual(Bob.update_count, 0)  # Bob's update count is still 0 since he had a serialize callback
+
+        wsj.unsubscribe(Alice)  # reduce the number of subscribers by 1
+        self.assertEqual(wsj.subscriber_count, 1)
 
 
 if __name__ == '__main__':

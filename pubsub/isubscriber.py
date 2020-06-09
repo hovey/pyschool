@@ -20,23 +20,22 @@ class ISubscriber(ABC):
 
     @abstractmethod
     def update(self):
-        """ Update is CRUD-style callback that publishers will trigger. """
+        """ The default callback method used by IPublisher interface.""" 
         pass
 
     @property
     @abstractmethod
     def update_count(self):
-        """ (int) Returns the number of times a subscriber has been updated by
-        a publisher.  Useful to know if this number grows large, may suggest
-        the subscriber is over-subscribered.
+        """ (int) Returns the number of times a subscriber has 
+        been updated by a publisher.  Useful to know if this number
+        grows large, may suggest the subscriber is over-subscribered.
         """
         pass
 
 class SubscriberBase(ISubscriber):
-    def __init__(self, **kwargs):
+    def __init__(self):
         super().__init__
         print('SubscriberBase.__init__()')
-        self._kwargs = kwargs
         self._update_count = 0
 
     def serialize(self):
@@ -45,10 +44,6 @@ class SubscriberBase(ISubscriber):
     def update(self):
         self._update_count += 1
         print('SubscriberBase.update()')
-
-    @property
-    def the_kwargs(self):
-        return self._kwargs
 
     @property
     def update_count(self):
