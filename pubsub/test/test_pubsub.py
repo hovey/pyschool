@@ -2,8 +2,8 @@
 
 from unittest import TestCase, main
 
-from pubsub.ipublisher import PublisherBase
-from pubsub.isubscriber import SubscriberBase
+from pubsub.newspaper import Newspaper
+from pubsub.lectiophile import Lectiophile
 
 
 class TestPubSub(TestCase):
@@ -14,14 +14,19 @@ class TestPubSub(TestCase):
 
     def test_empty_dict_on_startup(self):
         # nyt is short for New York Times
-        nyt = PublisherBase()
+        newspaper_dict = {"name": "The New York Times"}
+        nyt = Newspaper(**newspaper_dict)
         self.assertFalse(bool(nyt.subscribers)) # bool False is empty dictionary
 
     def test_pub_sub(self):
         # wsj is short for Wall Street Journal
-        wsj = PublisherBase()
-        Alice = SubscriberBase()
-        Bob = SubscriberBase()
+        newspaper_dict = {"name": "The Wall Street Journal"}
+        wsj = Newspaper(**newspaper_dict)
+        subscription_card = {"name": "Alice Ackerman", "zipcode": "87111"}
+        Alice = Lectiophile(**subscription_card)
+
+        subscription_card = {"name": "Bob Beverly", "zipcode": "90210"} # overwrite previous
+        Bob = Lectiophile(**subscription_card)
 
         self.assertEqual(wsj.subscriber_count, 0)
         wsj.connect(Alice)
