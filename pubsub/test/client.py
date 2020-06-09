@@ -2,7 +2,6 @@ from pathlib import Path # stop using os.path, use pathlib instead
 import sys
 import argparse
 
-# from pubsub.factory import Factory
 from pubsub.factory import Factory
 
 def main(argv):
@@ -20,26 +19,8 @@ def main(argv):
 
     file_type = Path(config_file).suffix[1:]  # e.g., 'json' or 'csv'
 
-    # _factory = Factory()
-    # _reader_type = _factory.reader_factory(mode=file_type)
-    # _reader = _reader_type(config_file)
-    # _data = _reader.data
-
-    # if args.verbose:
-    #     print('verbose is on')
-    #     print(f'Created a reader factory of type {file_type}')
-    #     print('with data:')
-    #     print(_data)
-    # else:
-    #     print('verbose is off')
-
     if file_type == 'json':
         _factory = Factory(config_file)
-
-        # if args.verbose:
-        #     print('The factory created items with the following guids:')
-        #     for item in _factory.items:
-        #         print(item.guid)
 
 
 if __name__ == '__main__':

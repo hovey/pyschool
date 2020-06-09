@@ -1,37 +1,20 @@
 {
-    "sine-data": {
-        "class": "model",
-        "folder": ".",
-        "file": "data.csv",
-        "skip_rows": 1,
-        "plot_kwargs": {
-            "label": "sin(t)",
-            "color": "darkorange",
-            "linestyle": "-",
-            "linewidth": 4,
-            "alpha" : 0.5
-        }
+    "publisher-1": {
+        "module": "newspaper",
+        "name": "The New York Times"
     },
-    "figure": {
-        "class": "view",
-        "model_keys": ["sine-data"],
-        "folder": ".",
-        "file": "recipe.svg",
-        "size": [8.0, 6.0],
-        "title": "Example using xyfigure",
-        "xlabel": "time (s)",
-        "ylabel": "functions of time f(t)",
-        "yaxis_rhs": {
-            "scale": 10,
-            "label": "right-hand-side label with 10 f(t) scale",
-            "yticks": [-10, -5, 0, 5, 10]
-        },
-        "details": 0,
-        "display": 0,
-        "latex": 0,
-        "serialize": 1
+    "publisher-2": {
+        "module": "newspaper",
+        "name": "The Wall Street Journal"
     },
-    "test_bad_class": {
-        "class": "model_nonsuch"
+    "subscriber-1": {
+        "module": "lectiophile",
+        "name": "Alice Ackerman",
+        "zipcode": 87111
+    },
+    "subscriber-2": {
+        "module": "lectiophile",
+        "name": "Bob Beverly",
+        "zipcode": 90210
     }
 }
