@@ -14,7 +14,6 @@ class ReaderBase(IReader):
 
     Attributes:
         file_path (str): The path to the file containing the data.
-        # _data (np.ndarray): The data read from the file.
         _data (dict or np.ndarray): The data read from the file.
     """
     def __init__(self,

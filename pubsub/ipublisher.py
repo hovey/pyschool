@@ -7,7 +7,7 @@ from abc import ABC, abstractmethod
 
 class IPublisher(ABC):
     """ The Interface class for publishers in the publish-subscribe design pattern. """
-    def __init__(self):
+    def __init__(self, **kwargs):
         """ The init method of the IPublisher class. """
         super().__init__()
 
@@ -39,6 +39,11 @@ class IPublisher(ABC):
 
     @property
     @abstractmethod
+    def name(self):
+        """ Returns the string name given to identify a class instance. """
+
+    @property
+    @abstractmethod
     def subscribers(self):
         """ Returns a dictionary of the subscribers and callbacks. """
         pass
@@ -51,14 +56,15 @@ class IPublisher(ABC):
         pass
 
 class PublisherBase(IPublisher):
-    def __init__(self):
-        super().__init__
-        print('PublisherBase.__init__()')
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        _kwargs = kwargs
+        self._name = kwargs.get("name", "Unknown Name")
         self._subscribers = dict()
+        print(f'PublisherBase.__init__() for {self.name}')
 
     def connect(self, subscriber, callback:str=None):
         if callback == None:
-            # callback = getattr(subscriber, 'update')
             callback = "update"
         self._subscribers[subscriber] = callback
 
@@ -69,6 +75,10 @@ class PublisherBase(IPublisher):
         for subscriber, callback in self._subscribers.items():
             method = getattr(subscriber, callback)
             method()
+
+    @property
+    def name(self):
+        return self._name
 
     @property
     def subscribers(self):
