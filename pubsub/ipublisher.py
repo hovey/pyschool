@@ -12,7 +12,7 @@ class IPublisher(ABC):
         super().__init__()
 
     @abstractmethod
-    def subscribe(self, ISubscriber, callback:str=None):
+    def connect(self, ISubscriber, callback:str=None):
         """ 
         Connects the subscriber with the callback string, 
         which is the same as the subsriber's callback method. 
@@ -26,7 +26,7 @@ class IPublisher(ABC):
         pass
 
     @abstractmethod
-    def unsubscribe(self, ISubscriber):
+    def disconnect(self, ISubscriber):
         """ 
         Disconnects the subscriber from the publisher's subscriber list. 
         """
@@ -56,13 +56,13 @@ class PublisherBase(IPublisher):
         print('PublisherBase.__init__()')
         self._subscribers = dict()
 
-    def subscribe(self, subscriber, callback:str=None):
+    def connect(self, subscriber, callback:str=None):
         if callback == None:
             # callback = getattr(subscriber, 'update')
             callback = "update"
         self._subscribers[subscriber] = callback
 
-    def unsubscribe(self, subscriber):
+    def disconnect(self, subscriber):
         del self._subscribers[subscriber]
 
     def publish(self):
