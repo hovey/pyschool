@@ -22,7 +22,7 @@ When code is repeated `[2, 3, ...n]` times, it creates two code liabilities:
 
 Code should just run the first time, without clients needing to spend excessive amount of time configuring prior to the run.  Services should use default values.  Allow clients to modify the default values through the service's API.
 
-## Kill all non-C.R.U.D. verbs in APIs
+## Eliminate non-C.R.U.D. verbs in APIs
 
 `Get` and `Set` are dead weight verbs that can be inferred from whether a value is being returned (a getter) or passed (a setter).  When `get` and `set` are eliminated from the API, client code gets more compact, more noun-driven, more attribute-rich, and less procedural.  
 
