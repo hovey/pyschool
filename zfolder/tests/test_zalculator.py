@@ -2,6 +2,7 @@ from unittest import TestCase, main
 
 from zfolder.zmath.zalculator import Zalculator as zcalc
 
+
 class TestZalculator(TestCase):
     """
     This is the unittest script.
@@ -9,6 +10,7 @@ class TestZalculator(TestCase):
     $ cd ~/pyschool
     $ python -m unittest -v zfolder/tests/test_zalculator.py
     """
+
     def test_add(self):
         total = zcalc.add(self, 4, 5)
         self.assertEqual(total, 9)
@@ -18,5 +20,5 @@ class TestZalculator(TestCase):
         self.assertEqual(total, 7)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()  # calls unittest.test()
