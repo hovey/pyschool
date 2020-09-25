@@ -39,3 +39,8 @@ $ pip list # verify zmath now exist in the list
 ```
 
 See [this](https://packaging.python.org/tutorials/installing-packages/#installing-from-a-local-src-tree) for details on installing from a local source.
+
+
+## References
+
+* [Layman, Matt.  2018.  Consistent Python code with Black.](https://www.mattlayman.com/blog/2018/python-code-black/)
