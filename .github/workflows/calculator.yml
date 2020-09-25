@@ -31,5 +31,4 @@ jobs:
       run: |
         python -m unittest
     - name: Test with Black
-      run: |
-        black --check zfolder/zmath
+      run: black --check zfolder/zmath
