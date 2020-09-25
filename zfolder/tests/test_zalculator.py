@@ -1,13 +1,22 @@
-import unittest
-from .zmath import zalculator
+from unittest import TestCase, main
 
-class MyTestCase(unittest.TestCase):
+from zfolder.zmath.zalculator import Zalculator as zcalc
+
+class TestZalculator(TestCase):
     """
     This is the unittest script.
     To test on command line:
     $ cd ~/pyschool
-    $ python -m unittest -v cont_integ/test_calculator.py
+    $ python -m unittest -v zfolder/tests/test_zalculator.py
     """
     def test_add(self):
-        total=zalculator.add(4,5)
-        assert total==9
+        total = zcalc.add(self, 4, 5)
+        self.assertEqual(total, 9)
+
+    def test_subtract(self):
+        total = zcalc.subtract(self, 10, 3)
+        self.assertEqual(total, 7)
+
+
+if __name__ == '__main__':
+    main()  # calls unittest.test()

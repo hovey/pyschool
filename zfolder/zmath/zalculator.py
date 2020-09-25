@@ -9,9 +9,10 @@ class Zalculator:
     def __init__(self):
         print("The Zalculator is initialized.")
 
-    def add(self, a, b):
-        """Returns the sum of two numbers a and b."""
-        return a + b
+    def add(self, x, y):
+        """Returns the sum of two numbers x and y."""
+        return x + y
 
-    def subtract(self, a, b):
-        """Returns the value of a less b."""
+    def subtract(self, x, y):
+        """Returns the value of number x less number y."""
+        return x - y
