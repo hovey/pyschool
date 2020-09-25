@@ -1,6 +1,7 @@
 """ 
 This module is the Zalculator service.
-""" 
+"""
+
 
 class Zalculator:
     """The Zalcuator provide fundamental mathematical calculation."""
