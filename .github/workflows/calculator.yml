@@ -30,3 +30,6 @@ jobs:
     - name: Test with unittest
       run: |
         python -m unittest
+    - uses: jpetrucciani/black-check@master
+      with:
+        path: 'zfolder/zmath'
