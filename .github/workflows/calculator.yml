@@ -32,4 +32,4 @@ jobs:
         python -m unittest
     - name: Test with Black
       run: |
-        black -- check zfolder/zmath
+        black --check zfolder/zmath
