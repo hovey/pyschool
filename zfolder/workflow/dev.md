@@ -7,7 +7,7 @@
 * Create a virtual environment called `zmathenv` and then activate that newly-created environment:
 
 ```bash 
-(base) $ conda create --name zmathenv python=3.8 numpy matplotlib pytest flake8 black
+(base) $ conda create --name zmathenv python=3.8 numpy matplotlib pytest flake8 black pylint
 (base) $ conda activate zmathenv
 (zmathenv) $
 ```
@@ -36,7 +36,9 @@
 (zmathenv) $ cd ~/pyschool
 (zmathenv) $ python -m unittest -v
 ```
+
 which will show all the current unit tests (this or similar):
+
 ```bash
 test_add (cont_integ.test_calculator.MyTestCase) ... ok
 test_divide (cont_integ.test_calculator.MyTestCase) ... ok
@@ -125,6 +127,32 @@ OK
 ```
 
 ## Check dev and test code passes Black
+
+```bash
+(zmathenv) [~/pyschool] $ black --check zfolder/
+would reformat /Users/sparta/pyschool/zfolder/setup.py
+would reformat /Users/sparta/pyschool/zfolder/tests/test_zalculator.py
+Oh no! 💥 💔 💥
+2 files would be reformatted, 4 files would be left unchanged.
+```
+
+Fix the formatting in any files that are indicated with "would reformat".  
+
+You can have VS Code either auto-format with Black on save by 
+adding the following lines to VS Code's `~/Library/Application Support/Code/User/settings.json` file:
+
+```bash
+    "python.formatting.provider": "black",
+    "editor.formatOnSave": true
+```
+
+Or, you can manually discover Black's changes, using this:
+
+```bash
+(zmathenv) [~/pyschool]$ black --diff  zfolder/setup.py
+```
+
+
 
 ## Push your code from local to repo feature branch
 
