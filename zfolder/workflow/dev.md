@@ -28,13 +28,16 @@
 
 ## Check out the master branch repository
 
+To come.
+
 ## Create a feature branch
 
-## Check existing unittests pass
+To come.
+
+## Check existing unit tests pass on your local machine
 
 ```bash
-(zmathenv) $ cd ~/pyschool
-(zmathenv) $ python -m unittest -v
+(zmathenv) [~/pyschool]$ python -m unittest -v
 ```
 
 which will show all the current unit tests (this or similar):
@@ -67,16 +70,19 @@ Test loading the data ... ok
 Ran 11 tests in 0.008s
 ```
 
-## Create new unittests to cover 100% of your code
+## Create new unit tests for code coverage and edge cases
+
+Tests should cover at least 80 percent of your code, preferably 100 
+percent.  Documentation on code covers is to come.
 
 In the `~/pyschool/zfolder/tests` folder, either add the the existing test file [`test_zalculator.py`](../tests/test_zalculator.py) or create your own test(s) with the `test_<my_file_name>.py` pattern.
 
 Test your unittest files (or your updates to the existing `test_zalculator.py` file) using this (or similar for your file):
 
 ```bash
-(zmathenv) $ cd ~/pyschool
-(zmathenv) $ python -m unittest -v zfolder/tests/test_zalculator.py
+(zmathenv) [~/pyschool]$ python -m unittest -v zfolder/tests/test_zalculator.py
 ```
+
 which will show the unittests (this or similar):
 
 ```bash
@@ -89,12 +95,12 @@ Ran 2 tests in 0.000s
 OK
 ```
 
-## Check all unittests pass
+## Check all unit tests pass
 
 Finally, rerun all unit tests, and make sure you new unit tests appear in the global lise of unit tests, e.g., 
 
 ```bash
-(zmathenv) [sparta ~/pyschool]$ python -m unittest -v
+(zmathenv) [~/pyschool]$ python -m unittest -v
 test_add (cont_integ.test_calculator.MyTestCase) ... ok
 test_divide (cont_integ.test_calculator.MyTestCase) ... ok
 test_multiply (cont_integ.test_calculator.MyTestCase) ... ok
@@ -126,7 +132,7 @@ Ran 13 tests in 0.009s
 OK
 ```
 
-## Check dev and test code passes Black
+## Check you code (both dev code and test code) passes Black
 
 ```bash
 (zmathenv) [~/pyschool] $ black --check zfolder/
@@ -151,8 +157,6 @@ Or, you can manually discover Black's changes, using this:
 ```bash
 (zmathenv) [~/pyschool]$ black --diff  zfolder/setup.py
 ```
-
-
 
 ## Push your code from local to repo feature branch
 
