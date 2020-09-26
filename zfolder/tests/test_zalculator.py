@@ -11,6 +11,10 @@ class TestZalculator(TestCase):
     $ python -m unittest -v zfolder/tests/test_zalculator.py
     """
 
+    def test_initialize(self):
+        zc = zcalc()
+        self.assertTrue(zc.initialized)
+
     def test_add(self):
         total = zcalc.add(self, 4, 5)
         self.assertEqual(total, 9)

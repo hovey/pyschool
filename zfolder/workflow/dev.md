@@ -7,7 +7,7 @@
 * Create a virtual environment called `zmathenv` and then activate that newly-created environment:
 
 ```bash 
-(base) $ conda create --name zmathenv python=3.8 numpy matplotlib pytest flake8 black pylint
+(base) $ conda create --name zmathenv python=3.8 numpy matplotlib pytest pytest-cov flake8 black pylint
 (base) $ conda activate zmathenv
 (zmathenv) $
 ```
@@ -156,6 +156,152 @@ Or, you can manually discover Black's changes, using this:
 
 ```bash
 (zmathenv) [~/pyschool]$ black --diff  zfolder/setup.py
+```
+
+## Test just the `/pyschool/zfolder/zmath` directory
+
+```bash
+(zmathenv) [sparta ~/pyschool]$ pytest zfolder/tests/ -v
+=============================================== test session starts ===============================================
+platform darwin -- Python 3.8.5, pytest-6.0.2, py-1.9.0, pluggy-0.13.1 -- /opt/miniconda3/envs/zmathenv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/sparta/pyschool/zfolder
+plugins: cov-2.10.1
+collected 2 items                                                                                                 
+
+zfolder/tests/test_zalculator.py::TestZalculator::test_add PASSED                                           [ 50%]
+zfolder/tests/test_zalculator.py::TestZalculator::test_subtract PASSED                                      [100%]
+
+================================================ 2 passed in 0.04s ================================================
+```
+
+## Test the entire `pyschool` directory
+
+```bash
+(zmathenv) [sparta ~/pyschool]$ pytest -v
+=============================================== test session starts ===============================================
+platform darwin -- Python 3.8.5, pytest-6.0.2, py-1.9.0, pluggy-0.13.1 -- /opt/miniconda3/envs/zmathenv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/sparta/pyschool
+plugins: cov-2.10.1
+collected 13 items                                                                                                
+
+test_unittest.py::TestLoadJSON::test_load_json PASSED                                                       [  7%]
+cont_integ/test_calculator.py::MyTestCase::test_add PASSED                                                  [ 15%]
+cont_integ/test_calculator.py::MyTestCase::test_divide PASSED                                               [ 23%]
+cont_integ/test_calculator.py::MyTestCase::test_multiply PASSED                                             [ 30%]
+cont_integ/test_calculator.py::MyTestCase::test_subtract PASSED                                             [ 38%]
+pubsub/test/test_pubsub.py::TestPubSub::test_empty_dict_on_startup PASSED                                   [ 46%]
+pubsub/test/test_pubsub.py::TestPubSub::test_pub_sub PASSED                                                 [ 53%]
+pubsub/test/test_pubsub.py::TestPubSub::test_same PASSED                                                    [ 61%]
+quartiles/test_pfield.py::MyTestCase::test_constructor PASSED                                               [ 69%]
+quartiles/test_pfield.py::MyTestCase::test_input_folder_and_file PASSED                                     [ 76%]
+quartiles/test_pfield.py::MyTestCase::test_quartiles PASSED                                                 [ 84%]
+zfolder/tests/test_zalculator.py::TestZalculator::test_add PASSED                                           [ 92%]
+zfolder/tests/test_zalculator.py::TestZalculator::test_subtract PASSED                                      [100%]
+
+=============================================== 13 passed in 0.45s ================================================
+```
+
+## Code Coverage with line numbers missing coverage
+
+```bash
+(zmathenv) [sparta ~/pyschool]$ pytest --cov=zfolder/zmath -v --cov-report term-missing
+=============================================== test session starts ===============================================
+platform darwin -- Python 3.8.5, pytest-6.0.2, py-1.9.0, pluggy-0.13.1 -- /opt/miniconda3/envs/zmathenv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/sparta/pyschool
+plugins: cov-2.10.1
+collected 13 items                                                                                                
+
+test_unittest.py::TestLoadJSON::test_load_json PASSED                                                       [  7%]
+cont_integ/test_calculator.py::MyTestCase::test_add PASSED                                                  [ 15%]
+cont_integ/test_calculator.py::MyTestCase::test_divide PASSED                                               [ 23%]
+cont_integ/test_calculator.py::MyTestCase::test_multiply PASSED                                             [ 30%]
+cont_integ/test_calculator.py::MyTestCase::test_subtract PASSED                                             [ 38%]
+pubsub/test/test_pubsub.py::TestPubSub::test_empty_dict_on_startup PASSED                                   [ 46%]
+pubsub/test/test_pubsub.py::TestPubSub::test_pub_sub PASSED                                                 [ 53%]
+pubsub/test/test_pubsub.py::TestPubSub::test_same PASSED                                                    [ 61%]
+quartiles/test_pfield.py::MyTestCase::test_constructor PASSED                                               [ 69%]
+quartiles/test_pfield.py::MyTestCase::test_input_folder_and_file PASSED                                     [ 76%]
+quartiles/test_pfield.py::MyTestCase::test_quartiles PASSED                                                 [ 84%]
+zfolder/tests/test_zalculator.py::TestZalculator::test_add PASSED                                           [ 92%]
+zfolder/tests/test_zalculator.py::TestZalculator::test_subtract PASSED                                      [100%]
+
+---------- coverage: platform darwin, python 3.8.5-final-0 -----------
+Name                          Stmts   Miss  Cover   Missing
+-----------------------------------------------------------
+zfolder/zmath/__init__.py         0      0   100%
+zfolder/zmath/zalculator.py       7      1    86%   10
+-----------------------------------------------------------
+TOTAL                             7      1    86%
+
+
+=============================================== 13 passed in 0.67s ================================================
+```
+
+Let zoom into that `Miss` in `zalculator.py`.  Line 9 and 10 of
+`zalculator.py` are as follows:
+
+```python
+    def __init__(self):
+        print("The Zalculator is initialized."
+```
+
+We update that method as follows:
+```python
+    def __init__(self):
+        self.initialized = False
+        print("The Zalculator is initialized.")
+        self.initialized = Tru
+```
+
+Currently, there no test that exercises the print statement of the `__init__` function.
+So, in `test_zalculatory.py`, we add the following test:
+
+```python
+    def __init__(self):
+        self.initialized = False
+        print("The Zalculator is initialized.")
+        self.initialized = Tru
+```
+
+which tests coverage of that line.
+
+```bash
+(zmathenv) [sparta ~/pyschool]$ pytest --cov=zfolder/zmath -v --cov-report term-missing
+=============================================== test session starts ===============================================
+platform darwin -- Python 3.8.5, pytest-6.0.2, py-1.9.0, pluggy-0.13.1 -- /opt/miniconda3/envs/zmathenv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/sparta/pyschool
+plugins: cov-2.10.1
+collected 14 items                                                                                                
+
+test_unittest.py::TestLoadJSON::test_load_json PASSED                                                       [  7%]
+cont_integ/test_calculator.py::MyTestCase::test_add PASSED                                                  [ 14%]
+cont_integ/test_calculator.py::MyTestCase::test_divide PASSED                                               [ 21%]
+cont_integ/test_calculator.py::MyTestCase::test_multiply PASSED                                             [ 28%]
+cont_integ/test_calculator.py::MyTestCase::test_subtract PASSED                                             [ 35%]
+pubsub/test/test_pubsub.py::TestPubSub::test_empty_dict_on_startup PASSED                                   [ 42%]
+pubsub/test/test_pubsub.py::TestPubSub::test_pub_sub PASSED                                                 [ 50%]
+pubsub/test/test_pubsub.py::TestPubSub::test_same PASSED                                                    [ 57%]
+quartiles/test_pfield.py::MyTestCase::test_constructor PASSED                                               [ 64%]
+quartiles/test_pfield.py::MyTestCase::test_input_folder_and_file PASSED                                     [ 71%]
+quartiles/test_pfield.py::MyTestCase::test_quartiles PASSED                                                 [ 78%]
+zfolder/tests/test_zalculator.py::TestZalculator::test_add PASSED                                           [ 85%]
+zfolder/tests/test_zalculator.py::TestZalculator::test_initialize PASSED                                    [ 92%]
+zfolder/tests/test_zalculator.py::TestZalculator::test_subtract PASSED                                      [100%]
+
+---------- coverage: platform darwin, python 3.8.5-final-0 -----------
+Name                          Stmts   Miss  Cover   Missing
+-----------------------------------------------------------
+zfolder/zmath/__init__.py         0      0   100%
+zfolder/zmath/zalculator.py       9      0   100%
+-----------------------------------------------------------
+TOTAL                             9      0   100%
+
+
+=============================================== 14 passed in 0.66s ================================================
 ```
 
 ## Push your code from local to repo feature branch
