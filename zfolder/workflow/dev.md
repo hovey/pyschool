@@ -253,7 +253,7 @@ We update that method as follows:
     def __init__(self):
         self.initialized = False
         print("The Zalculator is initialized.")
-        self.initialized = Tru
+        self.initialized = True
 ```
 
 Currently, there no test that exercises the print statement of the `__init__` function.
@@ -263,7 +263,7 @@ So, in `test_zalculatory.py`, we add the following test:
     def __init__(self):
         self.initialized = False
         print("The Zalculator is initialized.")
-        self.initialized = Tru
+        self.initialized = True
 ```
 
 which tests coverage of that line.
