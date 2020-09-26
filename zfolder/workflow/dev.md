@@ -23,7 +23,7 @@
 
 ```bash
 (zmathenv) $ cd ~/pyschool
-(zmathenv) $
+(zmathenv) $ # to come, ask Anirudh on this step.
 ```
 
 ## Check out the master branch repository
