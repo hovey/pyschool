@@ -1,4 +1,5 @@
 ![unittest](https://github.com/hovey/pyschool/workflows/unittest/badge.svg)
+[![codecov](https://codecov.io/gh/hovey/pyschool/branch/master/graph/badge.svg)](https://codecov.io/gh/hovey/pyschool)
 
 # pyschool
 Examples of [Best Practices](#best-practices) and [Pythonic Patterns](#pythonic-patterns)
