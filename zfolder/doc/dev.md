@@ -6,41 +6,16 @@
 
 To come.
 
-## Prior to work, verify existing unit tests pass
+## Prior to work, verify *existing* unit tests pass
 
 ```bash
-(zmathenv) [~/pyschool]$ python -m unittest -v
+(zmathenv) [~/pyschool]$ pytest -v
 ```
 
-which will show all the current unit tests (this or similar):
+Does this step show 100 percent of tests are `PASSED`?
 
-```bash
-test_add (cont_integ.test_calculator.MyTestCase) ... ok
-test_divide (cont_integ.test_calculator.MyTestCase) ... ok
-test_multiply (cont_integ.test_calculator.MyTestCase) ... ok
-test_subtract (cont_integ.test_calculator.MyTestCase) ... ok
-test_empty_dict_on_startup (pubsub.test.test_pubsub.TestPubSub) ... PublisherBase.__init__() for The New York Times
-Newspaper.__init__() for The New York Times
-ok
-test_pub_sub (pubsub.test.test_pubsub.TestPubSub) ... PublisherBase.__init__() for The Wall Street Journal
-Newspaper.__init__() for The Wall Street Journal
-SubscriberBase.__init__() for Alice Ackerman
-Lectiophile.__init__() for Alice Ackerman
-SubscriberBase.__init__() for Bob Beverly
-Lectiophile.__init__() for Bob Beverly
-SubscriberBase.update() for Alice Ackerman
-SubscriberBase.serialize() for Bob Beverly
-ok
-test_same (pubsub.test.test_pubsub.TestPubSub) ... ok
-test_constructor (quartiles.test_pfield.MyTestCase) ... ok
-test_input_folder_and_file (quartiles.test_pfield.MyTestCase) ... ok
-test_quartiles (quartiles.test_pfield.MyTestCase) ... ok
-test_load_json (test_unittest.TestLoadJSON)
-Test loading the data ... ok
-
-----------------------------------------------------------------------
-Ran 11 tests in 0.008s
-```
+* Yes: proceed to the next step; or, 
+* No: do not proceed, your local machine is not yet properly configured.
 
 For an overview of the `unittest` and `pytest` frameworks, see [Testing](../../testing/README.md).
 
@@ -55,23 +30,16 @@ percent.  Documentation on code covers is to come.
 
 In the `~/pyschool/zfolder/tests` folder, either add the the existing test file [`test_zalculator.py`](../tests/test_zalculator.py) or create your own test(s) with the `test_<my_file_name>.py` pattern.
 
-Test your unittest files (or your updates to the existing `test_zalculator.py` file) using this (or similar for your file):
+Test your unit test files (or your updates to the existing `test_zalculator.py` file) using this (or similar for your file):
 
 ```bash
-(zmathenv) [~/pyschool]$ python -m unittest -v zfolder/tests/test_zalculator.py
+(zmathenv) [~/pyschool]$ pytest zfolder/ -v 
 ```
 
-which will show the unittests (this or similar):
+Does this step show 100 percent of tests are `PASSED`?
 
-```bash
-test_add (zfolder.tests.test_zalculator.TestZalculator) ... ok
-test_subtract (zfolder.tests.test_zalculator.TestZalculator) ... ok
-
-----------------------------------------------------------------------
-Ran 2 tests in 0.000s
-
-OK
-```
+* Yes: proceed to the next step; or, 
+* No: do not proceed, your tests do no yet pass.
 
 ## Check code style
 
