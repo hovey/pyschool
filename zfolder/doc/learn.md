@@ -1,5 +1,7 @@
 # Learn
 
+## Previous: [Introduction](introduction.md)
+
 ## Introduction
 
 Here is the workflow scenario:
@@ -38,6 +40,4 @@ zfolder
 Also, previous developers have deployed the service to [PyPi](https://pypi.org/) as the `zmath` package (aka library), following their
 [deployment steps](deployment.md).
 
-| Previous |  Next |
-|----------|------:|
-| [README](README.md) | [dev](dev.md) |
+## Next: [Configuration](configuration.md)
