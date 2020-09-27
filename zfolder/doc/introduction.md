@@ -37,7 +37,7 @@ Attribute | Script Writer |  Software Developer
 `├──` community | singleton | team
 `├──` time horizon | short-term | long-term
 `├──` achieves goals through ... | tactics | strategy
-`├──` [pace](https://en.wikipedia.org/wiki/The_Tortoise_and_the_Hare) | tortoise | hare
+`├──` [pace](https://en.wikipedia.org/wiki/The_Tortoise_and_the_Hare) | hare | tortoise
 `├──` code **popularity** | possible | possible
 `├──` code **reuse** | unlikely | likely
 `├──` code **scale** | unlikely | possible
