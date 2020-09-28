@@ -8,6 +8,18 @@
 * Install [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
 * Create a virtual environment called `zmathenv` and then activate that newly-created environment:
 
+### Virtual Environment
+
+A virtual environment ensures you will have all the necessary modules required to run the workflow, and that
+the modules installed are compatable with each other.  First, check to make sure you don't already have a
+virtual environment called `zmathenv` 
+
+```bash
+conda env list
+```
+
+Next, create the virtual environment:
+
 ```bash 
 (base) $ conda create --name zmathenv python=3.8 numpy matplotlib pytest pytest-cov flake8 black pylint
 (base) $ conda activate zmathenv
