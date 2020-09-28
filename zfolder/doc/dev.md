@@ -109,7 +109,7 @@ Let zoom into that `Miss` in `zalculator.py`.  Line 9 and 10 of
 
 ```python
 def __init__(self):
-    print("The Zalculator is initialized."
+    print("The Zalculator is initialized.")
 ```
 
 We update that method as follows:
