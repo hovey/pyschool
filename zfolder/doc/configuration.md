@@ -15,7 +15,7 @@ the modules installed are compatable with each other.  First, check to make sure
 virtual environment called `zmathenv` 
 
 ```bash
-conda env list
+(base) $ conda env list
 ```
 
 Next, create the virtual environment:
