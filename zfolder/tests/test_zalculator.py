@@ -21,7 +21,7 @@ class TestZalculator(TestCase):
 
     def test_subtract(self):
         total = zcalc.subtract(self, 10, 3)
-        self.assertEqual(total, 6)
+        self.assertEqual(total, 7)
 
 
 if __name__ == "__main__":
