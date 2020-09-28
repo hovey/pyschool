@@ -2,10 +2,6 @@
 
 ## Previous: [Configuration](configuration.md)
 
-## Create a feature branch
-
-To come.
-
 ## Prior to work, verify *existing* unit tests pass
 
 ```bash
