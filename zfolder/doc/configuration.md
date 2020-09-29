@@ -12,6 +12,10 @@ then *configure* the the dev tools below.
 * Install [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
 * Create a virtual environment called `zmathenv` and then activate that newly-created environment:
 
+Also, consider these installations, if appropriate:
+
+* [Black integration with vim](https://black.readthedocs.io/en/stable/editor_integration.html#vim)
+
 ## Configuration
 
 ### Git Configuration
