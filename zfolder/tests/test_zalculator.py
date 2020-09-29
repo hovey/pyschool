@@ -8,7 +8,10 @@ class TestZalculator(TestCase):
     This is the unittest script.
     To test on command line:
     $ cd ~/pyschool
+    either
     $ python -m unittest -v zfolder/tests/test_zalculator.py
+    or
+    $ pytest zfolder/tests/test_zalculator.py -v
     """
 
     def test_initialize(self):

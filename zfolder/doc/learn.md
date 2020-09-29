@@ -25,16 +25,18 @@ Previous developers have created the existing repo  at `/pyschool/zfolder/` and 
 
 ```bash
 zfolder
-├── LICENSE
-├── README.md
 ├── zmath # maps to the zmath package
 │   ├── __init__.py
 │   └── zalculator.py
-├── setup.py
-└── tests
-    └── test_zalculator.py
-└── dist
-    └── zmath-0.0.1-py3-none-any.whl
+├── tests
+│   └── test_zalculator.py
+├── doc
+│   └── introduction.md
+├── dist
+│   └── zmath-0.0.1-py3-none-any.whl
+├── LICENSE
+├── README.md
+└── setup.py
 ```
 
 Also, previous developers have deployed the service to [PyPi](https://pypi.org/) as the `zmath` package (aka library), following their
