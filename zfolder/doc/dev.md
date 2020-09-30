@@ -173,4 +173,8 @@ By pushing from your local the feature branch on the repository, you
 
 Repeat the steps on this page as necessary for continued development, or proceed to the next step.
 
+## References
+
+* [Real Python PEP8](https://realpython.com/python-pep8/) and comments on Black
+
 ## Next: [Propose](propose.md)
