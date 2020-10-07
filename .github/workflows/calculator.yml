@@ -34,5 +34,4 @@ jobs:
     - name: Test with Black
       run: |
         pip install black
-        # black --check zfolder
-        black --check .
+        black --check zfolder
