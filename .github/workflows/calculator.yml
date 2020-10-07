@@ -29,9 +29,8 @@ jobs:
         python -m pip install --user numpy scipy matplotlib
     - name: Test with unittest
       run: |
-        cd zfolder
         python -m unittest
     - name: Test with Black
       run: |
         pip install black
-        black --check zfolder
+        black --check zmath
