@@ -1,6 +1,7 @@
 from unittest import TestCase, main
 
-from zfolder.zmath.zalculator import Zalculator as zcalc
+# from zfolder.zmath.zalculator import Zalculator as zcalc
+from zmath.zalculator import Zalculator as zcalc
 
 
 class TestZalculator(TestCase):

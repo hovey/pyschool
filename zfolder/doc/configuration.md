@@ -3,37 +3,69 @@
 ## Previous: [Learn](learn.md)
 
 To set up your local development environment, *install* and 
-then *configure* the the dev tools below.
+possibly *configure* the the dev tools below.
 
-## Installation
+## Git
 
-* Install [Git](https://git-scm.com/)
-* Install [Visual Studio Code](https://code.visualstudio.com/)
-* Install [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
-* Create a virtual environment called `zmathenv` and then activate that newly-created environment:
+### Existing Installation
 
-Also, consider these installations, if appropriate:
+Check the existing install version
 
-* [Black integration with vim](https://black.readthedocs.io/en/stable/editor_integration.html#vim)
+```bash
+$ git --version
+git version 2.6.4
+```
 
-## Configuration
+If your version is sufficiently old compared to the current version, consider updating your Git.  On Linux, to install or upgrade:
 
-### Git Configuration
+```bash
+sudo apt-get install git
+```
+
+On a new installer file for
+* [Mac](https://git-scm.com/download/mac)
+* [PC](https://git-scm.com/download/win) e.g., `Git-2.28.0-64-bit.exe`
+
+### New Installation
+
+Download the [installer](https://git-scm.com/).
 
 If not yet configured, your username and email are set as follows
 and are used set for commit transactions:
 
 ```bash
-(base) $ git config --global user.name "your-name-here"
-(base) $ git config --global user.email "your-email@example.com"  
-(base) $ git config --global color.ui auto  # colorize the command line interface 
+$ git config --global user.name "your-name-here" (e.g., "James Bond")
+$ git config --global user.email "your-email@example.com" (e.g., "bond@gmail.com")
+$ git config --global color.ui auto  # colorize the command line interface 
 ```
+
+To edit these items in the future, directly update the `~/.gitconfig` file.
 
 * [Connect](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/connecting-to-github-with-ssh) local to GitHub repo via ssh.
 * Clone the repo to local:
 
 ```bash
-(base) $ git@github.com:hovey/pyschool.git
+$ git clone git@github.com:hovey/pyschool.git
+```
+
+## Miniconda
+
+* [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
+
+Verify the version number and install location:
+
+```bash
+$ python --version 
+Python 3.8.3
+
+$ which python
+/c/Users/chovey/Miniconda3/python
+```
+
+*  verify conda is up-to-date
+
+```bash
+(base) $ conda update -n base -c defaults conda
 ```
 
 ### Virtual Environment Configuration
@@ -49,19 +81,36 @@ virtual environment called `zmathenv`
 Create the virtual environment:
 
 ```bash 
-(base) $ conda create --name zmathenv python=3.8 numpy matplotlib pytest pytest-cov flake8 black pylint
+(base) $ conda create --name zmathenv python=3.8 black flake8 matplotlib pytest pytest-cov scipy
 (base) $ conda activate zmathenv
 (zmathenv) $
 ```
 
+*Note:* If you are using the Git Bash shell, you may need to 
+
+```bash
+$ conda init bash
+```
+
+then close and reopen the Git Bash shell for conda commands to work.
+
 * Install the existing `zmath` library in developer mode:
 
 ```bash
-(zmathenv) $ cd ~/pyschool
-(zmathenv) $ # to come, ask Anirudh on this step.
+(zmathenv) $ cd ~/pyschool/zfolder
+(zmathenv) $ pip list # verify zmath is not in the list
+(zmathenv) $ pip install -e .
+(zmathenv) $ pip list # verify zmath is in the list
 ```
 
-### To Branch or Not to Branch?
+## VS Code
+
+* [Visual Studio Code](https://code.visualstudio.com/)
+* [Black integration with vim](https://black.readthedocs.io/en/stable/editor_integration.html#vim)
+
+
+
+## To Branch or Not to Branch?
 
 There are two main Git [workflows](https://www.atlassian.com/git/tutorials/comparing-workflows):
 
