@@ -1,0 +1,20 @@
+{
+    "publisher-1": {
+        "module": "newspaper",
+        "name": "The New York Times"
+    },
+    "publisher-2": {
+        "module": "newspaper",
+        "name": "The Wall Street Journal"
+    },
+    "subscriber-1": {
+        "module": "lectiophile",
+        "name": "Alice Ackerman",
+        "zipcode": 87111
+    },
+    "subscriber-2": {
+        "module": "lectiophile",
+        "name": "Bob Beverly",
+        "zipcode": 90210
+    }
+}

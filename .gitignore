@@ -1,0 +1,6 @@
+launch.json
+*.vscode
+*.swp
+__pycache__
+.coverage
+

@@ -1,7 +1,9 @@
 ![unittest](https://github.com/hovey/pyschool/workflows/unittest/badge.svg)
+[![codecov](https://codecov.io/gh/hovey/pyschool/branch/master/graph/badge.svg)](https://codecov.io/gh/hovey/pyschool)
+[![codecov](https://codecov.io/gh/sandialabs/sibl/branch/master/graph/badge.svg)](https://codecov.io/gh/sandialabs/sibl)
 
 # pyschool
-Examples of Best Practices and Pythonic Patterns
+Examples of [Best Practices](#best-practices) and [Pythonic Patterns](#pythonic-patterns)
 
 ## Best Practices
 
@@ -22,7 +24,7 @@ When code is repeated `[2, 3, ...n]` times, it creates two code liabilities:
 
 Code should just run the first time, without clients needing to spend excessive amount of time configuring prior to the run.  Services should use default values.  Allow clients to modify the default values through the service's API.
 
-## Kill all non-C.R.U.D. verbs in APIs
+## Eliminate non-C.R.U.D. verbs in APIs
 
 `Get` and `Set` are dead weight verbs that can be inferred from whether a value is being returned (a getter) or passed (a setter).  When `get` and `set` are eliminated from the API, client code gets more compact, more noun-driven, more attribute-rich, and less procedural.  
 
@@ -40,6 +42,10 @@ versus
 Verbs, in general, can harbor lots of dead weight and bloat.  Instead of `set` other verbs that could be used with `color` are `calculate` (e.g., RBG or alpha channels) or `update` or `render` or `draw` or `paint` or `apply`... and really these verbs are hallmarks of implementation, not interface; they start to expose the service's internals for returning a color to the client.  And, they are unnecessary noise for the client, who either just wants to get or set the color, and not worry about how the same is implemented. 
 
 Thus, verbs, *in the service API*, invite the slippery slope of coupling client to a service's implementation, which is bad.  Prefer to couple the client to the service's interface.  That way, should the implementation change, it does not propagate changes to the client, forcing them to update how they use the service.
+
+From the REST API notes, [How to Design a REST API](https://restfulapi.net/rest-api-design-tutorial-with-example/)
+
+> Notice that these URIs do not use any verb or operation. It’s very important to not include any verb in URIs. URIs should all be nouns only.
 
 ### C.R.U.D.
 
@@ -66,13 +72,30 @@ Consider the string of `if` checking:
 
 This is an example of `code smell`, which means the code has sufficent *function* but has weak *form*.  In this example, the client is forever checking the myriad of different `Animal` descendants.  As the number of `Animals` increases, clients must modify their code everyhere they used this smelly pattern.  
 
+## Coverage
+
+* coverage.py on [GitHub](https://github.com/nedbat/coveragepy) and on [PyPI](https://pypi.org/project/coverage/)
+
+```bash
+$ pip install coverage
+$ coverage run -m unittest
+$ coverage report
+$ coverage html
+$ cd htmlcov/
+$ open index.html
+```
+
+* [coverage-badge.py](https://pypi.org/project/coverage-badge/)
+
 ## Client-Service Decoupling
 
 Services should expose client functionality through a service API.  The API will be better when it [avoids verbs](README.md#kill-all-non-crud-verbs-in-apis).  Services should not expose implementation.  
 
 Clients should code to a service's interface, not implementation.  This allows the client to be only loosely coupled to the service, which is good.  Tight coupling is bad.  Loose coupling allows the client and the service to change over time independent from one another.  A change to the service that also requires a change to any and all clients who have used the service in the past is an example of [code smell](README.md#code-smell).
 
+## Singleton versus Collections
 
+To come.  [For now](https://restfulapi.net/resource-naming/)
 
 ## Pythonic Patterns
 
@@ -100,6 +123,7 @@ Clients should code to a service's interface, not implementation.  This allows t
 
 ### [Factory](factory.md)
 
+### [Publish-Subscribe](pubsub/README.md) (aka Observer)
 
 ### Import
 
@@ -123,12 +147,67 @@ Clients should code to a service's interface, not implementation.  This allows t
 * An [example](test_unittest.py), using the [unittest.mock](https://docs.python.org/3/library/unittest.mock.html#) library for testing in Python.
 * [Real Python](https://realpython.com/python-mock-library/) article.  
 
+Examples from `xyfigure_test.py`:
+
+```bash
+$ python xyfigure_test.py                      # for terse interaction,
+$ python -m unittest xyfigure_test             # for default interaction,
+$ python -m unittest -v xyfigure_test          # for higher verbosity, and
+
+$ python -m unittest xyfigure_test.TestImageDiff.test_same  # e.g., to test the test_same() method
+```
+
 ## Examples
+
+### Conda
+
+* virual environment (venv)
+
+```bash
+# from [Apollo/sibl] with all folders containin __init__.py file:
+(base) conda create -n temp
+(base) conda activate temp
+(temp) conda install numpy scipy matplotlib
+(temp) conda install pip
+(temp) pip install -e .  # -e is development mode, if code updates, new pip install is not required
+(temp) conda list
+(temp) 
+(temp) conda deactivate
+(base) conda remove -n temp --all
+# list all environments:
+(base) conda info --envs
+```
+
+* also, pip virtual environment (venv)
+
+```bash
+(base) python -m venv fire
+```
 
 ### Computation
 
 * [Ordinary least squares](least_squares/ols.py)
 * Several examples in the `monkey_see` folder  
+
+### Debugger
+
+Example:  From `~/sibl/xyfigure/test` in VS Code, `Run | Open Configurations` and add to `launch.json` the following:
+
+```json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "/Users/Apollo/sibl/xyfigure/xyfigure.py",
+            "args": ["signal_process_serialize.json"],
+            "console": "integratedTerminal"
+        }
+    ]
+}
+```
 
 ### Matplotlib
 
@@ -146,11 +225,47 @@ Once the code base has sufficient development, and it is ready for production, u
 * Test
   * Unit Test
   * Integration Test
-* [Packaging](https://packaging.python.org/tutorials/packaging-projects/) (Build, Installer), and packaging [guide](https://packaging.python.org/guides/distributing-packages-using-setuptools/), and [distribution](https://pypi.org/) with PyPI.
+* [Packaging/Distribution/PyPI](https://packaging.python.org/tutorials/packaging-projects/) (Build, Installer), and packaging [guide](https://packaging.python.org/guides/distributing-packages-using-setuptools/), and [distribution](https://pypi.org/) with PyPI.
 * [Packaging and Distribution](https://conda.io/projects/conda-build/en/latest/) with Conda to create a [Conda Package](https://conda.io/projects/conda/en/latest/user-guide/concepts/packages.html).  Building conda packages [from scratch](https://conda.io/projects/conda-build/en/latest/user-guide/tutorials/build-pkgs.html).
 * Client Use
   * Client [Installation](https://packaging.python.org/tutorials/installing-packages/)
   * Client Bug Reports (https://github.com/hovey/pyschool/issues)
+  
+  #### Production/Distribution Notes
+  
+```bash
+# -----------------
+# production server
+# -----------------
+$ cd ~/sibl/xyfigure
+$ rm -r xyfigure.egg-info/
+$ vim setup.py   # update setup.py, typically increment the version, located parent file README.md
+
+# update server if necessary
+$ python -m pip install --user --upgrade setuptools wheel
+$ python -m pip install --user --upgrade twine
+
+# build to the dist/ subdirectory
+$ python setup.py sdist bdist_wheel
+
+# assure the PyPI API token for the server is created on pypi.org and saved on the server at ~/.pypirc
+
+# remove any old .gz and .whl files in dist/ subdirectory
+$ cd dist/  #rm old .gz and old .whl
+$ cd ../  # back to the ~/sibl/xyfigure directory
+
+# deploy
+$ python -m twine upload dist/*
+
+# ------
+# client
+# ------
+$ pip list
+$ pip uninstall sibllib  # the old name
+$ cd /nscratch/chovey/casco_sim/temp/
+$ pip install --user xyfigure-0.0.4-py3-none-any.whl
+$ pip list
+```
 
 ## References
 
