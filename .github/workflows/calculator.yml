@@ -35,4 +35,4 @@ jobs:
       run: |
         pip install black
         # black --check zfolder
-        blac --check .
+        black --check .
