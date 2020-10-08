@@ -29,6 +29,9 @@ jobs:
         run: |
           pip install pytest
           pip install pytest-cov
+          cd zfolder
+          pip install -e .
+          cd ../
           pytest --cov=zfolder/zmath --cov-report=xml
       - name: Upload coverage to Codecov
       # uses: codecov/codecov-action@6004246f47ab62d32be025ce173b241cd84ac58e
