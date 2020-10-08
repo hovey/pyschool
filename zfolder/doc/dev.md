@@ -17,19 +17,19 @@ For an overview of the `unittest` and `pytest` frameworks, see [Testing](../../t
 
 ## Create a feature
 
-To implement your feature, create or update code in the `~/pyschool/zmath/code` folder.
+To implement your feature, create or update code in the `~/pyschool/zfolder/zmath/` folder.
 
 ## Create unit tests
 
 Tests should cover at least 80 percent of your code, preferably 100 
 percent.  Documentation on code covers is to come.
 
-In the `~/pyschool/zmath/tests` folder, either add the the existing test file [`test_zalculator.py`](../tests/test_zalculator.py) or create your own test(s) with the `test_<my_file_name>.py` pattern.
+In the `~/pyschool/zfolder/tests/` folder, either add the the existing test file [`test_zalculator.py`](../tests/test_zalculator.py) or create your own test(s) with the `test_<my_file_name>.py` pattern.
 
 Test your unit test files (or your updates to the existing `test_zalculator.py` file) using this (or similar for your file):
 
 ```bash
-(zmathenv) [~/pyschool]$ pytest zmath/ -v 
+(zmathenv) [~/pyschool/zfolder]$ pytest -v 
 ```
 
 Does this step show 100 percent of tests are `PASSED`?
@@ -40,9 +40,9 @@ Does this step show 100 percent of tests are `PASSED`?
 ## Check code style
 
 ```bash
-(zmathenv) [~/pyschool] $ black --check zmath/
-would reformat /Users/sparta/pyschool/zmath/setup.py
-would reformat /Users/sparta/pyschool/zmath/tests/test_zalculator.py
+(zmathenv) [~/pyschool/zfolder] $ black --check .
+would reformat /Users/sparta/pyschool/zfolder/setup.py
+would reformat /Users/sparta/pyschool/zfolder/tests/test_zalculator.py
 Oh no! 💥 💔 💥
 2 files would be reformatted, 4 files would be left unchanged.
 ```
@@ -60,13 +60,13 @@ adding the following lines to VS Code's `~/Library/Application Support/Code/User
 Or, you can manually discover Black's changes, using this:
 
 ```bash
-(zmathenv) [~/pyschool]$ black --diff  zmath/setup.py
+(zmathenv) [~/pyschool/zfolder]$ black --diff setup.py
 ```
 
 ## Test Coverage
 
 ```bash
-(zmathenv) [sparta ~/pyschool]$ pytest --cov=zmath/code -v --cov-report term-missing
+(zmathenv) [sparta ~/pyschool]$ pytest --cov=zfolder/zmath -v --cov-report term-missing
 =============================================== test session starts ===============================================
 platform darwin -- Python 3.8.5, pytest-6.0.2, py-1.9.0, pluggy-0.13.1 -- /opt/miniconda3/envs/zmathenv/bin/python
 cachedir: .pytest_cache
@@ -85,14 +85,14 @@ pubsub/test/test_pubsub.py::TestPubSub::test_same PASSED                        
 quartiles/test_pfield.py::MyTestCase::test_constructor PASSED                                               [ 69%]
 quartiles/test_pfield.py::MyTestCase::test_input_folder_and_file PASSED                                     [ 76%]
 quartiles/test_pfield.py::MyTestCase::test_quartiles PASSED                                                 [ 84%]
-zmath/tests/test_zalculator.py::TestZalculator::test_add PASSED                                           [ 92%]
-zmath/tests/test_zalculator.py::TestZalculator::test_subtract PASSED                                      [100%]
+zfolder/tests/test_zalculator.py::TestZalculator::test_add PASSED                                           [ 92%]
+zfolder/tests/test_zalculator.py::TestZalculator::test_subtract PASSED                                      [100%]
 
 ---------- coverage: platform darwin, python 3.8.5-final-0 -----------
 Name                          Stmts   Miss  Cover   Missing
 -----------------------------------------------------------
-zmath/code/__init__.py            0      0   100%
-zmath/code/zalculator.py          7      1    86%   10
+zfolder/zmath/__init__.py         0      0   100%
+zfolder/zmath/zalculator.py       7      1    86%   10
 -----------------------------------------------------------
 TOTAL                             7      1    86%
 
@@ -148,15 +148,15 @@ pubsub/test/test_pubsub.py::TestPubSub::test_same PASSED                        
 quartiles/test_pfield.py::MyTestCase::test_constructor PASSED                                               [ 64%]
 quartiles/test_pfield.py::MyTestCase::test_input_folder_and_file PASSED                                     [ 71%]
 quartiles/test_pfield.py::MyTestCase::test_quartiles PASSED                                                 [ 78%]
-zmath/tests/test_zalculator.py::TestZalculator::test_add PASSED                                           [ 85%]
-zmath/tests/test_zalculator.py::TestZalculator::test_initialize PASSED                                    [ 92%]
-zmath/tests/test_zalculator.py::TestZalculator::test_subtract PASSED                                      [100%]
+zfolder/tests/test_zalculator.py::TestZalculator::test_add PASSED                                           [ 85%]
+zfolder/tests/test_zalculator.py::TestZalculator::test_initialize PASSED                                    [ 92%]
+zfolder/tests/test_zalculator.py::TestZalculator::test_subtract PASSED                                      [100%]
 
 ---------- coverage: platform darwin, python 3.8.5-final-0 -----------
 Name                          Stmts   Miss  Cover   Missing
 -----------------------------------------------------------
-zmath/code/__init__.py            0      0   100%
-zmath/code/zalculator.py          9      0   100%
+zfolder/zmath/__init__.py         0      0   100%
+zfolder/zmath/zalculator.py       9      0   100%
 -----------------------------------------------------------
 TOTAL                             9      0   100%
 

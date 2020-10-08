@@ -94,13 +94,13 @@ $ conda init bash
 
 then close and reopen the Git Bash shell for conda commands to work.
 
-* Install the existing `zmath` library in developer mode:
+* **IMPORTANT STEP:** Install the existing `zmath` library in developer mode:
 
 ```bash
 (zmathenv) $ cd ~/pyschool/zfolder
-(zmathenv) $ pip list # verify zmath is not in the list
+(zmathenv) $ pip list # verify zmath is not in the list (or it may already exist, but point to, e.g., /Users/Apollo/.local/lib/python3.8/site-packages)
 (zmathenv) $ pip install -e .
-(zmathenv) $ pip list # verify zmath is in the list
+(zmathenv) $ pip list # verify zmath is in the list (and now points to, e.g., /Users/Apollo/pyschool/zfolder)
 ```
 
 ## VS Code
