@@ -24,8 +24,8 @@ Here is the workflow scenario:
 Previous developers have created the existing repo  at `/pyschool/zfolder/` and populated it with the main service and tests, based on the [python package template](https://packaging.python.org/tutorials/packaging-projects/#creating-the-package-files), as follows:
 
 ```bash
-zfolder
-├── zmath # maps to the zmath package
+zmath # maps to the zmath package
+├── code
 │   ├── __init__.py
 │   └── zalculator.py
 ├── tests

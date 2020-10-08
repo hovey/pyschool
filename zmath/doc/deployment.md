@@ -8,7 +8,7 @@
 # -----------------
 # production server
 # -----------------
-$ cd ~/pyschool/zfolder
+$ cd ~/pyschool/zmath
 $ rm -r zmath.egg-info/ # if it exists, if not, skip this step
 $ vim setup.py   # update setup.py, typically increment the version, version is here and possibly in the README.md
 
@@ -33,7 +33,7 @@ $ python -m twine upload dist/*
 # ------
 $ pip list
 $ pip uninstall zmath  # if it exists, later we show the update method alternative to uninstall
-$ cd ~/pyschool/zfolder/dist
+$ cd ~/pyschool/zmath/dist
 # then either install from pypi.or; or..
 $ pip install --user zmath-0.0.n-py3-none-any.whl # where n is the desired version number
 # or install from local
