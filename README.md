@@ -1,6 +1,6 @@
-![unittest](https://github.com/hovey/pyschool/workflows/unittest/badge.svg)
+[![unittest](https://github.com/hovey/pyschool/workflows/unittest/badge.svg)](https://github.com/hovey/pyschool/actions)
+[![hboxcov](https://github.com/hovey/pyschool/workflows/hboxcov/badge.svg)](https://github.com/hovey/pyschool/actions)
 [![codecov](https://codecov.io/gh/hovey/pyschool/branch/master/graph/badge.svg)](https://codecov.io/gh/hovey/pyschool)
-[![codecov](https://codecov.io/gh/sandialabs/sibl/branch/master/graph/badge.svg)](https://codecov.io/gh/sandialabs/sibl)
 
 # pyschool
 Examples of [Best Practices](#best-practices) and [Pythonic Patterns](#pythonic-patterns)
