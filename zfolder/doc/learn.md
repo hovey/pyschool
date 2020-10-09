@@ -39,6 +39,7 @@ zfolder/ # a general folder checked into a repo, holds all zmath paraphernalia
 ├── .gitignore # marks setup.py objects as not for repo
 ├── LICENSE
 ├── README.md
+├── setup.sh # creates the zmath conda environment
 ├── setup.py
 │
 │   # non-repo items, which will appear upon building a deployment #

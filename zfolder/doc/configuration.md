@@ -62,45 +62,36 @@ $ which python
 /c/Users/chovey/Miniconda3/python
 ```
 
-*  verify conda is up-to-date
+Verify conda is up-to-date:
 
 ```bash
 (base) $ conda update -n base -c defaults conda
 ```
 
+*Note:* If you are using the Git Bash shell, you may need to 
+
+```bash
+(base) $ conda init bash
+```
+
+then close and reopen the Git Bash shell for conda commands to work.
+
+
 ### Virtual Environment Configuration
 
 A virtual environment ensures you will have all the necessary modules required to run the workflow, and that
-the modules installed are compatable with each other.  First, check to make sure you don't already have a
-virtual environment called `zmathenv` 
+the modules installed are compatable with each other.
+
+To see the current conda environments:
 
 ```bash
 (base) $ conda env list
 ```
 
-Create the virtual environment:
-
-```bash 
-(base) $ conda create --name zmathenv python=3.8 black flake8 matplotlib pytest pytest-cov scipy
-(base) $ conda activate zmathenv
-(zmathenv) $
-```
-
-*Note:* If you are using the Git Bash shell, you may need to 
+Use the bash shell file [setup.sh](../setup.sh) to automatically create (or recreate if it already exists) the `zmathenv` conda environment:
 
 ```bash
-$ conda init bash
-```
-
-then close and reopen the Git Bash shell for conda commands to work.
-
-* **IMPORTANT STEP:** Install the existing `zmath` library in developer mode:
-
-```bash
-(zmathenv) $ cd ~/pyschool/zfolder
-(zmathenv) $ pip list # verify zmath is not in the list (or it may already exist, but point to, e.g., /Users/Apollo/.local/lib/python3.8/site-packages)
-(zmathenv) $ pip install -e .
-(zmathenv) $ pip list # verify zmath is in the list (and now points to, e.g., /Users/Apollo/pyschool/zfolder)
+(base) [sparta ~/pyschool/zfolder]$ ./setup.sh
 ```
 
 ## VS Code
