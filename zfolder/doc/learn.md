@@ -37,14 +37,16 @@ zfolder/ # a general folder checked into a repo, holds all zmath paraphernalia
 ├── tests/
 │   └── test_zalculator.py # tests the zmath package
 ├── .gitignore # marks setup.py objects as not for repo
+├── env_create.sh # creates the zmath conda environment
 ├── LICENSE
 ├── README.md
-├── setup.sh # creates the zmath conda environment
 ├── setup.py
 │
-│   # non-repo items, which will appear upon building a deployment #
+│   # non-repo items, which will appear upon building a client deployment #
 ├── build/ # a setup.py target, not for repo, subject to .gitignore
-└── dist/ # a setup.py target, not for repo, subject to .gitignore
+├── dist/ # a setup.py target, not for repo, subject to .gitignore
+│
+│   # non-repo items, which will appear upon building a developer or client deployment #
 └── zmath.egg-info/ # a setup.py target, not for repo, subject to .gitignore
 ```
 

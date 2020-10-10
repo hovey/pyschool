@@ -88,18 +88,12 @@ To see the current conda environments:
 (base) $ conda env list
 ```
 
-Use the bash shell file [setup.sh](../setup.sh) to automatically create (or recreate if it already exists) the `zmathenv` conda environment:
-
-```bash
-(base) [sparta ~/pyschool/zfolder]$ ./setup.sh
-```
+Follow the [developer client](deployment.md#developer-client) instructions.
 
 ## VS Code
 
 * [Visual Studio Code](https://code.visualstudio.com/)
 * [Black integration with vim](https://black.readthedocs.io/en/stable/editor_integration.html#vim)
-
-
 
 ## To Branch or Not to Branch?
 
