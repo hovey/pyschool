@@ -38,6 +38,9 @@
 
 ## Developer Client
 
+Use the `-e` or `--editable` option to allow
+pip to install directly from version control. [[1]](#1)
+
 ```bash
 # --------------------
 # developer deployment
@@ -109,9 +112,23 @@ Then, delete the virutal environment:
 
 ## References
 
+* [Dowling, Samuel.  2020.  How to set up a Python project and development environment.](https://www.samueldowling.com/2020/06/08/how-to-set-up-a-python-project-and-development-environment/)
 * [Layman, Matt.  2018.  Consistent Python code with Black.](https://www.mattlayman.com/blog/2018/python-code-black/)
 * [Griffioen, Henk.  2017.  How to Start a Data Science Projects in Python](https://godatadriven.com/blog/how-to-start-a-data-science-project-in-python/) for folder structure of package.
 * [van der Geer, Rogier.  2019.  A Practical Guide to Using Setup.py](https://godatadriven.com/blog/a-practical-guide-to-using-setup-py/)
 
 ## Back to: [Learn](learn.md)
 ## Back to: [Configuration](configuration.md)
+
+## Notes:
+
+### 1
+
+* Git, Subversion, Mercurial, and Bazaar are supported.
+* Existing check out:
+  * Example: `pip install -e path/to/repo`
+* New check out:
+  * Example: `pip install -e svn+http://svn.colorstudy.com/INITools/trunk#egg=initools-dev`
+  * The repo URL must 
+    * start with one of the following: `git+`, `svn+`, `hg+` or `bzr+`), 
+    * must end with and end with `#egg=packagename`
