@@ -1,0 +1,15 @@
+name: zmathenv-dev
+channels:
+  - defaults
+dependencies:
+  - python=3.8
+  # - pip
+  - black
+  - flake8
+  - matplotlib
+  - pytest
+  - pytest-cov
+  - scipy
+  # https://docs.conda.io/projects/conda-build/en/latest/user-guide/wheel-files.html
+  # - pip:
+  #  - xyfigure

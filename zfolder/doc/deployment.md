@@ -40,28 +40,42 @@
 (base) $
 ```
 
-## Developer Client
+## Development Client
 
-Use the `-e` or `--editable` option to allow
+Use the [`env_dev_create.sh`](../env_dev_create.sh), which uses 
+the `-e` or `--editable` option to allow
 pip to install directly from version control. [[1]](#1)
 
 ```bash
-# --------------------
-# developer deployment
-# --------------------
-# verify conda is up-to-date
-# (base) $ conda update -n base -c defaults conda
-# 
-# (base) $ cd ~/pyschool/zfolder
-# (base) $ conda activate zmathenv
-# (zmathenv) $ pip install -e .  # installs zmath from current folder
-(base) [~/pyschool/zfolder]$ ./env_create.sh
+# ----------------------
+# development deployment
+# ----------------------
+(base) [~/pyschool/zfolder]$ ./env_dev_create.sh
+```
+
+Verify the `zmath` package has been installed with pip:
+
+```bash
+(base) [~]$ conda activate zmathenv-dev
+(zmathenv-dev) [~]$ conda list
+... # truncated list
+zlib                      1.2.11               h1de35cc_3  
+zmath                     0.0.10                    dev_0    <develop>
+zstd                      1.4.5                h41d2c2f_0 
+... # truncated list
+(zmathenv-dev) [~]$ pip list
+... # truncated list
+wheel              0.35.1
+zipp               3.3.0
+zmath              0.0.10     /Users/sparta/pyschool/zfolder/src
+... # truncated list
+(zmathenv-dev) [~]$
 ```
 
 Then do a quick command line test that the `zmath` package works for the development client:
 
 ```python
-(zmathenv) [~/pyschool/zfolder]$ python
+(zmathenv-dev) [~]$ python
 Python 3.8.5 (default, Sep  4 2020, 02:22:02) 
 [Clang 10.0.0 ] :: Anaconda, Inc. on darwin
 Type "help", "copyright", "credits" or "license" for more information.
@@ -76,28 +90,29 @@ The Zalculator is initialized.
 ## Production Client
 
 ```bash
-# -----------------
-# client deployment
-# -----------------
-$ conda activate base
-(base) $ 
+# ---------------------
+# production deployment
+# ---------------------
+(base) [~/pyschool/zfolder]$ ./env_create.sh
+```
 
-# verify conda is up-to-date
-(base) [~]$ conda update -n base -c defaults conda
+Verify the `zmath` package has been installed with pip:
 
-# create the temporary environment manually
-(base) [~]$ conda create --name tempenv python=3.8 black flake8 matplotlib pytest pytest-cov scipy
-
-# activate the new environment
-(base) [~]$ conda activate tempenv
-
-(tempenv) [~]$ pip install ~/pyschool/zfolder/dist/zmath-0.0.8-py3-none-any.whl # or 0.0.n where n is version of interest
-
-(tempenv) [~]$ pip list # verify zmath now exist in the list
-
-# deprecated: or install from local
-# $ pip install --user -e zmath-0.0.n-py3-none-any.whl 
-# see https://packaging.python.org/tutorials/installing-packages/#installing-from-a-local-src-tree
+```bash
+(base) [~]$ conda activate zmathenv
+(zmathenv) [~]$ conda list
+... # truncated list
+zlib                      1.2.11               h1de35cc_3  
+zmath                     0.0.10                   pypi_0    pypi
+zstd                      1.4.5                h41d2c2f_0 
+... # truncated list
+(zmathenv) [~]$ pip list
+... # truncated list
+webencodings      0.5.1
+wheel             0.35.1
+zmath             0.0.10
+... # truncated list
+(zmathenv) [~]$
 ```
 
 Then do a quick command line test that the `zmath` package works for the production client:
