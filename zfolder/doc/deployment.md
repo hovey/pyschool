@@ -8,31 +8,35 @@
 # -----------------
 # verify conda is up-to-date
 (base) $ conda update -n base -c defaults conda
+(base) $ conda create --name deploy python=3.8 
 
-(base) $ conda activate zmathenv # environment previously created via ~/pyschool/zfolder/env_create.sh
+# (base) $ conda activate zmathenv # environment previously created via ~/pyschool/zfolder/env_create.sh
+(base) $ conda activate deploy
 
 # update environment if necessary
-(zmathenv) $ python -m pip install --user --upgrade setuptools wheel
-(zmathenv) $ python -m pip install --user --upgrade twine
+# (zmathenv) $ python -m pip install --user --upgrade setuptools wheel
+# (zmathenv) $ python -m pip install --user --upgrade twine
+(deploy) $ python -m pip install --user --upgrade setuptools wheel
+(deploy) $ python -m pip install --user --upgrade twine
 
-(zmathenv) $ cd ~/pyschool/zfolder
+(deploy) $ cd ~/pyschool/zfolder
 
 # delete prior deployments
-(zmathenv) $ rm -r build/ # if it exists, if not, skip this step
-(zmathenv) $ rm -r dist/ # if it exists, if not, skip this step
-(zmathenv) $ rm -r zmath.egg-info/ # if it exists, if not, skip this step
+(deploy) $ rm -r build/ # if it exists, if not, skip this step
+(deploy) $ rm -r dist/ # if it exists, if not, skip this step
+(deploy) $ rm -r zmath.egg-info/ # if it exists, if not, skip this step
 
-(zmathenv) $ vim setup.py   # update setup.py, typically increment the version, version is here and possibly in the README.md
+(deploy) $ vim setup.py   # update setup.py, typically increment the version, version is here and possibly in the README.md
 
 # build to the dist/ subdirectory
-(zmathenv) $ python setup.py sdist bdist_wheel
+(deploy) $ python setup.py sdist bdist_wheel
 
 # assure the PyPI API token for the server is created on pypi.org and saved on the server at ~/.pypirc
 # deploy
-(zmathenv) $ python -m twine upload dist/*
+(deploy) $ python -m twine upload dist/*
 
 # end of deployment, now test a developer client or production client
-(zmathenv) $ conda deactivate
+(deploy) $ conda deactivate
 (base) $
 ```
 
@@ -46,11 +50,27 @@ pip to install directly from version control. [[1]](#1)
 # developer deployment
 # --------------------
 # verify conda is up-to-date
-(base) $ conda update -n base -c defaults conda
+# (base) $ conda update -n base -c defaults conda
+# 
+# (base) $ cd ~/pyschool/zfolder
+# (base) $ conda activate zmathenv
+# (zmathenv) $ pip install -e .  # installs zmath from current folder
+(base) [~/pyschool/zfolder]$ ./env_create.sh
+```
 
-(base) $ cd ~/pyschool/zfolder
-(base) $ conda activate zmathenv
-(zmathenv) $ pip install -e .  # installs zmath from current folder
+Then do a quick command line test that the `zmath` package works for the development client:
+
+```python
+(zmathenv) [~/pyschool/zfolder]$ python
+Python 3.8.5 (default, Sep  4 2020, 02:22:02) 
+[Clang 10.0.0 ] :: Anaconda, Inc. on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import zmath.zalculator as zc
+>>> myZ = zc.Zalculator()
+The Zalculator is initialized.
+>>> myZ.add(3, 4)
+7
+>>> quit()
 ```
 
 ## Production Client
@@ -59,25 +79,28 @@ pip to install directly from version control. [[1]](#1)
 # -----------------
 # client deployment
 # -----------------
+$ conda activate base
+(base) $ 
+
 # verify conda is up-to-date
-(base) $ conda update -n base -c defaults conda
+(base) [~]$ conda update -n base -c defaults conda
 
-(base) $ cd ~/; mkdir temp; cd ~/temp
-(base) [~/temp]$ source ~/pyschool/zfolder/env_create.sh 
-# Select an environment name (e.g., zmathenv): tempenv
-# Answer yes to create the new environment.
-(base) $ conda activate tempenv
+# create the temporary environment manually
+(base) [~]$ conda create --name tempenv python=3.8 black flake8 matplotlib pytest pytest-cov scipy
 
-(tempenv) $ pip install ~/pyschool/zfolder/dist/zmath-0.0.8-py3-none-any.whl # or 0.0.n where n is version of interest
+# activate the new environment
+(base) [~]$ conda activate tempenv
 
-$ pip list # verify zmath now exist in the list
+(tempenv) [~]$ pip install ~/pyschool/zfolder/dist/zmath-0.0.8-py3-none-any.whl # or 0.0.n where n is version of interest
+
+(tempenv) [~]$ pip list # verify zmath now exist in the list
 
 # deprecated: or install from local
 # $ pip install --user -e zmath-0.0.n-py3-none-any.whl 
 # see https://packaging.python.org/tutorials/installing-packages/#installing-from-a-local-src-tree
 ```
 
-Then do a quick command line test that the `zmath` package works for the client:
+Then do a quick command line test that the `zmath` package works for the production client:
 
 ```python
 (tempenv) [apollo ~/temp]$ python
@@ -90,13 +113,6 @@ The Zalculator is initialized.
 >>> myZ.add(3, 4)
 7
 >>> quit()
-#
-#>>> from zmath.zalculator import Zalculator as zc
-#>>> testobj = zc()
-#The Zalculator is initialized.
-#>>> testobj.add(2, 3)
-#5
-#>>> 
 ```
 
 See [this](https://packaging.python.org/tutorials/installing-packages/#installing-from-a-local-src-tree) for details on installing from a local source.
@@ -107,7 +123,6 @@ Then, delete the virutal environment:
 (tempenv) $ conda deactivate
 (base) $ conda env remove --name tempenv
 (base) $ conda env list # verify tempenv no longer in list
-(base) $ cd ~/; rmdir temp/
 ```
 
 ## References
