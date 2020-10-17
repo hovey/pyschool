@@ -142,6 +142,8 @@ Then, delete the virutal environment:
 
 ## References
 
+* [Mărieș, Ionel Cristian.  2014.  Packaging a Python Library [the case for the `src` folder]](https://blog.ionelmc.ro/2014/05/25/python-packaging/), specifically, the point-of-view advocating the `src` folder structure.
+
 * [Dowling, Samuel.  2020.  How to set up a Python project and development environment.](https://www.samueldowling.com/2020/06/08/how-to-set-up-a-python-project-and-development-environment/)
 * [Layman, Matt.  2018.  Consistent Python code with Black.](https://www.mattlayman.com/blog/2018/python-code-black/)
 * [Griffioen, Henk.  2017.  How to Start a Data Science Projects in Python](https://godatadriven.com/blog/how-to-start-a-data-science-project-in-python/) for folder structure of package.

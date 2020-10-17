@@ -27,9 +27,10 @@ Previous developers have created the existing repo  at `/pyschool/zfolder/` and 
 zfolder/ # a general folder checked into a repo, holds all zmath paraphernalia
 │
 │   # repo items #
-├── zmath/ # maps to the zmath Python package
-│   ├── __init__.py # makes the folder a package
-│   └── zalculator.py # a service of the zmath package
+├── src/ # isolate the package
+│   └── zmath/ # maps to the zmath Python package, package items
+│       ├── __init__.py # makes the folder a package
+│       └── zalculator.py # a service of the zmath package
 ├── data/
 │   └── test-004-haversine.csv # for eventual use, placeholder for now
 ├── doc/
@@ -37,7 +38,10 @@ zfolder/ # a general folder checked into a repo, holds all zmath paraphernalia
 ├── tests/
 │   └── test_zalculator.py # tests the zmath package
 ├── .gitignore # marks setup.py objects as not for repo
-├── env_create.sh # creates the zmath conda environment
+├── env_create.sh # creates the zmath conda environment, release version
+├── env_dev_create.sh # creates the zmath conda environment, development version
+├── environment.yml # the conda environment specification, release version
+├── environment-dev.yml # the conda environment specification, development version
 ├── LICENSE
 ├── README.md
 ├── setup.py
@@ -45,9 +49,12 @@ zfolder/ # a general folder checked into a repo, holds all zmath paraphernalia
 │   # non-repo items, which will appear upon building a client deployment #
 ├── build/ # a setup.py target, not for repo, subject to .gitignore
 ├── dist/ # a setup.py target, not for repo, subject to .gitignore
+│   ├── zmath-0.0.10-py3-none-any.whl # wheel file, e.g., version 0.0.10
+│   └── zmath-0.0.10.tar.gz
 │
 │   # non-repo items, which will appear upon building a developer or client deployment #
-└── zmath.egg-info/ # a setup.py target, not for repo, subject to .gitignore
+└── src/ # isolate the package
+    └── zmath.egg-info/ # a setup.py target, not for repo, subject to .gitignore
 ```
 
 Also, previous developers have deployed the service to [PyPi](https://pypi.org/) as the `zmath` package (aka library), following their
