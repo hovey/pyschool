@@ -26,7 +26,7 @@ Two conceptual designs illustrate two pubsub patterns:
 | | `def subscribers(self, subscriber):` </br> `self._subscribers.append(subscriber)` |  |
 |   | Publishers register objects that implement the `ISub` interface. | | 
 | | Publishers know about Subscribers.  | Subscribers do not know about Publishers. |
-| **event** | An event is triggered.  Publishers notify their Subscribers. | 
+| **event**, **notification** | An event is triggered.  Publishers notify their Subscribers. | 
 |   | `for s in _self.subscribers:` </br> `s.pubsub_callback()`  | Subscribers react to the notification with whatever they have implemented in their callback. |
 | **example** |  | Newspaper Subscribers fill out a form with their name and postal address. |  |   |
 |  | Newspaper Publishers collect from Newspaper Subscribers forms with their name and address. | |
@@ -50,7 +50,7 @@ Two conceptual designs illustrate two pubsub patterns:
 | | | `def publishers(self, publisher):` </br> `self._publishers.append(publisher)` |
 | | | Subscribers register objects that implement the `IPub` interface. | 
 | | Publishers do not know about Subscribers. | Subscribers know about Publishers.  | 
-| **event** | | An event is triggered.  Subscribers notify their Publishers. |
+| **event**, **notification** | | An event is triggered.  Subscribers notify their Publishers. |
 | | Publishers react to the notification with whatever they have implemented in their callback. | `for p in _self.publishers:` </br> `p.pubsub_callback()`  | 
 | **example** | Grocery Publishers provide an online grocery delivery service via their website.  |   |
 | | | Grocery Subscribers collect from Grocery Publishers a website address. |
