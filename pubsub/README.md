@@ -7,8 +7,8 @@ Observer design pattern, will be called called **pubsub** for short.
 
 Two conceptual designs illustrate two pubsub patterns:
 
-1. Typical, called **pubsub push**, 
-2. Atypical, called **pubsub pull**.
+1. **pubsub push**, which is the typical Publish-Subscribe pattern.
+2. **pubsub pull**, which is an atypical inversion of the original pattern, swapping who knows of whom.
 
 ### Pubsub Push
 
@@ -17,7 +17,7 @@ Two conceptual designs illustrate two pubsub patterns:
 * Publishers know about Subscribers.
 * Subscribers do not know about Publishers.
 
-| interface | IPub | ISub |
+| interface | `IPub` | `ISub` |
 |---|---|---|
 | **creation** | | `+pubsub_callback()` | 
 | | | Required by the `ISub` interface, Subscribers implement the public `pubsub_callback` method. |
@@ -32,7 +32,7 @@ Two conceptual designs illustrate two pubsub patterns:
 |  | Newspaper Publishers collect from Newspaper Subscribers forms with their name and address. | |
 | | The "on-schedule" event is triggered by a 24-hour time interval. News is report daily. | | 
 |  | On a daily frequency, Newspaper Publishers send a newspaper (their notification) to Newspaper Subscribers. |  |  |   |
-| |  | Newspaper Subscribers react to the publication by reading the newspaper (their callback).
+| |  | Newspaper Subscribers react to the notification by reading the newspaper (their callback).
 
 ### Pubsub Pull
 
@@ -41,7 +41,7 @@ Two conceptual designs illustrate two pubsub patterns:
 * Publishers do not know about Subscribers.
 * Subscribers know about Publishers.
 
-| interface | IPub | ISub |
+| interface | `IPub` | `ISub` |
 |---|---|---|
 | **creation** | `+pubsub_callback()` | |
 | | Required by the `IPub` interface, Publishers implement the public `pubsub_callback` method. |
@@ -56,7 +56,7 @@ Two conceptual designs illustrate two pubsub patterns:
 | | | Grocery Subscribers collect from Grocery Publishers a website address. |
 | | | The "on-demand" event is triggered when Subscribers need more food.  No definite time interval between events exists because food demand depends on (e.g., historical) external factors, such as number of times Subscribers dined out versus cooked at home, or the size of the Subscribers' previous food orders. |
 | | | On an as-needed frequency, Grocery Subscribers request groceries (their notification) from Grocery Publishers. |
-| | Grocery Publishers react to the publication, typically by sending out groceries. | |
+| | Grocery Publishers react to the notification, typically filling the order (their callback) and making it available to the Grocery Subscriber for curbside pickup. | |
 
 
 ## Benefits
