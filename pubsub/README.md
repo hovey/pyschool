@@ -3,6 +3,62 @@
 The Publish-Subscribe design pattern, also known as the 
 Observer design pattern, will be called called **pubsub** for short.
 
+## Introduction
+
+Two conceptual designs illustrate two pubsub patterns:
+
+1. Typical, called **pubsub push**, 
+2. Atypical, called **pubsub pull**.
+
+### Pubsub Push
+
+* An Event is triggered "on schedule."
+* An Event triggers a push notification.
+* Publishers know about Subscribers.
+* Subscribers do not know about Publishers.
+
+| interface | IPub | ISub |
+|---|---|---|
+| **creation** | | `+pubsub_callback()` | 
+| | | Required by the `ISub` interface, Subscribers implement the public `pubsub_callback` method. |
+| **registration** | `+subscribers(ISub)` |  |
+| | Required by the `IPub` interface, Publishers implement the public `subscribers` method, which takes an `ISub` argument.| | 
+| | `def subscribers(self, subscriber):` </br> `self._subscribers.append(subscriber)` |  |
+|   | Publishers register objects that implement the `ISub` interface. | | 
+| | Publishers know about Subscribers.  | Subscribers do not know about Publishers. |
+| **event** | An event is triggered.  Publishers notify their Subscribers. | 
+|   | `for s in _self.subscribers:` </br> `s.pubsub_callback()`  | Subscribers react to the notification with whatever they have implemented in their callback. |
+| **example** |  | Newspaper Subscribers fill out a form with their name and postal address. |  |   |
+|  | Newspaper Publishers collect from Newspaper Subscribers forms with their name and address. | |
+| | The "on-schedule" event is triggered by a 24-hour time interval. News is report daily. | | 
+|  | On a daily frequency, Newspaper Publishers send a newspaper (their notification) to Newspaper Subscribers. |  |  |   |
+| |  | Newspaper Subscribers react to the publication by reading the newspaper (their callback).
+
+### Pubsub Pull
+
+* An Event is triggered "on demand."
+* An Event triggers a pull notification.
+* Publishers do not know about Subscribers.
+* Subscribers know about Publishers.
+
+| interface | IPub | ISub |
+|---|---|---|
+| **creation** | `+pubsub_callback()` | |
+| | Required by the `IPub` interface, Publishers implement the public `pubsub_callback` method. |
+| **registration** | | `+publishers(IPub)` |  |
+| | | Required by the `ISub` interface, Subscribers implement the public `publishers` method, which takes an `IPub` argument.|
+| | | `def publishers(self, publisher):` </br> `self._publishers.append(publisher)` |
+| | | Subscribers register objects that implement the `IPub` interface. | 
+| | Publishers do not know about Subscribers. | Subscribers know about Publishers.  | 
+| **event** | | An event is triggered.  Subscribers notify their Publishers. |
+| | Publishers react to the notification with whatever they have implemented in their callback. | `for p in _self.publishers:` </br> `p.pubsub_callback()`  | 
+| **example** | Grocery Publishers provide an online grocery delivery service via their website.  |   |
+| | | Grocery Subscribers collect from Grocery Publishers a website address. |
+| | | The "on-demand" event is triggered when Subscribers need more food.  No definite time interval between events exists because food demand depends on (e.g., historical) external factors, such as number of times Subscribers dined out versus cooked at home, or the size of the Subscribers' previous food orders. |
+| | | On an as-needed frequency, Grocery Subscribers request groceries (their notification) from Grocery Publishers. |
+| | Grocery Publishers react to the publication, typically by sending out groceries. | |
+
+
 ## Benefits
 
 * Loose coupling between classes.  
@@ -51,3 +107,4 @@ Also, there is a client implementation that uses a Factory, which uses compositi
 ## References
 
 * Aaron Maxwell, [Observer Pattern in Python](https://www.protechtraining.com/blog/post/tutorial-the-observer-pattern-in-python-879)
+* Ariel Ortiz, [Design Patterns in Python for the Untrained Eye](http://34.212.143.74/s201911/pycon2019/docs/design_patterns.html#_observer_pattern), Observer Pattern, Pycon USA 2019, May 1, 2019, Cleveland OH USA.
