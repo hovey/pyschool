@@ -116,6 +116,7 @@ To come.  [For now](https://restfulapi.net/resource-naming/)
 ### Docstrings
 
 * See [Google docstring format](http://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings)
+* Nice [examples](https://gist.github.com/candlewill/fce04bb26d402288cd02f09bd4f5f562) of Google docstring format
 
 ### Error Checking (ask for forgiveness, not permission)
 
