@@ -106,5 +106,6 @@ Also, there is a client implementation that uses a Factory, which uses compositi
 
 ## References
 
+* [Refactoring Guru](https://refactoring.guru/design-patterns/observer)
 * Aaron Maxwell, [Observer Pattern in Python](https://www.protechtraining.com/blog/post/tutorial-the-observer-pattern-in-python-879)
 * Ariel Ortiz, [Design Patterns in Python for the Untrained Eye](http://34.212.143.74/s201911/pycon2019/docs/design_patterns.html#_observer_pattern), Observer Pattern, Pycon USA 2019, May 1, 2019, Cleveland OH USA.
