@@ -22,7 +22,6 @@ class App:
 
 class AppDecorator(App):
     """App decorator base class"""
-    _app: App = None
 
     def __init__(self, app: App):
         self._app = app
