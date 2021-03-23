@@ -4,3 +4,7 @@ launch.json
 __pycache__
 .coverage
 tags
+
+# macOS database files
+.DS_Store
+
