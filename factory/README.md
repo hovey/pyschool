@@ -103,6 +103,121 @@ dealership) from a list of three set options:  (1) a car, (2) a truck, (3) a van
   * Therefore, convention does not allow for "off-menu" ordering, or creating objects 
   not already predefined by the service specification.
 
+### Additional Examples
+
+Let's build an example that further clarifies *reduced client complexity* item 
+above.   We said that, in general, the trade off involves a set of `2^n` combinations.
+But, as we will see next, this estimate is an *upper bound* for the complexity measure.
+In practice, there will be fewer than `2^n` combinations.   This reduction 
+occurs because Builders build 
+things *with certain predefined combinations from a preset menu*.
+Not all combinations will be sensible combinations, and therefore can be
+eliminated as a possible menu item.
+The following example demonstrates this practical result.
+
+#### After
+
+```python
+# service.py before
+def shopping_item(vinegar: bool, olive_oil: bool, chocolate: bool, peanut_butter: bool):
+
+# client.py before
+# Note: for more compactness in the parameter list, we use:
+X = True  # capital letter "X"
+O = False  # capital letter "O"
+
+# There are 2^n = 2^4 = 16 combinations
+
+# singletons (4 combination)
+my_shopping_cart = service.shopping_item(X, O, O, O)  # vinegar
+my_shopping_cart = service.shopping_item(O, X, O, O)  # olive_oil
+my_shopping_cart = service.shopping_item(O, O, X, O)  # chocolate
+my_shopping_cart = service.shopping_item(O, O, O, X)  # peanut_butter
+
+# duals (6 combinations)
+my_shopping_cart = service.shopping_item(X, X, O, O)  # vinegar and olive_oil
+my_shopping_cart = service.shopping_item(X, O, X, O)  # vinegar and chocolate
+my_shopping_cart = service.shopping_item(X, O, O, X)  # vinegar and peanut_butter
+#
+my_shopping_cart = service.shopping_item(O, X, X, O)  # olive_oil and chocolate
+my_shopping_cart = service.shopping_item(O, X, O, X)  # olive_oil and peanut_butter
+#
+my_shopping_cart = service.shopping_item(O, O, X, X)  # chocolate and peanut_butter
+
+# triples (4 combinations)
+my_shopping_cart = service.shopping_item(X, X, X, O)  # vinegar, olive_oil, chocolate
+my_shopping_cart = service.shopping_item(X, X, O, X)  # vinegar, olive_oil, peanut_butter
+my_shopping_cart = service.shopping_item(X, O, X, X)  # vinegar, chocolate, peanut_butter
+my_shopping_cart = service.shopping_item(O, X, X, X)  # olive_oil, chocolate, peanut_butter
+
+# quads (2 combinations)
+my_shopping_cart = service.shopping_item(O, O, O, O)  # none of the available items
+my_shopping_cart = service.shopping_item(X, X, X, X)  # vinegar, olive_oil, chocolate, peanut_butter
+```
+
+The pattern that emerges is that the service, as it is currently implemented,
+doesn't really *build* anything.
+Instead, the service, as currently implemented, just returns items from the
+roster of four available items.  So, if the client wants to *build* something from the
+four constituents, the client must do that work itself.  
+
+While the present
+implementation pattern is suitable for a grocery cart context, it migrates
+away from the Builder pattern since there is no predefined menu and since the
+shopping item method doesn't build (amalgamate) constituents; it just returns
+constituents.  If we truly wanted a shopping cart implementation, it would
+be cleaner for the service to publish a list of available items, e.g., 
+
+```python
+# service.py
+service_items = ("vinegar", "olive_oil", "chocolate", "peanut_putter")
+def shopping_item(item: str)
+```
+
+and then have clients order single items with a single call, e.g., 
+
+```python
+# client.py
+# we just need vinegar and olive oil today...
+my_shopping_cart = service.shopping_item("vinegar")
+my_shopping_cart = service.shopping_item("olive_oil")
+```
+
+Let's return to the two defining concepts of the Builder pattern:  
+
+1. Creates and returns to a client *a single object* frequently composed of two
+or more sub-objects following a composition recipe or template.
+2. Prefers *convention over configuration* to reduce client burden of decision 
+complexity.
+
+Considering these two concepts together, we finally will see that the `2^n`
+combinations estimate is a theoretical upper bound.  In practice, there will
+be far fewer than `2^n` combinations that make sense.  Let's return to our
+shopping cart example.
+
+#### After
+
+We see that with `n=4` parameters, there are 16 combinations.  But, only two
+will make sense:  (1) vinegar and olive oil, and (2) chocolate and
+peanut_butter.  These combinations will be created and offered back to the
+client as *a single object*; respectively, (1) salad_dressing and (2) candy_bar
+(recall the chocolate and peanut butter constituents to a REESE'S Peanut Butter
+Cup).
+
+```python
+# service.py
+service_items = ("salad_dressing", "candy_bar")
+def shopping_item(item: str)
+```
+
+and then have clients order single items with a single call, e.g., 
+
+```python
+# client.py
+# we just need salad dressing today...
+my_shopping_cart = service.shopping_item("salad_dressing")
+```
+
 ## Abstract Factory
 
 * Creates and then returns to a client *a multiplicity of objects* that all
