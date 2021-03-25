@@ -6,7 +6,7 @@
 
 * Creates and then returns to a client *a single object* frequently composed of
 two or more sub-objects following a composition recipe or template.  Builders offer clients
-these fixed single objects from a finite menu of available choises.
+these fixed single objects from a finite menu of available choices.
 
 ### Examples
 
@@ -60,7 +60,7 @@ my_paleo_order = service.menu_paleo()
 * **Home example**: A customer (home buyer) orders from a Builder Factory (a residential
 home builder) from three set options:  (1) a two-bedroom home, (2) a three-bedroom
 home, or (3) a four-bedroom home.
-  * The two-bedroom home follows a recipie that specifies one bathroom.
+  * The two-bedroom home follows a recipe that specifies one bathroom.
   * The three-bedroom home follows a recipe that specifies two bathrooms.
   * The four-bedroom home follows a recipe that specifies three bathrooms.
 * **Vehicle example**:  A customer (client) orders from a Builder Factory (vehicle
@@ -69,7 +69,7 @@ dealership) from a list of three set options:  (1) a car, (2) a truck, (3) a van
   vehicle, and not parts of a recipe, e.g., just tires, which are parts of cars.
   * For connection to the *Abstract Factory* pattern, assume the following
   character about vehicles and tires to be true.
-    * A car recipie specifies four high-performace tires.
+    * A car recipe specifies four high-performance tires.
     * A truck recipe specifies four mud and snow tires.
     * A van recipe specifies four all-season tires.
 
@@ -109,8 +109,9 @@ dealership) from a list of three set options:  (1) a car, (2) a truck, (3) a van
 belong to a certain style or theme.
   * **Vehicle example**:  A car dealership (client) orders from an Abstract Factory
   (tire manufacturer) any number of high-performance tires (e.g., car tires),
-  depending on demand from the the car dealership's customers.
+  depending on demand from the car dealership's customers.
     * A car dealership, since it only deals with cars and not trucks or vans, never
     would order mud-and-snow tires (for trucks) or all-season tires (for vans).
 
 *More to come.*
+
