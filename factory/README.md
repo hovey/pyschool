@@ -157,7 +157,7 @@ my_shopping_cart = service.shopping_item(X, X, X, X)  # vinegar, olive_oil, choc
 
 The pattern that emerges is that the service, as it is currently implemented,
 doesn't really *build* anything.
-Instead, the service, as currently implemented, just returns items from the
+Instead, the current service just returns items from the
 roster of four available items.  So, if the client wants to *build* something from the
 four constituents, the client must do that work itself.  
 
@@ -197,11 +197,14 @@ shopping cart example.
 
 #### After
 
-We see that with `n=4` parameters, there are 16 combinations.  But, only two
-will make sense:  (1) vinegar and olive oil, and (2) chocolate and
+We see that with `n=4` parameters, there are 16 possible combinations.  But, only two
+of these combinations will make sense:  (1) vinegar and olive oil, and (2) chocolate and
 peanut_butter.  These combinations will be created and offered back to the
-client as *a single object*; respectively, (1) salad_dressing and (2) candy_bar
-(recall the chocolate and peanut butter constituents to a REESE'S Peanut Butter
+client as *a single object*; respectively,
+
+1. `salad_dressing` (recall vinegar and olive oil are 
+classic salad dressing constituents) and
+2. `candy_bar` (recall the chocolate and peanut butter constituents to a REESE'S Peanut Butter
 Cup).
 
 ```python
@@ -217,6 +220,20 @@ and then have clients order single items with a single call, e.g.,
 # we just need salad dressing today...
 my_shopping_cart = service.shopping_item("salad_dressing")
 ```
+
+### Conclusion
+
+A Builder is a creation pattern (Factory) that returns a single and complete 
+object to a client.
+That single object is frequently composed of two or more sub-items.  The combination
+of sub-items is work that the Builder does so clients don't have to do the same
+work.  (Similar to eating out, someone else does all the shopping, cooking and
+cleaning for you, the customer).  
+
+As a result of not having to undertake the building work, the client has a
+finite number of options (the menu) from which to order from the service.  
+The menu thus simplifies the client interaction with the service, where
+convention is preferred to configuration.
 
 ## Abstract Factory
 
