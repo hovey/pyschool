@@ -1,6 +1,5 @@
 # Factory
 
-
 ## Introduction
 
 The **Factory Pattern** is software design patterns used for object *creation*.
@@ -12,16 +11,12 @@ Use of a factory pattern:
 
 A static factory method is a singleton function that may or may not reside in a class.  Clients will pass a parameter to the factory method to indicate to the factory the type of object the client would like the factory to return.
 
-## Abstract Factory
-
-The abstract factory is a **collection** of factory methods, with each factory method creating a unique class of object.
-
-## Examples
+### Examples
 
 * Creation of [shapes](../super/shapes.py) with a dictionary.
 * [Anirudh's factory](view.py) based on folders instead of dictionary creation.
 
-### Dynamic Load of Module
+#### Dynamic Load of Module
 
 ```python
 # Reference:
@@ -53,7 +48,7 @@ def module(module_name):
         return None
 ```
 
-### Client-Use of Dynamic Module Load
+#### Client-Use of Dynamic Module Load
 
 ```python
 key = next(iter(process_dict))
@@ -302,6 +297,8 @@ The menu thus simplifies the client interaction with the service, where
 convention is preferred to configuration.
 
 ## Abstract Factory
+
+The abstract factory is a **collection** of factory methods, with each factory method creating a unique class of object.
 
 * Creates and then returns to a client *a multiplicity of objects* that all
 belong to a certain style or theme.
