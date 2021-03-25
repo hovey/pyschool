@@ -1,5 +1,12 @@
 # Factory
 
+## Contents
+
+* [Introduction](#introduction)
+* [Static Factory Method](#static-factory-method)
+* [Builder](#builder)
+* [Abstract Factory](#abstract-factory)
+
 ## Introduction
 
 The **Factory Pattern** is software design patterns used for object *creation*.
