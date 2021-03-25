@@ -89,10 +89,10 @@ dealership) from a list of three set options:  (1) a car, (2) a truck, (3) a van
   * The Builder pattern burdens clients to fewer parameters, especially a lot of `False`
   parameter passing, but does so at the cost of increasing the API surface area from
   a single function call to two or more function calls.  
-    * If there are `n` mutually exclusive parameters, there are `n!` combinations that
+    * If there are `n` mutually exclusive parameters, there are `2^n` combinations that
     a single API, e.g., `menu_item` can create.  
     * Eliminating all parameters but offering
-    the same combinations as a method API would result in `n!` new service methods to
+    the same combinations as a method API would result in `2^n` new service methods to
     replace the previous single service method.
   * Thus, the Builder trades parameter complexity for API complexity.
 * Convention > Configuration
