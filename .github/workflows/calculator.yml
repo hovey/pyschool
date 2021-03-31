@@ -9,7 +9,7 @@ jobs:
     strategy:
       max-parallel: 2
       matrix:
-        python-version: [3.8]
+        python-version: [3.9]
 
     steps:
     - uses: actions/checkout@v2
@@ -33,4 +33,4 @@ jobs:
     - name: Test with Black
       run: |
         pip install black
-        black --check zfolder
+        black --check src/pyschool/

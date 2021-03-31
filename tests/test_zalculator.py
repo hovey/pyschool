@@ -3,18 +3,20 @@ from unittest import TestCase, main
 # from zfolder.zmath.zalculator import Zalculator as zcalc
 # from zmath.zalculator import Zalculator as zcalc
 # from zmath.code.zalculator import Zalculator as zcalc
-from zmath.zalculator import Zalculator as zcalc
+# from zmath.zalculator import Zalculator as zcalc
+from pyschool.zmath.zalculator import Zalculator as zcalc
 
 
 class TestZalculator(TestCase):
     """
     This is the unittest script.
     To test on command line:
-    $ cd ~/pyschool
+    > cd ~/pyschool
+    > conda activate pyschool-env
     either
-    $ python -m unittest -v zmath/tests/test_zalculator.py
+    > python -m unittest -v tests/test_zalculator.py
     or
-    $ pytest zmath/tests/test_zalculator.py -v
+    > pytest tests/test_zalculator.py -v
     """
 
     def test_initialize(self):

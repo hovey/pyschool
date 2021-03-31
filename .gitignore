@@ -8,3 +8,6 @@ tags
 # macOS database files
 .DS_Store
 
+# egg files
+*.egg-info
+
