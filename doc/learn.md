@@ -8,7 +8,7 @@ Here is the workflow scenario:
 
 * There is a master branch on the `pyschool/zfolder/` that holds items required to develop, test, and deploy the `zmath` package. 
 * The `zmath` package is a limited math service that implements functionality through the `Zalculator` class.  
-  * This class is contained the [`zalculator.py`](../zmath/zalculator.py) file.  
+  * This class is contained the [`zalculator.py`](../src/pyschooo/zmath/zalculator.py) file.  
   * This class currently provides clients of the `zmath` service with `add` and `subtract` functionality.
 * Your job is to implement `divide` functionality, while your colleague implements the `multiply` functionality.  
 * You and your colleague plan to use **branches** of the master repository.  
@@ -24,6 +24,7 @@ Here is the workflow scenario:
 Previous developers have created the existing repo  at `/pyschool/zfolder/` and populated it with the main service and tests, based on the [python package template](https://packaging.python.org/tutorials/packaging-projects/#creating-the-package-files) and a [recommended folder structure](https://godatadriven.com/blog/how-to-start-a-data-science-project-in-python/), as follows:
 
 ```bash
+# To be refactored...
 zfolder/ # a general folder checked into a repo, holds all zmath paraphernalia
 │
 │   # repo items #

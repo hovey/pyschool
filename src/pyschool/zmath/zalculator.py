@@ -2,7 +2,10 @@
 
 
 class Zalculator:
-    """The Zalcuator provide fundamental mathematical calculation."""
+    """The Zalcuator provide fundamental mathematical calculation.
+
+    This module is used for testing of initial wheel file deployment, pyschool library
+    imports, and pytest functionality."""
 
     def __init__(self):
         self.initialized = False
