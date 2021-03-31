@@ -1,4 +1,6 @@
-# Pyplot Show
+# View
+
+*View implemented with Pyplot Show*
 
 `matplotlib.pyplot.show(*, block=None)` displays (shows) all open figures.
 
