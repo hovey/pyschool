@@ -17,7 +17,7 @@ fi
 
 # Creating new conda environment
 conda update --yes -n base -c defaults conda
-conda create --yes -n pyschool-env python=3.9
+conda create --yes -n pyschool-env python=3.8
 eval "$(conda shell.bash hook)"
 conda activate pyschool-env
 
