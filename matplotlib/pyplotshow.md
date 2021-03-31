@@ -6,7 +6,7 @@ There are two modes:
 
 * **Interactive** 
   * Assures all windows are displayed and return immediately.  User is responsible
-  for ensuring the even loop is running to have responsive figures.
+  for ensuring the event loop is running to have responsive figures.
 * **Non-Interactive** 
   * `block` defaults to `True`
   * Runs the GUI main loop until all windows are closed

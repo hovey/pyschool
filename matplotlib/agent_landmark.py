@@ -13,22 +13,26 @@ instructions = """
   """
 
 
+# configuration for the world
+x_min = 0.0  # lower horizontal bound of view
+x_max = 10.0  # upper horizontal bound of view
+y_min = 0.0  # lower vertical bound of view
+y_max = 10.0  # upper vertical bound of view
+
+steps_per_span = 10  # number of discrete points per span in either x or y direction
+delta_x = (x_max - x_min) / steps_per_span  # magnitude of x-direction step size
+delta_y = (y_max - y_min) / steps_per_span  # magnitude of y-direction step size
+
+# configuration for items in the world
 al = 0.5  # alpha
-box_width = 0.2  # width
-box_height = 0.3  # height
+
+box_width = delta_x  # width, as a fraction of the world x-dimension
+box_height = delta_y  # height, as a fraction of the world y-dimension
 
 color_agent = "green"
 color_landmark = "black"
 
 lw = 2  # linewidth
-
-x_min = 0.0  # lower horizontal bound of view
-x_max = 7.0  # upper horizontal bound of view
-y_min = -2.0  # lower vertical bound of view
-y_max = 2.0  # upper vertical bound of view
-
-delta_x = (x_max - x_min) / 20.0  # magnitude of incremental x-direction movement
-delta_y = (y_max - y_min) / 20.0  # magnitude of incremental y-direction movement
 
 
 class Box:
@@ -39,11 +43,12 @@ class Box:
         self.y = y
 
 
-class Game:
+class World:
     def __init__(self, ax):
         self.ax = ax
         ax.set_ylim([y_min, y_max])
         ax.set_xlim([x_min, x_max])
+        ax.set_aspect(1.0)
 
         # agent
         box_a_x = randint(low=x_min, high=x_max)
@@ -79,8 +84,8 @@ class Game:
         )
         self.canvas = self.ax.figure.canvas
         self.background = None
-        self.on = False
-        self.instructions_shown = True
+        # self.on = False
+        # self.instructions_shown = True
         self.boxes = [Box(boxA, box_a_x, box_a_y), Box(boxB, box_b_x, box_b_y)]
         self.instructions = self.ax.annotate(
             instructions,
@@ -154,7 +159,7 @@ class Game:
 
 fig, ax = plt.subplots()
 canvas = ax.figure.canvas
-animation = Game(ax)
+animation = World(ax)
 
 # disable default key bindings by override
 if fig.canvas.manager.key_press_handler_id is not None:
