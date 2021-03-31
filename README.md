@@ -3,7 +3,69 @@
 [![codecov](https://codecov.io/gh/hovey/pyschool/branch/master/graph/badge.svg)](https://codecov.io/gh/hovey/pyschool)
 
 # pyschool
-Examples of [Best Practices](#best-practices) and [Pythonic Patterns](#pythonic-patterns)
+
+The **pyschool** repository demonstrates
+*Best Practices*, 
+*Pythonic Practices*, and 
+*Design Patterns* implemented in Python.
+
+## Best Practices
+
+* D.R.Y. > W.E.T.
+* Convention > Configuration
+* Code Smell
+* Verb Smell
+  * Get and Set
+* Client and Service
+* Production
+  * Style (with Black)
+  * Test (with Pytest)
+  * Coverage
+  * Continuous Integration (CI)
+  * Deployment (with PyPI)
+* Docstrings
+* Object Oriented Programming (OOP)
+  * Open-Closed Principle (OCP)
+  * Separation of concern
+  * Interface versus implementation
+
+## Pythonic Practices
+
+* Iterator
+* Decorator (of Python)
+* List comprehension
+* Error handling
+
+## Patterns
+
+* Adapter
+* Singleton
+* Decorator
+* Factory
+  * Static Factory Method
+  * Builder
+  * Abstract Factory
+* Publish-Subscribe (aka "PubSub" and Observer)
+
+## Examples
+
+* Anatomy of a figure
+* Animation
+* Colors
+* Element scale versus density
+* Growth charts
+* Imports
+* Least squares
+* Midpoint differentiation
+* Oscillator
+* Quartiles
+* Scientific notation
+
+## Toolbox
+
+* VIM macros
+
+*To be refactored.*
 
 ## Best Practices
 
@@ -122,7 +184,7 @@ To come.  [For now](https://restfulapi.net/resource-naming/)
 
 * See [examples](error_check.md).
 
-### [Factory](factory.md)
+### [Factory](factory/README.md)
 
 ### [Publish-Subscribe](pubsub/README.md) (aka Observer)
 
