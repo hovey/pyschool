@@ -1,19 +1,9 @@
 import matplotlib.pyplot as plt
 from numpy.random import randint
+from datetime import datetime
 
 from pyschool.pattern.publish_subscribe import Publisher
 from pyschool.pattern.publish_subscribe import Subscriber
-
-instructions = """
-  'r' refresh initial positions
-  'q' quit demonstration
-
-  'j' move agent down
-  'k' move agent up
-
-  'h' move agent left
-  'l' move agent right
-  """
 
 
 # configuration for the world
@@ -38,10 +28,19 @@ color_landmark = "black"
 lw = 2  # linewidth
 
 
+def update_title(axes):
+    now = datetime.now()
+    # now_string = now.strftime("%Y-%m-%d %H:%M:%S")
+    now_string = "View updated at " + now.strftime("%H:%M:%S")
+    # axes.set_title(datetime.now())
+    axes.set_title(now_string)
+    # axes.figure.canvas.draw()  # unnecessary because there is a draw timer that triggers
+
+
 class Box:
-    # def __init__(self, disp, x, y, type="l"):
-    def __init__(self, disp, x, y):
-        self.disp = disp
+    def __init__(self, rectangle, x, y):
+        # rectangle is a matplotlib.pathes.Rectangle object
+        self.rectangle = rectangle
         self.x = x
         self.y = y
 
@@ -53,11 +52,11 @@ class World(Subscriber):
         ax.set_xlim([x_min, x_max])
         ax.set_aspect(1.0)
 
-        # agent
+        # agent initial position
         box_a_x = randint(low=x_min, high=x_max)
         box_a_y = randint(low=y_min, high=y_max)
 
-        # landmark
+        # landmark initial position
         box_b_x = randint(low=x_min, high=x_max)
         box_b_y = randint(low=y_min, high=y_max)
 
@@ -88,8 +87,17 @@ class World(Subscriber):
         self.canvas = self.ax.figure.canvas
         self.background = None
         self.boxes = [Box(boxA, box_a_x, box_a_y), Box(boxB, box_b_x, box_b_y)]
+
+        # number of times the subscriber callback has been triggered by publisher
+        self.num_publication_callbacks = 0
+
+        self.instructions_string = str(
+            "\nInstructions:\n\n'r' refresh initial positions\n'q' quit demonstration\n\nAgent always falls down.\n\n'k' move agent up\n'h' move agent left\n'l' move agent right"
+        )
+        _current_callback = self._callback_string()
+
         self.instructions = self.ax.annotate(
-            instructions,
+            self.instructions_string + _current_callback,
             (0.5, 0.5),  # middle of view
             verticalalignment="center",
             horizontalalignment="center",
@@ -99,10 +107,22 @@ class World(Subscriber):
         )
         self.canvas.mpl_connect("key_press_event", self.on_key_press)
 
+    def _callback_string(self):
+        # self.callback_string = str(
+        #     f"\n publication_callback number: {self.num_publication_callbacks}"
+        # )
+        return str(
+            f"\n\npubsub publication_callback number: {self.num_publication_callbacks}"
+        )
+
     def publication_callback(self, *, message: str):  # Subscriber implementation
         super().publication_callback(message=message)
+        self.num_publication_callbacks += 1
+
+        _current_callback = self._callback_string() + "\nMessage:\n" + message
+
         self.instructions = self.ax.annotate(
-            message,
+            self.instructions_string + _current_callback,
             (0.5, 0.5),  # middle of view
             verticalalignment="center",
             horizontalalignment="center",
@@ -112,18 +132,21 @@ class World(Subscriber):
         )
 
     def draw(self, event):
-        # draw_artist = self.ax.draw_artist
         if self.background is None:
             self.background = self.canvas.copy_from_bbox(self.ax.bbox)
 
         # restart the clean slate background
         self.canvas.restore_region(self.background)
 
+        self.ax.draw_artist(self.instructions)
+        self.canvas.blit(self.ax.bbox)
+        self.canvas.flush_events()
+
         # boxes
         for box in self.boxes:
-            box.disp.set_y(box.y)
-            box.disp.set_x(box.x)
-            self.ax.draw_artist(box.disp)
+            box.rectangle.set_y(box.y)
+            box.rectangle.set_x(box.x)
+            self.ax.draw_artist(box.rectangle)
 
         self.canvas.blit(self.ax.bbox)
         self.canvas.flush_events()
@@ -131,12 +154,6 @@ class World(Subscriber):
         return True
 
     def on_key_press(self, event):
-
-        if event.key == "j":  # move down
-            self.boxes[0].y -= delta_y
-            # enforce lower bounds
-            if self.boxes[0].y < y_min:
-                self.boxes[0].y = y_min
 
         if event.key == "k":  # move up
             self.boxes[0].y += delta_y
@@ -157,13 +174,15 @@ class World(Subscriber):
                 self.boxes[0].x = x_max - box_width
 
         if event.key == "r":  # refresh initial positions
+            # not need, e.g., high=x_max - box_width because the right hand side
+            # interval is exclusive, not inclusive
             self.boxes[0].x = randint(low=x_min, high=x_max)
             self.boxes[0].y = randint(low=y_min, high=y_max)
 
             self.boxes[1].x = randint(low=x_min, high=x_max)
             self.boxes[1].y = randint(low=y_min, high=y_max)
 
-        if event.key == "q":
+        if event.key == "q":  # quit
             # close the figure, end the interactive demonstration
             plt.close()
 
@@ -174,15 +193,12 @@ fig, ax = plt.subplots()
 canvas = ax.figure.canvas
 animation = World(ax)
 
-# pubsub hook up
-verbosity = True
-pub = Publisher()
-
-# The World, a subscriber, subscribes to the publisher.
-pub.subscribe(animation)
-
-# The publisher publishes to subscribers.
-pub.publish(pub.events.publication)
+# # pubsub hook up
+# verbosity = True
+# pub = Publisher()
+#
+# # The World, a subscriber, subscribes to the publisher.
+# pub.subscribe(animation)
 
 # disable default key bindings by override
 if fig.canvas.manager.key_press_handler_id is not None:
@@ -195,21 +211,55 @@ if fig.canvas.manager.key_press_handler_id is not None:
 
 
 # bootstrap after the first draw
-def start_anim(event):
-    canvas.mpl_disconnect(start_anim.cid)
+# def start_anim(event):
+#     canvas.mpl_disconnect(start_anim.cid)
+#
+#     def local_draw():
+#         if animation.ax.get_renderer_cache():
+#             animation.draw(None)
+#
+#     start_anim.timer.add_callback(local_draw)
+#     start_anim.timer.start()
+#     # canvas.mpl_connect("draw_event", on_redraw)
+#
+#
+# # draw event from plot gets triggered, map it to call start_anim
+# start_anim.cid = canvas.mpl_connect("draw_event", start_anim)
+# start_anim.timer = animation.canvas.new_timer(interval=1)
 
-    def local_draw():
-        if animation.ax.get_renderer_cache():
-            animation.draw(None)
+view_update_interval = 5000  # milliseconds
+view_timer = fig.canvas.new_timer(interval=view_update_interval)
+view_timer.add_callback(update_title, ax)  # View updates the title every interval
+# view_timer.add_callback(animation.draw, None)  # View updates the world every interval
+view_timer.start()
 
-    start_anim.timer.add_callback(local_draw)
-    start_anim.timer.start()
-    # canvas.mpl_connect("draw_event", on_redraw)
+draw_update_interval = 10  # milliseconds
+draw_timer = fig.canvas.new_timer(interval=draw_update_interval)
+draw_timer.add_callback(animation.draw, None)  # View updates the world every interval
+draw_timer.start()
+
+# The publisher publishes to subscribers.
+# hold off on publication until now, will want to queue a publication every x seconds
+# pub.publish(pub.events.publication)
 
 
-# draw event from plot gets triggered, map it to call start_anim
-start_anim.cid = canvas.mpl_connect("draw_event", start_anim)
-start_anim.timer = animation.canvas.new_timer(interval=1)
+# # bootstrap after the first draw
+# def start_anim(event):
+#     canvas.mpl_disconnect(start_anim.cid)
+#
+#     def local_draw():
+#         if animation.ax.get_renderer_cache():
+#             animation.draw(None)
+#
+#     start_anim.timer.add_callback(local_draw)
+#     start_anim.timer.start()
+#     # canvas.mpl_connect("draw_event", on_redraw)
+#
+#
+# # draw event from plot gets triggered, map it to call start_anim
+# start_anim.cid = canvas.mpl_connect("draw_event", start_anim)
+# draw_update_interval = 10  # milliseconds, should be something very fast
+# start_anim.timer = fig.canvas.new_timer(interval=draw_update_interval)
 
 # plt.show(block=False)
 plt.show()

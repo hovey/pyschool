@@ -1,7 +1,9 @@
 import matplotlib.pyplot as plt
 from numpy.random import randint
 
-instructions = """
+instructions_string = """
+  Instructions:
+
   'r' refresh initial positions
   'q' quit demonstration
 
@@ -36,9 +38,9 @@ lw = 2  # linewidth
 
 
 class Box:
-    # def __init__(self, disp, x, y, type="l"):
-    def __init__(self, disp, x, y):
-        self.disp = disp
+    def __init__(self, rectangle, x, y):
+        # rectangle is a matplotlib.pathes.Rectangle object
+        self.rectangle = rectangle
         self.x = x
         self.y = y
 
@@ -84,11 +86,10 @@ class World:
         )
         self.canvas = self.ax.figure.canvas
         self.background = None
-        # self.on = False
-        # self.instructions_shown = True
         self.boxes = [Box(boxA, box_a_x, box_a_y), Box(boxB, box_b_x, box_b_y)]
+
         self.instructions = self.ax.annotate(
-            instructions,
+            instructions_string,
             (0.5, 0.5),  # middle of view
             verticalalignment="center",
             horizontalalignment="center",
@@ -99,7 +100,6 @@ class World:
         self.canvas.mpl_connect("key_press_event", self.on_key_press)
 
     def draw(self, event):
-        # draw_artist = self.ax.draw_artist
         if self.background is None:
             self.background = self.canvas.copy_from_bbox(self.ax.bbox)
 
@@ -108,9 +108,9 @@ class World:
 
         # boxes
         for box in self.boxes:
-            box.disp.set_y(box.y)
-            box.disp.set_x(box.x)
-            self.ax.draw_artist(box.disp)
+            box.rectangle.set_y(box.y)
+            box.rectangle.set_x(box.x)
+            self.ax.draw_artist(box.rectangle)
 
         self.canvas.blit(self.ax.bbox)
         self.canvas.flush_events()
@@ -144,13 +144,15 @@ class World:
                 self.boxes[0].x = x_max - box_width
 
         if event.key == "r":  # refresh initial positions
+            # not need, e.g., high=x_max - box_width because the right hand side
+            # interval is exclusive, not inclusive
             self.boxes[0].x = randint(low=x_min, high=x_max)
             self.boxes[0].y = randint(low=y_min, high=y_max)
 
             self.boxes[1].x = randint(low=x_min, high=x_max)
             self.boxes[1].y = randint(low=y_min, high=y_max)
 
-        if event.key == "q":
+        if event.key == "q":  # quit
             # close the figure, end the interactive demonstration
             plt.close()
 
@@ -184,8 +186,9 @@ def start_anim(event):
     # canvas.mpl_connect("draw_event", on_redraw)
 
 
-# draw even from plot gets triggered, map it to call start_anim
+# draw event from plot gets triggered, map it to call start_anim
 start_anim.cid = canvas.mpl_connect("draw_event", start_anim)
-start_anim.timer = animation.canvas.new_timer(interval=1)
+draw_update_interval = 10  # milliseconds, should be something very fast
+start_anim.timer = animation.canvas.new_timer(interval=draw_update_interval)
 
 plt.show()

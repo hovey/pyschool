@@ -39,6 +39,14 @@ There are two modes:
 
 ![agent_landmark.png](agent_landmark.png)
 
+### Timers
+
+#### References
+
+* Matplotlib [handling timers](https://matplotlib.org/stable/gallery/event_handling/timers.html)
+* [RealPython](https://realpython.com/python-timer/)
+
+
 *To come.*
 
 ### Multiprocess

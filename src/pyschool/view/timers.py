@@ -21,7 +21,7 @@ ax.plot(x, x ** 2)
 
 # Create a new timer object. Set the interval to 1000 milliseconds
 # (1000 is default) and tell the timer what function should be called.
-time_interval = 1000  # millisecond
+time_interval = 1000  # milliseconds
 
 # https://matplotlib.org/stable/api/backend_bases_api.html?highlight=new_timer#matplotlib.backend_bases.FigureCanvasBase.new_timer
 # new_timer(self, interval=None, callbacks=None)
