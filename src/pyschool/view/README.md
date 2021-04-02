@@ -44,7 +44,7 @@ There are two modes:
 #### References
 
 * Matplotlib [handling timers](https://matplotlib.org/stable/gallery/event_handling/timers.html)
-* [RealPython](https://realpython.com/python-timer/)
+* [RealPython](https://realpython.com/python-timer/) for Python (not specifically Matplotlib)
 
 
 *To come.*

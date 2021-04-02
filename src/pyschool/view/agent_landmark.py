@@ -21,6 +21,9 @@ x_max = 10.0  # upper horizontal bound of view
 y_min = 0.0  # lower vertical bound of view
 y_max = 10.0  # upper vertical bound of view
 
+x_mid = (x_max - x_min) / 2.0 + x_min
+y_mid = (y_max - y_min) / 2.0 + y_min
+
 steps_per_span = 10  # number of discrete points per span in either x or y direction
 delta_x = (x_max - x_min) / steps_per_span  # magnitude of x-direction step size
 delta_y = (y_max - y_min) / steps_per_span  # magnitude of y-direction step size
@@ -89,12 +92,11 @@ class World:
         self.boxes = [Box(boxA, box_a_x, box_a_y), Box(boxB, box_b_x, box_b_y)]
 
         self.instructions = self.ax.annotate(
-            instructions_string,
-            (0.5, 0.5),  # middle of view
+            text=instructions_string,
+            xy=(x_mid, y_mid),  # middle of view
             verticalalignment="center",
             horizontalalignment="center",
             multialignment="left",
-            textcoords="axes fraction",
             animated=False,
         )
         self.canvas.mpl_connect("key_press_event", self.on_key_press)
