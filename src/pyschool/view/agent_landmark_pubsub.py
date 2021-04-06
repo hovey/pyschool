@@ -55,7 +55,7 @@ class World(Subscriber):
         box_b_y = randint(low=y_min, high=y_max)
 
         # boxes
-        (boxA,) = self.ax.barh(
+        boxA, *_ = self.ax.barh(
             box_a_y,
             box_width,
             height=box_height,
@@ -66,7 +66,7 @@ class World(Subscriber):
             label="Agent",
             animated=True,
         )
-        (boxB,) = self.ax.barh(
+        boxB, *_ = self.ax.barh(
             box_b_y,
             box_width,
             height=box_height,

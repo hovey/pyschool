@@ -39,6 +39,13 @@ There are two modes:
 
 ![agent_landmark.png](agent_landmark.png)
 
+### Agent and Landmark with Publish-Subscribe
+
+* `agent_landmark_pubsub.py`
+
+![agent_landmark_pubsub.png](agent_landmark_pubsub.png)
+
+
 ### Timers
 
 #### References
