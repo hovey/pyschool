@@ -41,6 +41,27 @@ instructions_string = """
 """
 
 
+class WindowSubscriber(Subscriber):
+    def __init__(
+        self, *, window: pyglet.window.Window, name: str, verbose: bool = False
+    ):
+        super().__init__()
+        self.name = name
+        self._verbose = verbose
+        self.num_publication_callbacks = 0
+        if verbose:
+            print(f"WindowSubscriber '{name}' created.")
+
+    def publication_callback(self, *, message: str):
+        self.num_publication_callbacks += 1
+
+        # enforce lower bounds prior to move attempt
+        if agent.y - delta_y >= y_min:
+            agent.y -= delta_y
+
+        return super().publication_callback(message=message)
+
+
 class Window(pyglet.window.Window):
     def __init__(self, *args, **kwargs):
         super().__init__(width=x_max, height=y_max)
@@ -53,6 +74,10 @@ class Window(pyglet.window.Window):
             anchor_y="center",
             width=x_max // 4,
             multiline=True,
+        )
+
+        self.subscriber = WindowSubscriber(
+            window=self, name="Hello Pyglet", verbose=True
         )
 
 
@@ -119,7 +144,7 @@ def on_key_press(symbol, modifiers):
 
     print(f"Key {key.symbol_string(symbol)} was pressed.")
 
-    if symbol == key.J:  # move up
+    if symbol == key.J:  # move down
         # enforce lower bounds prior to move attempt
         if agent.y - delta_y >= y_min:
             agent.y -= delta_y
@@ -158,7 +183,9 @@ def clock_tick_udpate(dt):
     # dt (int): time interval in units of seconds.
     now = datetime.now()
     now_string = "Title updated at " + now.strftime("%H:%M:%S")
-    window.set_caption(caption=now_string)
+    callback_string = f", {window.subscriber.num_publication_callbacks} callbacks"
+    # window.set_caption(caption=now_string)
+    window.set_caption(caption=now_string + callback_string)
 
 
 # schedule a clock-driven interval callback
@@ -167,5 +194,11 @@ def clock_tick_udpate(dt):
 delta_t = 1  # seconds
 pyglet.clock.schedule_interval(func=clock_tick_udpate, interval=delta_t)
 
+# Publish-Subscribe
+pub = Publisher()
+pub.subscribe(window.subscriber)
+# now simulate a publisher trigger as publication every 4 seconds
+delta_p = 4  # seconds, publication interval
+pyglet.clock.schedule_interval(func=pub.publish, interval=delta_p)
 
 pyglet.app.run()
