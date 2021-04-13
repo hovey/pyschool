@@ -126,21 +126,6 @@ def on_key_press(symbol, modifiers):
         landmark.x = x0
         landmark.y = y0
 
-    # if event.key == "l":  # move right
-    #     self.boxes[0].x += delta_x
-    #     # enforce left bounds
-    #     if self.boxes[0].x + box_width > x_max:
-    #         self.boxes[0].x = x_max - box_width
-
-    # if event.key == "r":  # refresh initial positions
-    #     # not need, e.g., high=x_max - box_width because the right hand side
-    #     # interval is exclusive, not inclusive
-    #     self.boxes[0].x = randint(low=x_min, high=x_max)
-    #     self.boxes[0].y = randint(low=y_min, high=y_max)
-
-    #     self.boxes[1].x = randint(low=x_min, high=x_max)
-    #     self.boxes[1].y = randint(low=y_min, high=y_max)
-
     elif symbol == key.Q:  # quit
         # close the figure, end the interactive demonstration
         # plt.close()
