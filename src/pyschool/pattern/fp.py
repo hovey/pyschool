@@ -144,10 +144,11 @@ Finally, find all physicists that have also won a Nobel prize:
 (Scientist(name='Curie', field='physics', born=1867, nobel=True),)
 
 Finally, the magic of functional program, declarative functions chained together.
+This is composition.
 """
 
 
-def nobel_filter(x):
+def nobel_filter(x: Scientist) -> bool:
     return x.nobel is True
 
 
@@ -158,17 +159,18 @@ def nobel_filter(x):
 """
 
 
-def physics_filter(x):
+def physics_filter(x: Scientist) -> bool:
     return x.field == "physics"
 
 
 """
+>>> physicists_functional = tuple(filter(fp.physics_filter, fp.scientists))
 >>> physicists_functional
 (Scientist(name='Curie', field='physics', born=1867, nobel=True), Scientist(name='Ride', field='physics', born=1951, nobel=False))
 """
 
 
-def physics_nobel_filter(x):
+def physics_nobel_filter(x: Scientist) -> bool:
     return physics_filter(x) and nobel_filter(x)
 
 
