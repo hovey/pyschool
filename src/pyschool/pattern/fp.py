@@ -2,15 +2,15 @@
 # Use immutable data
 # Use filter, map, and reduce
 
-from typing import NamedTuple
+from typing import NamedTuple, Tuple
 
-"""Introduction to Functional Programming in Python
+"""Introduction to Functional Programming in Python by Dan Bader of Real Python
+Series of six videos: https://youtube.com/playlist?list=PLP8GkvaIxJP1z5bu4NX_bFrEInBkAgTMr
 
-References:
-Dan Bader, Functional Programming in Python: Immutable Data Structures, Real Python,
-30 Aug 2017.
-Video 1: https://youtu.be/xJCPpDlk9_w
-Six lectures in this series
+--------------------------------------------------------------------
+Video 1: Functional Programming in Python: Immutable Data Structures
+30 Aug 2017
+https://youtu.be/xJCPpDlk9_w
 
 Start with dictionaries, which are mutable.  Mutable data allows for side effects
 (bugs and other unintended consequences) and prohibits concurrency.  Instead, prefer
@@ -93,9 +93,10 @@ Scientist(name='Lovelace', field='math', born=1815, nobel=False)
 >>> fp.s1
 Scientist(name='Noether', field='math', born=1882, nobel=False)
 
-Video 2:  https://youtu.be/fkjjqyfN51c
-Functional Programming in Python: The "filter()" Function
+------------------------------------------------------------------
+Video 2: Functional Programming in Python: The "filter()" Function
 06 Sep 2017
+https://youtu.be/fkjjqyfN51c
 
 filter: (function or None, iterable)
 filter(function or None, iterable) --> filter object
@@ -178,4 +179,55 @@ def physics_nobel_filter(x: Scientist) -> bool:
 >>> winners_physicists_functional = tuple(filter(fp.physics_nobel_filter, fp.scientists))
 >>> winners_physicists_functional
 (Scientist(name='Curie', field='physics', born=1867, nobel=True),)
+"""
+
+
+"""
+---------------------------------------------------------------
+Video 3: Functional Programming in Python: The "map()" Function
+13 Sep 2017
+https://youtu.be/powVeMYKCSw
+
+map: (func, *iterables)
+map(func, *iterables) --> map object
+
+Make an iterator that computes the function using arguments from each of the iterables.
+Stops when the shortest iterable is exhausted.
+
+Takes tuples and shape them into new tuples.
+Example: assemble the names and ages of each scientist.
+"""
+
+
+def name(x: Scientist) -> str:
+    return x.name
+
+
+"""
+>>> names = tuple(map(fp.name, fp.scientists))
+>>> names
+('Lovelace', 'Noether', 'Curie', 'Youyou', 'Yonath', 'Rubin', 'Ride')
+"""
+
+
+def age(x: Scientist) -> int:
+    _year_example = 2017
+    return _year_example - x.born
+
+
+"""
+>>> ages = tuple(map(fp.age, fp.scientists))
+>>> ages
+(202, 135, 150, 87, 78, 89, 66)
+"""
+
+
+def name_and_age(x: Scientist) -> Tuple[str, int]:
+    return name(x), age(x)
+
+
+"""
+>>> names_and_ages = tuple(map(fp.name_and_age, fp.scientists))
+>>> names_and_ages
+(('Lovelace', 202), ('Noether', 135), ('Curie', 150), ('Youyou', 87), ('Yonath', 78), ('Rubin', 89), ('Ride', 66))
 """
