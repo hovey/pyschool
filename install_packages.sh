@@ -12,8 +12,8 @@ conda install --yes -c anaconda flake8
 conda install --yes -c anaconda matplotlib
 
 echo "Installing pip packages"
-# python -m pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org --upgrade pip
+python -m pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org --upgrade pip
 # pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org sacred
 # pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org torchtest
-# pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org pyglet
+pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org pyglet
 
