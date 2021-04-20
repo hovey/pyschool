@@ -38,6 +38,7 @@ class AppDecorator(App):
 class AppHomeScreen(AppDecorator):
 
     """Adds home screen to app"""
+
     def __call__(self, **kwargs):
         return self.app(**kwargs) + kwargs.get("home", " home page")
 
@@ -45,6 +46,7 @@ class AppHomeScreen(AppDecorator):
 class AppLoginPage(AppDecorator):
 
     """Adds login page to app"""
+
     def __call__(self, **kwargs):
         return self.app(**kwargs) + kwargs.get("login", " login page")
 
