@@ -30,7 +30,7 @@ scientists_dict = [
 
 """Also, the dict allows for bad keys to be used.
 Example:
->>> import fp
+>>> import functional_programming as fp
 >>> fp.scientists_dict
 [{'name': 'Lovelace', 'field': 'math', 'born': 1815, 'nobel': False}, {'name': 'Noether', 'field': 'math', 'born': 1882, 'nobel': False}, {'name': 'Curie', 'field': 'physics', 'born': 1867, 'nodel_oops': True}]
 
@@ -230,4 +230,10 @@ def name_and_age(x: Scientist) -> Tuple[str, int]:
 >>> names_and_ages = tuple(map(fp.name_and_age, fp.scientists))
 >>> names_and_ages
 (('Lovelace', 202), ('Noether', 135), ('Curie', 150), ('Youyou', 87), ('Yonath', 78), ('Rubin', 89), ('Ride', 66))
+
+If the original data set, scientists, is viewed as a matrix, with each
+row as a scientist instance, and each column as an attribute of a scientists, then
+* `filter` has been used to select a subset of rows for all columns, and
+* `map` has been used to select a subset of columns for all rows.
+Ask AP his thoughts.
 """
