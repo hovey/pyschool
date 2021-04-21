@@ -12,8 +12,10 @@ def f01():
 
 
 """Example
+$ conda activate pyschool-env
+$ cd src/pyschool/pattern
 $ python
-> import gen
+> import generators as gen
 > g = gen.f01()
 > type(g)  # returns <type 'generator'>
 > next(g)  # returns 1
@@ -37,8 +39,6 @@ class f02:
 
 
 """Example
-python
-> import gen
 > f = gen.f02()
 > type(f)  # returns <class 'gen.f02'>
 > f.list_comp  # returns [0, 1, 4, 9, 16]
@@ -49,11 +49,11 @@ compare memory stores of list comprehension versus generator comprehension
 > big_num = 100000
 > h = gen.f02(size=big_num)
 > sys.getsizeof(h.list_comp)  # returns 824464 (over 824000 bytes for list comprehension)
-> sys.getsizeof(h.gen_comp)  # returns 120 (just 120 types for generator comprehension)
+> sys.getsizeof(h.gen_comp)  # returns 112 (just 112 bytes for generator comprehension)
 
 compare speed of list comprehension versus generator comprehension
-> import cProfile
-> cProfile.run('sum([n ** 2 for n in range(100000)])')
+> import cProfile as cp
+> cp.run('sum([n ** 2 for n in range(100000)])')
          5 function calls in 0.038 seconds
 
    Ordered by: standard name
@@ -66,7 +66,7 @@ compare speed of list comprehension versus generator comprehension
         1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
 
 
-> cProfile.run('sum((n ** 2 for n in range(100000)))')
+> cp.run('sum((n ** 2 for n in range(100000)))')
          100005 function calls in 0.049 seconds
 
    Ordered by: standard name
@@ -82,7 +82,7 @@ So the list comprehension took 38 ms to run, whereas the generator comprehension
 took 49 ms to run.
 
 Summary: There is a tradeoff in terms of memory versus speed.
-Relative to the list comprehension, the generator comprehension
-takes less memory
-but requires a longer run time.
+Relative to the list comprehension, the generator comprehension:
+* takes less memory, but
+* requires a longer run time.
 """
