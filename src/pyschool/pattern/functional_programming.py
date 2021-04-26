@@ -12,30 +12,34 @@ Video 1: Functional Programming in Python: Immutable Data Structures
 30 Aug 2017
 https://youtu.be/xJCPpDlk9_w
 
-Start with dictionaries, which are mutable.  Mutable data allows for side effects
-(bugs and other unintended consequences) and prohibits concurrency.  Instead, prefer
-tuples, which are immutable, to dictionaries, which are mutable.
+We start with dictionaries, which are mutable.  Mutable data allows for side effects
+(bugs and other unintended consequences) and prohibits concurrency.
 
-Other disadvantages of dictionaries:
-* Can add to dictionary with possible typos for the keys.
-* The appearance of keys gets repetitve and creates noise around the values, which
-  are the true items of interest.
+Instead of dictionaries (which are mutable),
+we shall prefer tuples (which are immutable).
+
+Disadvantages of a dictionary:
+* Allows mutability, which allows bugs to be introduced.
+* Allows key errors.  Has no key checking.  We can create bad keys with typos.
+* Allows value errors.  Has no value checking.  We can create bad values with typos.
+* Noise.  The appearance of keys gets repetitve and creates noise around the values,
+  which are the true items of interest.
 """
 
 scientists_dict = [
     {"name": "Lovelace", "field": "math", "born": 1815, "nobel": False},
     {"name": "Noether", "field": "math", "born": 1882, "nobel": False},
-    {"name": "Curie", "field": "physics", "born": 1867, "nodel_oops": True},
+    {"name": "Curie", "field": "physics", "born": 1867, "nodel_typo": True},
 ]
 
-"""Also, the dict allows for bad keys to be used.
+"""The third record in this dictionary contains a bad key called "nodel_typo".
 Example:
 >>> import functional_programming as fp
 >>> fp.scientists_dict
-[{'name': 'Lovelace', 'field': 'math', 'born': 1815, 'nobel': False}, {'name': 'Noether', 'field': 'math', 'born': 1882, 'nobel': False}, {'name': 'Curie', 'field': 'physics', 'born': 1867, 'nodel_oops': True}]
+[{'name': 'Lovelace', 'field': 'math', 'born': 1815, 'nobel': False}, {'name': 'Noether', 'field': 'math', 'born': 1882, 'nobel': False}, {'name': 'Curie', 'field': 'physics', 'born': 1867, 'nodel_typo': True}]
 
 Even if we get the key correct, we can still corrupt the value with the wrong type!
-This creates a lurking bad value because dicts have no type checking on the values.
+A bad value type creates a lurking bug because dicts lack type checking.
 Example:
 >>> s0_bad_value = dict(name="Lovelace", field="math", born="should be int, not string", nobel=False)
 >>> s0_bad_value["born"]
@@ -48,8 +52,9 @@ construct data with value type errors.
 
 The functional alternative: NamedTuple
 
-A sensible alternative to a dictionary is a NamedTuple, which is immutable, and can
-enforce type checking.
+A sensible alternative to a dictionary is a NamedTuple.  Advantages of a NamedTuple:
+* Immutable data.
+* Type checking on key on construction.
 """
 
 
@@ -73,6 +78,12 @@ can admit typos in the keys.)
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
 TypeError: __new__() got an unexpected keyword argument 'nodel'
+
+Here, the bad key "nodel" has been caught, but the bad value "should be int, not string"
+was not caught.  To catch the bad value, rely on a good linter, such as flake8
+(https://flake8.pycqa.org/en/latest/) or use the pylance language server for python.
+Pylance uses pyright, which is Microsoft's static type checking tool.
+(https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance).
 """
 
 
@@ -89,9 +100,9 @@ scientists = (s0, s1, s2, s3, s4, s5, s6)
 
 """
 >>> fp.s0
-Scientist(name='Lovelace', field='math', born=1815, nobel=False)
+Scientist(name="Lovelace", field="math", born=1815, nobel=False)
 >>> fp.s1
-Scientist(name='Noether', field='math', born=1882, nobel=False)
+Scientist(name="Noether", field="math", born=1882, nobel=False)
 
 ------------------------------------------------------------------
 Video 2: Functional Programming in Python: The "filter()" Function
