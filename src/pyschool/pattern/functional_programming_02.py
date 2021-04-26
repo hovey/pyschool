@@ -3,7 +3,7 @@ module.
 >>> import functional_programming_02 as fp2
 """
 from abc import ABC, abstractmethod
-from typing import NamedTuple, Tuple, Type, Union
+from typing import Generator, Iterator, NamedTuple, Tuple, Type, Union
 
 import pytest
 
@@ -123,6 +123,11 @@ def test_FP():
     #     degree: int
     #     retirement: Union[int, None]
 
+    class Person(NamedTuple):
+        name: str
+        degree: int
+        retirement: int
+
     class Retiree(NamedTuple):
         name: str
         degree: int
@@ -132,13 +137,6 @@ def test_FP():
         name: str
         degree: int
 
-    class Person(NamedTuple):
-        name: str
-        # person: Union[Retiree, Worker]
-        degree: int
-        # retirement: Union[int, None]
-        retirement: int
-
     a = Person(name="Anna", degree=1970, retirement=1980)  # 10 years experience
     b = Person(name="Bob", degree=1970, retirement=1990)  # 20 years experience
 
@@ -147,33 +145,100 @@ def test_FP():
     c = Person(name="Charles", degree=1981, retirement=0)  # 19 years experience
     d = Person(name="Donna", degree=1991, retirement=0)  # 9 years experience
 
-    group = (a, b, c, d)
+    def retiree(x: Person) -> Retiree:
+        return Retiree(name=x.name, degree=x.degree, retirement=x.retirement)
 
-    def retired(p: Person) -> bool:
-        return p.retirement != 0
+    def worker(x: Person) -> Worker:
+        return Worker(name=x.name, degree=x.degree)
+
+    group = (
+        a,
+        b,
+        c,
+        d,
+    )
+
+    def retired(x: Person) -> bool:
+        return x.retirement != 0
+
+    def retirees(x: Tuple[Person, ...]) -> Iterator:
+        # def retirees(x: Tuple[Person, ...]) -> Tuple[Retiree, ...]:
+        # def retirees(x: Tuple[Person, ...]):
+        # aa = tuple(filter(lambda i: i.retirement != 0, x))
+        aa = tuple(filter(retired, x))
+        # bb = (
+        #     Retiree(name=a.name, degree=a.degree, retirement=a.retirement) for a in aa
+        # )
+        bb = map(retiree, aa)
+        return bb
+
+    r = retirees(group)
+    known_retirees_names = ["Anna", "Bob"]
+    calc_retirees_names = [x.name for x in r]
+    assert known_retirees_names == calc_retirees_names
+
+    def experience(x: Retiree) -> int:
+        return x.retirement - x.degree
+
+    assert experience(retiree(a)) == 10
+    assert experience(retiree(b)) == 20
+
+    def experience_sum(x: Tuple[Retiree, ...]) -> int:
+        experiences = tuple(map(experience, x))
+        return sum(experiences)
+
+    assert experience_sum((retiree(a), retiree(b))) == 30
+
+    def current_experience(x: Worker, current_year: int) -> int:
+        return current_year - x.degree
+
+    assert current_experience(worker(c), now) == 19
+    assert current_experience(worker(d), now) == 9
+
+    # def retirees_experience(x: Tuple[Retiree, ...]) -> int:
+    #     aa = sum(map(retiree_experience, x))
+    #     return aa
 
     def working(p: Person) -> bool:
         return p.retirement == 0
 
-    # a = tuple(map(retired, group))
-    # b = tuple(filter(retired, group))
-    # c = tuple(filter(working, group))
-
-    def retirees(g: Tuple[Person, ...]) -> tuple:
-        return tuple(filter(retired, g))
-
-    r = retirees(group)
-    known_retirees = ["Anna", "Bob"]
-    calc_retirees = [x.name for x in r]
-    assert known_retirees == calc_retirees
-
-    def workers(g: Tuple[Person, ...]) -> tuple:
-        return tuple(filter(working, g))
+    def workers(x: Tuple[Person, ...]) -> tuple:
+        # aa = tuple(filter(lambda i: i.retirement == 0, x))
+        aa = tuple(filter(working, x))
+        return aa
 
     w = workers(group)
     known_workers = ["Charles", "Donna"]
     calc_workers = [x.name for x in w]
     assert known_workers == calc_workers
+
+    # def retiree(p: Person) -> Retiree:
+    #     if retired(p):
+    #         return Retiree(name=p.name, degree=p.degree, retirement=p.retirement)
+
+    # def worker(p: Person) -> Worker:
+    #     return Worker(name=p.name, degree=p.degree)
+
+    # a = tuple(map(retired, group))
+    # b = tuple(filter(retired, group))
+    # c = tuple(filter(working, group))
+
+    # def retirees(g: Tuple[Person, ...]) -> tuple:
+    #     return tuple(filter(retired, g))
+    # def retirees(ps: Tuple[Person]) -> Generator:
+    #     qq = (retiree(p) for p in ps)
+    #     return qq
+
+    # def workers(g: Tuple[Person, ...]) -> tuple:
+    #     return tuple(filter(working, g))
+
+    # w = workers(group)
+    # known_workers = ["Charles", "Donna"]
+    # calc_workers = [x.name for x in w]
+    # assert known_workers == calc_workers
+
+    # def experience(r: Retiree) -> int:
+    #     return r.retirement - r.degree
 
     a = 4
 
@@ -206,33 +271,33 @@ def test_FP():
 
     # assert known_working_states == calculated_working_states
 
-    def retiree_experience(p: Person_FP) -> int:
-        return p.retirement - p.degree
+    # def retiree_experience(p: Person_FP) -> int:
+    #     return p.retirement - p.degree
 
-    def worker_experience(p: Person_FP, current_year: int) -> int:
-        return current_year - p.degree
+    # def worker_experience(p: Person_FP, current_year: int) -> int:
+    #     return current_year - p.degree
 
-    def retirees_experience(retirees: tuple) -> Tuple[int]:
-        a = tuple(map(retiree_experience, retirees))
-        return a
+    # def retirees_experience(retirees: tuple) -> Tuple[int]:
+    #     a = tuple(map(retiree_experience, retirees))
+    #     return a
 
-    def workers_experience(workers: tuple, current_year: int) -> Tuple[int]:
-        b = tuple(map(worker_experience(workers, current_year), workers))
-        return b
+    # def workers_experience(workers: tuple, current_year: int) -> Tuple[int]:
+    #     b = tuple(map(worker_experience(workers, current_year), workers))
+    #     return b
 
     r = retirees(group)
     w = workers(group)
 
-    def experience(person: Person_FP, current_year: int) -> int:
-        retirees = map(retiree, group)
+    # def experience(person: Person_FP, current_year: int) -> int:
+    #     retirees = map(retiree, group)
 
-        retirees_experience = sum(filter(retired_person, group))
-        assert retirees_experience == 30
+    #     retirees_experience = sum(filter(retired_person, group))
+    #     assert retirees_experience == 30
 
-        workers_experience = sum(filter(working_person, group))
-        assert workers_experience == 28
+    #     workers_experience = sum(filter(working_person, group))
+    #     assert workers_experience == 28
 
-        return sum(filter(retired_person, group)) + sum(filter(working_person, group))
+    #     return sum(filter(retired_person, group)) + sum(filter(working_person, group))
 
     # assert experience == 42
 
