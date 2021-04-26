@@ -151,7 +151,7 @@ def test_FP():
     def worker(x: Person) -> Worker:
         return Worker(name=x.name, degree=x.degree)
 
-    group = (
+    people = (
         a,
         b,
         c,
@@ -161,7 +161,7 @@ def test_FP():
     def retired(x: Person) -> bool:
         return x.retirement != 0
 
-    def retirees(x: Tuple[Person, ...]) -> Iterator:
+    def retirees(x: Tuple[Person, ...]) -> Iterator[Retiree]:
         # def retirees(x: Tuple[Person, ...]) -> Tuple[Retiree, ...]:
         # def retirees(x: Tuple[Person, ...]):
         # aa = tuple(filter(lambda i: i.retirement != 0, x))
@@ -172,7 +172,7 @@ def test_FP():
         bb = map(retiree, aa)
         return bb
 
-    r = retirees(group)
+    r = retirees(people)
     known_retirees_names = ["Anna", "Bob"]
     calc_retirees_names = [x.name for x in r]
     assert known_retirees_names == calc_retirees_names
@@ -188,6 +188,20 @@ def test_FP():
         return sum(experiences)
 
     assert experience_sum((retiree(a), retiree(b))) == 30
+    assert experience_sum(retirees(people)) == 30
+
+    def working(x: Person) -> bool:
+        return x.retirement == 0
+
+    def workers(x: Tuple[Person, ...]) -> Iterator[Worker]:
+        aa = tuple(filter(working, x))
+        bb = map(worker, aa)
+        return bb
+
+    r = retirees(people)
+    known_retirees_names = ["Anna", "Bob"]
+    calc_retirees_names = [x.name for x in r]
+    assert known_retirees_names == calc_retirees_names
 
     def current_experience(x: Worker, current_year: int) -> int:
         return current_year - x.degree
@@ -195,22 +209,38 @@ def test_FP():
     assert current_experience(worker(c), now) == 19
     assert current_experience(worker(d), now) == 9
 
+    def current_experience_sum(x: Tuple[Worker, ...], current_year: int) -> int:
+        current_experiences = (current_experience(i, current_year) for i in x)
+        return sum(current_experiences)
+
+    assert current_experience_sum((worker(c), worker(d)), current_year=now) == 28
+    assert current_experience_sum(workers(people), current_year=now) == 28
+
+    def current_people_experience_sum(x: Tuple[Person, ...], current_year: int) -> int:
+        retired_sum = experience_sum(retirees(x))
+        working_sum = current_experience_sum(workers(x), current_year=now)
+        return retired_sum + working_sum
+
+    assert current_people_experience_sum(people, current_year=now) == 58
+
+    print("To functional or not to functional, that is the question.")
+
     # def retirees_experience(x: Tuple[Retiree, ...]) -> int:
     #     aa = sum(map(retiree_experience, x))
     #     return aa
 
-    def working(p: Person) -> bool:
-        return p.retirement == 0
+    # def working(p: Person) -> bool:
+    #     return p.retirement == 0
 
-    def workers(x: Tuple[Person, ...]) -> tuple:
-        # aa = tuple(filter(lambda i: i.retirement == 0, x))
-        aa = tuple(filter(working, x))
-        return aa
+    # def workers(x: Tuple[Person, ...]) -> tuple:
+    #     # aa = tuple(filter(lambda i: i.retirement == 0, x))
+    #     aa = tuple(filter(working, x))
+    #     return aa
 
-    w = workers(group)
-    known_workers = ["Charles", "Donna"]
-    calc_workers = [x.name for x in w]
-    assert known_workers == calc_workers
+    # w = workers(people)
+    # known_workers = ["Charles", "Donna"]
+    # calc_workers = [x.name for x in w]
+    # assert known_workers == calc_workers
 
     # def retiree(p: Person) -> Retiree:
     #     if retired(p):
@@ -219,9 +249,9 @@ def test_FP():
     # def worker(p: Person) -> Worker:
     #     return Worker(name=p.name, degree=p.degree)
 
-    # a = tuple(map(retired, group))
-    # b = tuple(filter(retired, group))
-    # c = tuple(filter(working, group))
+    # a = tuple(map(retired, people))
+    # b = tuple(filter(retired, people))
+    # c = tuple(filter(working, people))
 
     # def retirees(g: Tuple[Person, ...]) -> tuple:
     #     return tuple(filter(retired, g))
@@ -232,15 +262,13 @@ def test_FP():
     # def workers(g: Tuple[Person, ...]) -> tuple:
     #     return tuple(filter(working, g))
 
-    # w = workers(group)
+    # w = workers(people)
     # known_workers = ["Charles", "Donna"]
     # calc_workers = [x.name for x in w]
     # assert known_workers == calc_workers
 
     # def experience(r: Retiree) -> int:
     #     return r.retirement - r.degree
-
-    a = 4
 
     # def worker(p: Person_FP) -> Worker:
     #     return Worker(degree=p.degree)
@@ -256,18 +284,18 @@ def test_FP():
 
     # known_retired_states = (True, True, False, False)
     # # the traditional approach
-    # for g, s in zip(group, known_retired_states):
+    # for g, s in zip(people, known_retired_states):
     #     assert retired_person(g) == s
 
     # # the more functional approach
-    # calculated_retirement_states = tuple(map(retired_person, group))
+    # calculated_retirement_states = tuple(map(retired_person, people))
     # assert known_retired_states == calculated_retirement_states
 
     # def working_person(person: Person_FP) -> bool:
     #     return not retired_person(person=person)
 
     # known_working_states = (False, False, True, True)
-    # calculated_working_states = tuple(map(working_person, group))
+    # calculated_working_states = tuple(map(working_person, people))
 
     # assert known_working_states == calculated_working_states
 
@@ -285,23 +313,21 @@ def test_FP():
     #     b = tuple(map(worker_experience(workers, current_year), workers))
     #     return b
 
-    r = retirees(group)
-    w = workers(group)
+    # r = retirees(people)
+    # w = workers(people)
 
     # def experience(person: Person_FP, current_year: int) -> int:
-    #     retirees = map(retiree, group)
+    #     retirees = map(retiree, people)
 
-    #     retirees_experience = sum(filter(retired_person, group))
+    #     retirees_experience = sum(filter(retired_person, people))
     #     assert retirees_experience == 30
 
-    #     workers_experience = sum(filter(working_person, group))
+    #     workers_experience = sum(filter(working_person, people))
     #     assert workers_experience == 28
 
-    #     return sum(filter(retired_person, group)) + sum(filter(working_person, group))
+    #     return sum(filter(retired_person, people)) + sum(filter(working_person, people))
 
     # assert experience == 42
-
-    a = 4
 
     # def experience(person: Person_FP) -> int:
 
