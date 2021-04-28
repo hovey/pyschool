@@ -1,4 +1,5 @@
 # agent_landmark_pyglet.py
+import time
 from numpy.random import randint
 
 import pyglet
@@ -95,12 +96,17 @@ class ViewPyglet:
         _y = randint(low=0, high=self.steps_per_span) * self.delta_y
         return (_x, _y)
 
-    @window.event
-    def on_draw(self):
+    # @window.event
+    # @self.window.event
+    # @__class__.window.event
+    # @pyglet.window.event
+    # def on_draw(self):
+    def draw(self):
         self.window.clear()
         self.label.draw()
         self.batch.draw()
 
+    """
     @window.event
     def on_key_press(self, symbol, modifiers):
 
@@ -141,6 +147,21 @@ class ViewPyglet:
             # close the figure, end the interactive demonstration
             # plt.close()
             self.window.close()
+        """
 
 
-pyglet.app.run()
+def main():
+    v = ViewPyglet()
+    win = v.window
+
+    @win.event
+    def on_draw():
+        v.draw()
+
+    # sleep to allow user to actually see the window, otherwise it is torn down instantly
+    # time.sleep(3)  # seconds
+    pyglet.app.run()
+
+
+if __name__ == "__main__":
+    main()
