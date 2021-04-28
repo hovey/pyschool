@@ -151,13 +151,19 @@ class ViewPyglet:
 
 def main():
     v = ViewPyglet()
-    win = v.window
+    # win = v.window
 
-    @win.event
+    # @win.event
+    # def on_draw():
+    #     v.draw()
+    @v.window.event
     def on_draw():
         v.draw()
 
-    @win.event
+    # @win.event
+    # def on_key_press(symbol, modifiers):
+    #     v.key_press(symbol, modifiers)
+    @v.window.event
     def on_key_press(symbol, modifiers):
         v.key_press(symbol, modifiers)
 
