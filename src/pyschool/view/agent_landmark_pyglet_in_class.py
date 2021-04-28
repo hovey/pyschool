@@ -57,7 +57,7 @@ class ViewPyglet:
             y=y_mid,
             anchor_x="center",
             anchor_y="center",
-            width=self.x_max // 4,
+            width=self.x_max // 3,
             multiline=True,
         )
 
@@ -106,9 +106,9 @@ class ViewPyglet:
         self.label.draw()
         self.batch.draw()
 
-    """
-    @window.event
-    def on_key_press(self, symbol, modifiers):
+    # @window.event
+    # def on_key_press(self, symbol, modifiers):
+    def key_press(self, symbol, modifiers):
 
         print(f"Key {key.symbol_string(symbol)} was pressed.")
 
@@ -147,7 +147,6 @@ class ViewPyglet:
             # close the figure, end the interactive demonstration
             # plt.close()
             self.window.close()
-        """
 
 
 def main():
@@ -157,6 +156,10 @@ def main():
     @win.event
     def on_draw():
         v.draw()
+
+    @win.event
+    def on_key_press(symbol, modifiers):
+        v.key_press(symbol, modifiers)
 
     # sleep to allow user to actually see the window, otherwise it is torn down instantly
     # time.sleep(3)  # seconds
