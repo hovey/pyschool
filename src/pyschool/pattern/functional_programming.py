@@ -12,18 +12,17 @@ Video 1: Functional Programming in Python: Immutable Data Structures
 30 Aug 2017
 https://youtu.be/xJCPpDlk9_w
 
+Motivation: A dictionaries can cause problems.  (A NamedTuple can avoid these problems.)
+
 We start with dictionaries, which are mutable.  Mutable data allows for side effects
 (bugs and other unintended consequences) and prohibits concurrency.
 
-Instead of dictionaries (which are mutable),
-we shall prefer tuples (which are immutable).
+Instead of using dictionaries (which are mutable), prefer tuples (which are immutable).
 
 Disadvantages of a dictionary:
 * Allows mutability, which allows bugs to be introduced.
 * Allows key errors.  Has no key checking.  We can create bad keys with typos.
 * Allows value errors.  Has no value checking.  We can create bad values with typos.
-* Noise.  The appearance of keys gets repetitve and creates noise around the values,
-  which are the true items of interest.
 """
 
 scientists_dict = [
@@ -49,12 +48,15 @@ Example:
 Yuck!  The type should be an int, not a string, but dictionaries allowed us to
 construct data with value type errors.
 
-
 The functional alternative: NamedTuple
 
-A sensible alternative to a dictionary is a NamedTuple.  Advantages of a NamedTuple:
+A NamedTuple is a sensible alternative to a dictionary.  Advantages of a NamedTuple:
 * Immutable data.
+* Required positional argument checking on construction.
+* Key checking on construction.
 * Type checking on key on construction.
+
+We begin be defining a Scientist, and then creating a tuple of Scientists.
 """
 
 
@@ -66,7 +68,7 @@ class Scientist(NamedTuple):
 
 
 """
-t = fp.Scientist()
+>>> t = fp.Scientist()
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
 TypeError: __new__() missing 4 required positional arguments: 'name', 'field', 'born', and 'nobel'
@@ -110,10 +112,18 @@ Video 2: Functional Programming in Python: The "filter()" Function
 https://youtu.be/fkjjqyfN51c
 
 filter: (function or None, iterable)
-filter(function or None, iterable) --> filter object
+filter(function or None, iterable) --> filter object (which is an iterable)
 
-Return an iterator yielding those items of iterable for which function(item)
-is true.  If function is None, return items that are true.
+Given a function(item) and an iterable of items, filter returns an iterator yielding
+those items of iterable for which function(item) is true.
+If function is None, filter return the items that are true.
+
+The filter function is often more efficient than a list comprehension, especially when
+working on large data sets.  A list comprehension creates a new list, which requires
+time to create and bloats memory requirements for the new list's storage.  In contrast,
+the filter does not create a new list.  Rather, the filter function makes a simple
+object that holds a reference to the original list and acts on it, which avoids list
+duplication and thus requires less memory bloat.
 
 Return a new list that is filtered by if the Scientist won a Nobel prize.
 >>> scientists_filtered = filter(lambda x: x.nobel is True, fp.scientists)
@@ -155,8 +165,8 @@ Finally, find all physicists that have also won a Nobel prize:
 >>> winners_physicists
 (Scientist(name='Curie', field='physics', born=1867, nobel=True),)
 
-Finally, the magic of functional program, declarative functions chained together.
-This is composition.
+Finally, the magic of functional program: declarative functions chained together.
+This is composition of two or more functions.
 """
 
 
@@ -190,6 +200,9 @@ def physics_nobel_filter(x: Scientist) -> bool:
 >>> winners_physicists_functional = tuple(filter(fp.physics_nobel_filter, fp.scientists))
 >>> winners_physicists_functional
 (Scientist(name='Curie', field='physics', born=1867, nobel=True),)
+
+See also itertools.filterfalse() for the complementary function that returns elements
+of iterable when the function returns false.
 """
 
 
@@ -200,13 +213,18 @@ Video 3: Functional Programming in Python: The "map()" Function
 https://youtu.be/powVeMYKCSw
 
 map: (func, *iterables)
-map(func, *iterables) --> map object
+map(func, iterable, ...) --> map object (which is an iterable)
 
 Make an iterator that computes the function using arguments from each of the iterables.
 Stops when the shortest iterable is exhausted.
 
+The first argument to map is a function object. The function is passed without calling
+the function itself, thus used without the parenthesis ( ) of the function.)
+
 Takes tuples and shape them into new tuples.
 Example: assemble the names and ages of each scientist.
+
+See also https://realpython.com/python-map-function/
 """
 
 
@@ -246,5 +264,25 @@ If the original data set, scientists, is viewed as a matrix, with each
 row as a scientist instance, and each column as an attribute of a scientists, then
 * `filter` has been used to select a subset of rows for all columns, and
 * `map` has been used to select a subset of columns for all rows.
-Ask AP his thoughts.
+
+So far, we have examined functions that take one parameter.
+For functions that take two or more parameters, include the same number of
+iterable objects after the function in the parameter to map.
+For example, to construct the difference of two tuples (e.g, difference or subtraction
+optione).
+>>> a = tuple(range(3))
+>>> a
+(0, 1, 2)
+>>> b = tuple(reversed(range(3)))
+>>> b
+(2, 1, 0)
+>>>
+c = tuple(map(lambda x, y: x - y, a, b))
+>>> c
+(-2, 0, 2)
+>>> d = tuple(map(lambda x, y: y - x, a, b))
+>>> d
+(2, 0, -2)
+See also Built-In Functions of the Python Standard Library (PSL)
+https://docs.python.org/3/library/functions.html
 """
