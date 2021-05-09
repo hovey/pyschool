@@ -2,10 +2,17 @@
 # Use immutable data
 # Use filter, map, and reduce
 
-from typing import NamedTuple, Tuple
+from typing import Dict, List, NamedTuple, Tuple
 
 """Introduction to Functional Programming in Python by Dan Bader of Real Python
 Series of six videos: https://youtube.com/playlist?list=PLP8GkvaIxJP1z5bu4NX_bFrEInBkAgTMr
+
+To use these tutorials, import the module into python, then perform the commented
+commands to interact with the data.
+$ cd ~/pyschool/src/pyschool/pattern
+$ conda activate pyschool-env
+$ python
+>>> import pyschool.pattern.functional_programming as fp
 
 --------------------------------------------------------------------
 Video 1: Functional Programming in Python: Immutable Data Structures
@@ -33,7 +40,6 @@ scientists_dict = [
 
 """The third record in this dictionary contains a bad key called "nodel_typo".
 Example:
->>> import functional_programming as fp
 >>> fp.scientists_dict
 [{'name': 'Lovelace', 'field': 'math', 'born': 1815, 'nobel': False}, {'name': 'Noether', 'field': 'math', 'born': 1882, 'nobel': False}, {'name': 'Curie', 'field': 'physics', 'born': 1867, 'nodel_typo': True}]
 
@@ -92,8 +98,8 @@ Pylance uses pyright, which is Microsoft's static type checking tool.
 s0 = Scientist(name="Lovelace", field="math", born=1815, nobel=False)
 s1 = Scientist(name="Noether", field="math", born=1882, nobel=False)
 s2 = Scientist(name="Curie", field="physics", born=1867, nobel=True)
-s3 = Scientist(name="Youyou", field="chemisty", born=1930, nobel=True)
-s4 = Scientist(name="Yonath", field="chemisty", born=1939, nobel=True)
+s3 = Scientist(name="Youyou", field="chemistry", born=1930, nobel=True)
+s4 = Scientist(name="Yonath", field="chemistry", born=1939, nobel=True)
 s5 = Scientist(name="Rubin", field="astronomy", born=1928, nobel=False)
 s6 = Scientist(name="Ride", field="physics", born=1951, nobel=False)
 
@@ -132,9 +138,9 @@ Return a new list that is filtered by if the Scientist won a Nobel prize.
 >>> next(scientists_filtered)
 Scientist(name='Curie', field='physics', born=1867, nobel=True)
 >>> next(scientists_filtered)
-Scientist(name='Youyou', field='chemisty', born=1930, nobel=True)
+Scientist(name='Youyou', field='chemistry', born=1930, nobel=True)
 >>> next(scientists_filtered)
-Scientist(name='Yonath', field='chemisty', born=1939, nobel=True)
+Scientist(name='Yonath', field='chemistry', born=1939, nobel=True)
 >>> next(scientists_filtered)
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
@@ -148,7 +154,7 @@ Connection to the language of vector spaces:
 
 >>> winners = tuple(filter(lambda x: x.nobel is True, fp.scientists))
 >>> winners
-(Scientist(name='Curie', field='physics', born=1867, nobel=True), Scientist(name='Youyou', field='chemisty', born=1930, nobel=True), Scientist(name='Yonath', field='chemisty', born=1939, nobel=True))
+(Scientist(name='Curie', field='physics', born=1867, nobel=True), Scientist(name='Youyou', field='chemistry', born=1930, nobel=True), Scientist(name='Yonath', field='chemistry', born=1939, nobel=True))
 
 >>> physicists = tuple(filter(lambda x: x.field == "physics", fp.scientists))
 >>> physicists
@@ -177,7 +183,7 @@ def nobel_filter(x: Scientist) -> bool:
 """
 >>> winners_functional = tuple(filter(fp.nobel_filter, fp.scientists))
 >>> winners_functional
-(Scientist(name='Curie', field='physics', born=1867, nobel=True), Scientist(name='Youyou', field='chemisty', born=1930, nobel=True), Scientist(name='Yonath', field='chemisty', born=1939, nobel=True))
+(Scientist(name='Curie', field='physics', born=1867, nobel=True), Scientist(name='Youyou', field='chemistry', born=1930, nobel=True), Scientist(name='Yonath', field='chemistry', born=1939, nobel=True))
 """
 
 
@@ -285,4 +291,96 @@ c = tuple(map(lambda x, y: x - y, a, b))
 (2, 0, -2)
 See also Built-In Functions of the Python Standard Library (PSL)
 https://docs.python.org/3/library/functions.html
+"""
+
+"""
+---------------------------------------------------------------
+Video 4: Functional Programming in Python: The "reduce()" Function
+20 Sep 2017
+https://youtu.be/ZrZ6vJGiE8I
+
+Need to import functools (starting in Python 3) to get the reduce function.
+"""
+
+from functools import reduce
+
+"""
+reduce: (function, sequence[, initial])
+reduce(function, sequence[, initial]) -> value
+
+Apply a function of two arguments cumulatively to the items of a sequence,
+from left to right, so as to reduce the sequence to a single value.
+
+For example, reduce(lambda x, y: x + y, [1, 2, 3, 4, 5]) calculates
+((((1 + 2) + 3) + 4) + 5).
+
+If initial is present, it is placed before the items of the sequence in the
+calculation, and serves as a default value when the sequence is empty.
+
+We make use `ages` tuple:
+
+>>> ages = tuple(map(fp.age, fp.scientists))
+>>> ages
+(202, 135, 150, 87, 78, 89, 66)
+>>> init = 0
+>>> ages_sum = reduce(lambda x, y: x + y, ages, init)
+>>> ages_sum
+807
+"""
+
+"""
+The next example is a reshuffle (or reorganizaiton) of the existing scientists tuple
+into a new dictionary that holds the field of study as keys and the corresponding
+names of the scientists as values.  We want this as our final result:
+
+>>> names_by_field
+{
+    "math": ["Lovelace", "Noether"],
+    "physics": ["Curie", "Ride"],
+    "chemistry": ["Youyou", "Yonath"],
+    "astronomy": ["Rubin"],
+}
+"""
+
+"""
+Hint 1: Create a reducer function
+"""
+
+
+def reducer(accumulator: Dict[str, List[str]], y: Scientist) -> Dict[str, List[str]]:
+    accumulator[y.field].append(y.name)
+    return accumulator
+
+
+"""
+>>> b = reduce(fp.reducer, fp.scientists, {"math": [], "physics": [], "chemistry": [], "astronomy": []})
+>>> b
+{'math': ['Lovelace', 'Noether'], 'physics': ['Curie', 'Ride'], 'chemistry': ['Youyou', 'Yonath'], 'astronomy': ['Rubin']}
+"""
+
+"""
+But, the method above uses a dictionary that must be predefined by the user, and this
+is a weak paradigm.  Better would be to have the initial conditions react to the data,
+without this user intervention.   How can this be done?
+Answer: use defaultdict
+Exmaple:
+>>> import collections
+>>> dd = collections.defaultdict(list)
+>>> dd
+defaultdict(<class 'list'>, {})
+"""
+
+
+"""
+>>> c = reduce(fp.reducer, fp.scientists, collections.defaultdict(list))
+>>> c
+defaultdict(<class 'list'>, {'math': ['Lovelace', 'Noether'], 'physics': ['Curie', 'Ride'], 'chemistry': ['Youyou', 'Yonath'], 'astronomy': ['Rubin']})
+"""
+
+
+"""
+Hint 3:  Make it more functional, use tuples, and not dictionaries
+>>> a = tuple(map(lambda x: x.field, fp.scientists))
+>>> a
+('math', 'math', 'physics', 'chemistry', 'chemistry', 'astronomy', 'physics')
 """
