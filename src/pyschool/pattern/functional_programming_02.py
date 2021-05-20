@@ -3,7 +3,7 @@ module.
 >>> import functional_programming_02 as fp2
 """
 from abc import ABC, abstractmethod
-from typing import Generator, Iterator, NamedTuple, Tuple, Type, Union
+from typing import Iterator, NamedTuple, Tuple
 
 import pytest
 

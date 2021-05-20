@@ -31,16 +31,16 @@ class f02:
         # create the comprehensions
         self.list_comp = [
             n ** 2 for n in range(size)
-        ]  # list comprehension, uses brackets [ ]
+        ]  # list comprehension, uses square brackets [ ]
 
         self.gen_comp = (
             n ** 2 for n in range(size)
-        )  # generator comprehension, uses parentheses
+        )  # generator comprehension, uses parentheses ( )
 
 
 """Example
 > f = gen.f02()
-> type(f)  # returns <class 'gen.f02'>
+> type(f)  # returns <class 'generators.f02'>
 > f.list_comp  # returns [0, 1, 4, 9, 16]
 > f.gen_comp  # returns <generator object f02.__init__.<locals>.<genexpr> at 0x7fc757286480>
 
