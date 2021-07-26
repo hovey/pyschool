@@ -12,14 +12,14 @@ import pytest
 def main():
 
     """Type hinting helps users avoid errors by indicating to the
-    linter data types and some data structure.
+    user (and linter) data types and structure.
 
     Consider a function that take a pair value in polar coordinates,
     (r, theta) for radial and angular, respectively, and returns a pair
     value in Cartesian coordinates (x, y), easting and northing,
     respectively.
 
-    We enforce keyword-only style of parameters as well, shown by the
+    We will use keyword-only style of parameters, shown by the
     parameters that follow the "*" in the function signature.
 
     Example 0:
@@ -41,10 +41,11 @@ def main():
     assert x0 == pytest.approx(0.866, tol)
     assert y0 == pytest.approx(0.5, tol)
 
-    """Now let's use type aliases to make function signature more precise.
+    """Now let's use type aliases to make the function signature more precise.
     Above, the input and return parameters are identical, but there is
-    a semantic difference between the two pairs, one is in polar coordinates
-    and the other is in Cartesian coordinates, and that is useful to communicate.
+    a semantic difference between the two pairs: One pair is in polar coordinates
+    and the other pair is in Cartesian coordinates.  This difference is useful
+    to communicate to the user.
 
     Example 1:
 
@@ -53,8 +54,8 @@ def main():
     PolarCoordinate = tuple[float, float]
     CartesianCoordinate = tuple[float, float]
 
-    """Then we make a new and improved function that uses these type alises.
-    Notice that the implementation remains unchanged.
+    """Then we make an improved function that uses these type alises.
+    The function implementation remains unchanged.
     """
 
     def polar_to_cartesian_1(*, point: PolarCoordinate) -> CartesianCoordinate:
@@ -68,8 +69,8 @@ def main():
     assert x1 == pytest.approx(0.866, tol)
     assert y1 == pytest.approx(0.5, tol)
 
-    """Benefits: A type aliase improves precision in the function parameter
-    types and an explicit semantic to communicate input types and outputs types.
+    """Benefits: A type aliase improves semantic precision in the function parameter
+    and return types.
 
     This is a fine starting point, but it could allow position-type
     errors, for example, if the user interchanged positions (r, theta) with
@@ -92,7 +93,9 @@ def main():
 
     """Now make use of these new constructions.  Notice how their use becomes
     very explicit, and order of the tuple, e.g, (r, theta) versus (theta, r)
-    errors are now more difficult to make.
+    cannot be made easily since the user will type the value right after
+    the NamedTuple data member name, e.g., in the creation of the `point_in`
+    PolarTuple below.
     """
 
     def polar_to_cartesian_2(*, point: PolarTuple) -> CartesianTuple:
