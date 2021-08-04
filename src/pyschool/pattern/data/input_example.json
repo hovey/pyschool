@@ -2,7 +2,7 @@
     "string_key": "string value",
     "int_key": 42,
     "bool_key": true,
-    "person_record": {
+    "person_object": {
         "name": "Jason Smith",
         "age": 26,
         "hobbies": [
@@ -25,6 +25,6 @@
         "South_Korea": "Seoul",
         "Japan": "Tokyo"
     },
-    "narrative": "This is a multi-line example; this is line 1\nand this is line 2, and finally\nthis is line 3.",
+    "narrative": "This is a multi-line example; this is line 1\nand this is line 2, and finally\nthis is line 3.\n",
     "year": 2021
 }

@@ -1,0 +1,4 @@
+string_key, string value
+int_key, 42
+bool_key, true
+name, Jason Smith

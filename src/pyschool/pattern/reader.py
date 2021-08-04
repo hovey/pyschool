@@ -4,51 +4,52 @@ Example:
 > cd ~/pyschool/src/pyschool/pattern
 > conda activate pyschoolenv
 # either
-> python reader.py -i data/input_example.json
+> python reader.py data/input_example.json
 # or
-> python reader.py -i data/input_example.yml
+> python reader.py data/input_example.yml
 """
 
-import argparse
 from pathlib import Path
 import sys
+import json
+import yaml
 
 
 def main(argv):
 
     engine_file = __file__
-    print(f"File name: {engine_file}.")
+    print(f"Engine: {engine_file}.")
 
-    # reference: https://www.golinuxcloud.com/python-argparse/
-    parser = argparse.ArgumentParser()
+    has_database = False  # default, the database not yet populated from file input
 
-    # reference:
-    # https://docs.python.org/3/library/argparse.html#the-add-argument-method
+    # path_file_in = Path(argv[0])
+    path_file_in = Path(argv[0]).resolve()
+    # file_stem = path_file_in.stem  # returns "input_example" from "input_example.json"
+    file_type = path_file_in.suffix  # returns "json" from "input_example.json"
 
-    # default type is string
-    parser.add_argument(
-        "input_file",
-        help="input file in .json or .yml format",
-    )
+    if not path_file_in.is_file():
+        raise OSError(f"File not found: {path_file_in}")
 
-    # verbosity
-    parser.add_argument(
-        "-v", "--verbose", help="increase output verbosity", action="store_true"
-    )
+    file_type = path_file_in.suffix
 
-    args = parser.parse_args()
+    if file_type not in [".json", ".yml"]:
+        raise TypeError("Only file types of .json or .yml are supported.")
 
-    a = args.verbose
-    b = args.input_file
+    if file_type == ".json":
+        with open(path_file_in) as fin:
+            database = json.load(fin)
+    else:  # then file type necessarily must be .yml
+        with open(path_file_in, "r") as stream:
+            database = yaml.safe_load(stream)
 
-    a = 4
+    print(f"Input: {path_file_in}")
+    print("The first level key and value pairs follow:")
+    for key, value in database.items():
+        # for item in data:
+        print(f"key is '{key}' -> value is '{value}'")
 
-    # if serialize:
-    #     extension = ".png"  # ".pdf"  # or '.svg'
-    #     bstring = Path(__file__).stem + extension
-    #     # fig.savefig(bstring, bbox_inches="tight")
-    #     fig.savefig(bstring, bbox_inches="tight", pad_inches=0)
-    #     print(f"Serialized file to {bstring}")
+    has_database = True  # overwrite default False state, database now populated
+    return has_database
 
 
 if __name__ == "__main__":
