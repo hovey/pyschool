@@ -2,7 +2,7 @@
 string_key: string value
 int_key: 42
 bool_key: true
-person_record:
+person_object:
   name: Jason Smith
   age: 26
   hobbies:

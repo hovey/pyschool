@@ -32,7 +32,7 @@ def main(argv):
 
     file_type = path_file_in.suffix
 
-    if file_type not in [".json", ".yml"]:
+    if file_type not in (".json", ".yml"):
         raise TypeError("Only file types of .json or .yml are supported.")
 
     if file_type == ".json":
