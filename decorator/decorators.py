@@ -16,6 +16,7 @@ def time_function(func):
 
     :returns time_wrapper: The wrapped function
     """
+
     @functools.wraps(func)
     def time_wrapper(*args):
         """
@@ -32,6 +33,7 @@ def time_function(func):
 
         print(f"{toc-tic} seconds for {args[1]}!")
         return result
+
     return time_wrapper
 
 
@@ -39,6 +41,7 @@ class Memoise(dict):
     """
     This class extends a python dictionary for memoisation
     """
+
     def __init__(self, func):
         """
         The init method of the Memoise class
@@ -66,14 +69,18 @@ class Memoise(dict):
 
 @Memoise
 def factorial(k):
-    if k < 2: return 1
+    if k < 2:
+        return 1
     return k * factorial(k - 1)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     val = 10
 
-    print(f"\nThis script times how long it takes to run a recursive "+
-           "function to calculate {val} factorial")
+    print(
+        f"\nThis script times how long it takes to run a recursive "
+        + "function to calculate {val} factorial"
+    )
 
     print(f"\nCalculating {val}! for the first time.")
     f1 = factorial(val)

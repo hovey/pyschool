@@ -1,0 +1,30 @@
+{
+    "string_key": "string value",
+    "int_key": 42,
+    "bool_key": true,
+    "person_object": {
+        "name": "Jason Smith",
+        "age": 26,
+        "hobbies": [
+            "hockey",
+            "cooking",
+            "quilting"
+        ],
+        "manager": {
+            "name": "Jessica Davis",
+            "age": 45,
+            "hobbies": [
+                "fishing",
+                "tennis",
+                "golf"
+            ],
+            "manager": null
+        }
+    },
+    "capitals": {
+        "South_Korea": "Seoul",
+        "Japan": "Tokyo"
+    },
+    "narrative": "This is a multi-line example; this is line 1\nand this is line 2, and finally\nthis is line 3.\n",
+    "year": 2021
+}

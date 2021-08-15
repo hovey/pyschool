@@ -180,7 +180,7 @@ def on_key_press(symbol, modifiers):
         window.close()
 
 
-def clock_tick_udpate(dt):
+def clock_tick_update(dt):
     # dt (int): time interval in units of seconds.
     now = datetime.now()
     now_string = "Title updated at " + now.strftime("%H:%M:%S")
@@ -193,7 +193,7 @@ def clock_tick_udpate(dt):
 # agent_landmark_pyglet.py
 # https://pyglet.readthedocs.io/en/latest/modules/clock.html?highlight=schedule_interval#pyglet.clock.schedule_interval
 delta_t = 1  # seconds
-pyglet.clock.schedule_interval(func=clock_tick_udpate, interval=delta_t)
+pyglet.clock.schedule_interval(func=clock_tick_update, interval=delta_t)
 
 # Publish-Subscribe
 pub = Publisher()

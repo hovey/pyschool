@@ -1,3 +1,12 @@
+"""This module tests the zalculator service.
+
+Example:
+> conda activate pyschoolenv
+> cd ~/pyschool
+> pytest tests/test_zalculator -v
+
+"""
+
 from unittest import TestCase, main
 
 # from zfolder.zmath.zalculator import Zalculator as zcalc
