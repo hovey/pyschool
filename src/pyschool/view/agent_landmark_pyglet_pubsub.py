@@ -1,5 +1,6 @@
 # agent_landmark_pyglet.py
 from datetime import datetime
+import time
 
 from numpy.random import randint
 import pyglet
@@ -199,6 +200,16 @@ pub = Publisher()
 pub.subscribe(window.subscriber)
 # now simulate a publisher trigger as publication every 4 seconds
 delta_p = 4  # seconds, publication interval
-pyglet.clock.schedule_interval(func=pub.publish, interval=delta_p)
+# pyglet.clock.schedule_interval(func=pub.publish, interval=delta_p)
 
-pyglet.app.run()
+# pyglet.app.run()
+
+for _ in range(5):
+    window.clear()
+    window.switch_to()
+    window.dispatch_events()
+    window.clear()
+    batch.draw()
+    window.flip()
+    time.sleep(2)
+    print("Test")
