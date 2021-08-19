@@ -21,10 +21,10 @@ jobs:
         uses: actions/setup-python@master
         with:
           python-version: 3.9
-       - name: Install dependencies
-         run: |
-           python -m pip install --upgrade pip
-           python -m pip install --user numpy scipy matplotlib
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install --user numpy scipy matplotlib
       # - name: Install dependencies
       #   run: config/pyschoolenv_create.sh
       - name: Generate coverage report
