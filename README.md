@@ -66,15 +66,13 @@ The **pyschool** repository demonstrates
 
 ## Toolbox
 
-* VIM macros
-
-*To be refactored.*
+* VIM [macros](src/pyschool/vim_macros/example.py)
 
 ## Pythonic Patterns
 
 ### Attributes
 
-* See the [`get_set` example](get_set/README.md), which goes through a short code example, with evolution from bad, to better, to best implementations.  
+* See the [`get_set` example](src/pyschool/get_set/README.md), which goes through a short code example, with evolution from bad, to better, to best implementations.  
 
 ### Client-Service
 
@@ -82,8 +80,8 @@ The **pyschool** repository demonstrates
 
 ### Decorators
 
-* An [example](logging_decorator.py) of a logging decorator pattern, which can help D.R.Y. out code (based on [this example](http://book.pythontips.com/en/latest/decorators.html#logging)).
-* An [example](decorators.py), using factorial, `tic-toc` timing convention, and [memoization](https://en.wikipedia.org/wiki/Memoization).
+* An [example](src/pyschool/decorator/logging_decorator.py) of a logging decorator pattern, which can help D.R.Y. out code (based on [this example](http://book.pythontips.com/en/latest/decorators.html#logging)).
+* An [example](src/pyschool/decorator/decorators.py), using factorial, `tic-toc` timing convention, and [memoization](https://en.wikipedia.org/wiki/Memoization).
 * See also [Real Python](https://realpython.com/primer-on-python-decorators/), [Wiki Python](https://wiki.python.org/moin/PythonDecorators), [Yasoob Khalid](http://book.pythontips.com/en/latest/decorators.html)
 
 ### Docstrings
@@ -93,32 +91,28 @@ The **pyschool** repository demonstrates
 
 ### Error Checking (ask for forgiveness, not permission)
 
-* See [examples](error_check.md).
+* See [examples](src/pyschool/errors/error_check.md).
 
-### [Factory](factory/README.md)
+### [Factory](src/pyschool/factory/README.md)
 
-### [Publish-Subscribe](pubsub/README.md) (aka Observer)
+### [Publish-Subscribe](src/pyschool/pubsub/README.md) (aka Observer)
 
 ### Import
 
-* When [importing modules](importable/importable.md) from non-local directories.  Used often in client-service patterns.
+* When [importing modules](src/pyschool/importable/importable.md) from non-local directories.  Used often in client-service patterns.
 
 ### Inheritance
 
-* A compact [example](inheritance_farm/readme.txt), showing a verb astraction (e.g., `speak`) and inheritance of behavior, with a simple client-service architecture.
-* [shapes](super/shapes.py)
-
-### Iteration
-
-* See [`for_loop_vs_iterator.py`](for_loop_v_iterator.py) for an example.
+* A compact [example](src/pyschool/inheritance_farm/readme.txt), showing a verb astraction (e.g., `speak`) and inheritance of behavior, with a simple client-service architecture.
+* [shapes](src/pyschool/super/shapes.py)
 
 ### Model, View, Controller (MVC)
 
-* [shapes_mvc](super/shapes_mvc.py)
+* [shapes_mvc](src/pyschool/super/shapes_mvc.py)
 
 ### Unit Test
 
-* An [example](test_unittest.py), using the [unittest.mock](https://docs.python.org/3/library/unittest.mock.html#) library for testing in Python.
+* An [example](tests/test_unittest.py), using the [unittest.mock](https://docs.python.org/3/library/unittest.mock.html#) library for testing in Python.
 * [Real Python](https://realpython.com/python-mock-library/) article.  
 
 Examples from `xyfigure_test.py`:
@@ -160,7 +154,7 @@ $ python -m unittest xyfigure_test.TestImageDiff.test_same  # e.g., to test the 
 
 ### Computation
 
-* [Ordinary least squares](least_squares/ols.py)
+* [Ordinary least squares](src/pyschool/least_squares/ols.py)
 * Several examples in the `monkey_see` folder  
 
 ### Debugger
@@ -182,14 +176,6 @@ Example:  From `~/sibl/xyfigure/test` in VS Code, `Run | Open Configurations` an
     ]
 }
 ```
-
-### Matplotlib
-
-* [Anatomy of a figure](anatomy_of_figure/anatomy_of_figure.py), a reproduction of a well-known exposition of features available in Matplotlib.
-* [Element scale versus density](element_scale_v_density/element_scale_v_density.py), an example of a log-scale plot.
-* [Growth Charts](growth_charts/README.md), attributes of error checking, kwarg forwarding, fill between, and color transparency.
-* [Introductory tutorials](introductory_tutorials.py)
-* [Quartiles](quartiles/pfield.py)
 
 ### Production
 
