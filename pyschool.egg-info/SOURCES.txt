@@ -1,6 +1,0 @@
-README.md
-setup.py
-pyschool.egg-info/PKG-INFO
-pyschool.egg-info/SOURCES.txt
-pyschool.egg-info/dependency_links.txt
-pyschool.egg-info/top_level.txt
