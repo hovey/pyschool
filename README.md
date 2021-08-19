@@ -12,12 +12,12 @@ The **pyschool** repository demonstrates
 
 ## Best Practices
 
-* [D.R.Y. > W.E.T.](src/pychool/doc/dry.md)
-* [Convention > Configuration](src/pychool/doc/convention.md)
-* [Code Smell](src/pychool/doc/code_smell.md)
+* [D.R.Y. > W.E.T.](doc/dry.md)
+* [Convention > Configuration](doc/convention.md)
+* [Code Smell](doc/code_smell.md)
 * Verb Smell
-  * [Get and Set](src/pychool/doc/get_and_set.md)
-  * [C.R.U.D.](src/pychool/doc/crud.md)
+  * [Get and Set](doc/get_and_set.md)
+  * [C.R.U.D.](doc/crud.md)
 * [Client and Service](doc/client_service.md)
 * Production
   * Style (with Black)
