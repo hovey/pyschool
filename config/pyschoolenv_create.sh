@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# TODO: Use this script with Continuous Integration, thus W.E.T. -> D.R.Y.
+
 # References: ruxi/make_conda_env.sh
 # https://gist.github.com/ruxi/949e3d326c5a8a24ecffa8a225b2be2a 
 #
