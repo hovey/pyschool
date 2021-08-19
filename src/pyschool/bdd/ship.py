@@ -9,6 +9,8 @@ class Ship:
     Attributes:
         is_dead (bool): If True, the ship is dead. If False, the ship is not
             dead.
+        is_hit (bool): If True, the ship has been hit. If False, the ship has
+            not been hit.
 
     Keyword Arguments:
         start (Tuple[int, int]): The start coordinate of the ship.
@@ -22,6 +24,7 @@ class Ship:
                 self._hit_map[(i, j)] = False
 
         self._is_dead = False
+        self.is_hit = False
 
     def guess(self, coordinate: Tuple[int, int]) -> bool:
         """Check if the ship has been hit.
@@ -39,6 +42,7 @@ class Ship:
         )
         if is_hit:
             self._hit_map[coordinate] = True
+            self.is_hit = True
 
     @property
     def is_dead(self) -> bool:
@@ -47,3 +51,5 @@ class Ship:
             return self._is_dead
 
         self._is_dead = all([is_hit for is_hit in self._hit_map.values()])
+
+        return self._is_dead

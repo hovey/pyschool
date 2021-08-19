@@ -45,9 +45,9 @@ def a_ship_is_nearly_dead(board):
 @given("The game is nearly over")
 def the_game_is_nearly_over(board):
     for ship in board.ships:
-        ship.is_dead = True
+        ship._is_dead = True
 
-    board.ships[0].is_dead = False
+    board.ships[0]._is_dead = False
 
 
 @when("A correct hit is called")
@@ -72,12 +72,12 @@ def ship_is_hit(board):
 
 @then("No ship is hit")
 def no_ship_is_hit(board):
-    assert any([ship.is_hit for ship in board.ships])
+    assert not any([ship.is_hit for ship in board.ships])
 
 
 @then("The ship is sunk")
 def the_ship_is_sunk(board):
-    assert board.ships[0].is_sunk
+    assert board.ships[0].is_dead
 
 
 @then("The game is over")
