@@ -31,6 +31,7 @@ The **pyschool** repository demonstrates
   * Separation of concern
   * Interface versus implementation
 * Singleton versus Collections, part of [REST](https://restfulapi.net/resource-naming/)
+* Test Driven Design (TDD) by Paul Everitt, 2020-06-10, [PyCharm Guide](https://www.jetbrains.com/pycharm/guide/tutorials/visual_pytest/background/)
 
 ## Pythonic Practices
 

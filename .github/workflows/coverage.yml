@@ -29,6 +29,7 @@ jobs:
         run: |
           pip install pytest
           pip install pytest-cov
+          pip install pytest-bdd
           pip install pyyaml
           # cd zfolder
           pip install -e .
