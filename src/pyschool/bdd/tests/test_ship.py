@@ -21,9 +21,9 @@ def test_ship_killed():
     pass
 
 
-@given("A ship", target_fixture=ship)
+@given("A ship", target_fixture="ship")
 def a_ship():
-    return Ship(start=(0, 0), end=(0, 3))
+    return Ship(start=(0, 0), end=(1, 3))
 
 
 @given("The ship is nearly dead")
@@ -49,7 +49,7 @@ def the_ship_has_been_hit(ship):
 
 @then("The ship has been missed")
 def the_ship_has_been_missed(ship):
-    assert not any(list(ship._hit_map.values))
+    assert not any(list(ship._hit_map.values()))
 
 
 @then("The ship is dead")
