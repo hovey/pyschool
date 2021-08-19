@@ -6,9 +6,5 @@ bool_key = True
 person = {
     "name": "Jason Smith",
     "age": 26,
-    "hobbies": [
-        "hockey",
-        "cooking",
-        "quilting"
-    ]
+    "hobbies": ["hockey", "cooking", "quilting"],
 }

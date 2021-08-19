@@ -6,6 +6,7 @@ import numpy as np
 
 from pubsub.reader_base import ReaderBase
 
+
 class Reader(ReaderBase):
     """
     A reader for json data.
@@ -14,8 +15,8 @@ class Reader(ReaderBase):
         file_path (str): The path to the file containing the data.
         _data (dict): The data read from the file.
     """
-    def __init__(self,
-                 file_path: str):
+
+    def __init__(self, file_path: str):
         """
         The init method of the csv.Reader class.
 
@@ -38,6 +39,6 @@ class Reader(ReaderBase):
         """
         # Read the data from the file
         with open(self.file_path) as fin:
-            self._data = np.genfromtxt(fin, dtype=float, comments='#', delimiter=',')
+            self._data = np.genfromtxt(fin, dtype=float, comments="#", delimiter=",")
 
         # return data  # <-- no need to return, just set member data

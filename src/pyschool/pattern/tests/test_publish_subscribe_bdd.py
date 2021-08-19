@@ -1,6 +1,10 @@
 from pytest_bdd import scenario, given, when, then
 
-from pyschool.pattern.publish_subscribe import Publisher, PublisherEvent, ConcreteSubscriber
+from pyschool.pattern.publish_subscribe import (
+    Publisher,
+    PublisherEvent,
+    ConcreteSubscriber,
+)
 
 
 @scenario("publisher.feature", "A Publisher is constructed")

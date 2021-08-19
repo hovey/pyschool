@@ -12,8 +12,8 @@ class Shape(ABC):
     Attributes:
         _shape_params (dict): The attributes representing the shape
     """
-    def __init__(self,
-                 **kwargs):
+
+    def __init__(self, **kwargs):
         """
         The init method of the Shape class
 

@@ -10,6 +10,7 @@ class Model(Shape):
     """
     The circle.Model class defines a circle
     """
+
     def __init__(self, **kwargs):
         """
         The init method of the circle.Model class
@@ -26,4 +27,4 @@ class Model(Shape):
         Returns:
             area (float): The area of the shape
         """
-        return math.pi * self._shape_params['radius']**2
+        return math.pi * self._shape_params["radius"] ** 2

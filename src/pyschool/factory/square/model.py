@@ -9,6 +9,7 @@ class Model(Shape):
     """
     The square.Model class defines a square
     """
+
     def __init__(self, **kwargs):
         """
         The init method of the square.Model class
@@ -25,4 +26,4 @@ class Model(Shape):
         Returns:
             area (float): The area of the shape
         """
-        return self._shape_params['side_length']**2
+        return self._shape_params["side_length"] ** 2

@@ -38,16 +38,19 @@ class Controller(IController):
         __filenames (List[str]): A list of paths to scan dicoms for
             all patients.
     """
-    def __init__(self,
-                 organs: List[str] = None,
-                 train_split: float = 0.7,
-                 val_split: float = 0.15,
-                 test_split: float = 0.15,
-                 write_loc: str = '/data/wg-p2m/ptm/data',
-                 read_loc: str = '/data/wg-p2m/IRCAD/3Dircadb1',
-                 random_seed: int = 42,
-                 read_mode: str = 'dicom',
-                 write_mode: str = 'numpy'):
+
+    def __init__(
+        self,
+        organs: List[str] = None,
+        train_split: float = 0.7,
+        val_split: float = 0.15,
+        test_split: float = 0.15,
+        write_loc: str = "/data/wg-p2m/ptm/data",
+        read_loc: str = "/data/wg-p2m/IRCAD/3Dircadb1",
+        random_seed: int = 42,
+        read_mode: str = "dicom",
+        write_mode: str = "numpy",
+    ):
         """
         The init method of the Controller class
 
@@ -72,18 +75,20 @@ class Controller(IController):
             write_mode (str): The type of file to which to write.
                 Defaults to 'numpy'.
         """
-        super().__init__(organs=organs,
-                         train_split=train_split,
-                         val_split=val_split,
-                         test_split=test_split,
-                         write_loc=write_loc,
-                         read_loc=read_loc,
-                         random_seed=random_seed)
-                         # read_mode=read_mode)
+        super().__init__(
+            organs=organs,
+            train_split=train_split,
+            val_split=val_split,
+            test_split=test_split,
+            write_loc=write_loc,
+            read_loc=read_loc,
+            random_seed=random_seed,
+        )
+        # read_mode=read_mode)
 
         # Set values of mutable arguments
         if not organs:
-            organs = ['bone', 'skin']
+            organs = ["bone", "skin"]
 
         # Set class attributes
         self._factory = Factory()
@@ -112,7 +117,6 @@ class Controller(IController):
         for path, fnames in dsets.items():
             self._write(path=path, filenames=fnames)
 
-
     @property
     def datasets(self) -> Dict[str, List[str]]:
         """
@@ -124,23 +128,24 @@ class Controller(IController):
                 be read.
         """
         # Split train, test, val sets
-        test_size = self._test_split / (self._train_split +
-                                        self._val_split +
-                                        self._test_split)
-        val_size = self._val_split / (self._train_split +
-                                      self._val_split)
+        test_size = self._test_split / (
+            self._train_split + self._val_split + self._test_split
+        )
+        val_size = self._val_split / (self._train_split + self._val_split)
 
-        f_tv, fnames_test = train_test_split(self._filenames,
-                                             test_size=test_size,
-                                             random_state=self._rs)
-        fnames_train, fnames_val = train_test_split(f_tv,
-                                                    test_size=val_size,
-                                                    random_state=self._rs)
+        f_tv, fnames_test = train_test_split(
+            self._filenames, test_size=test_size, random_state=self._rs
+        )
+        fnames_train, fnames_val = train_test_split(
+            f_tv, test_size=val_size, random_state=self._rs
+        )
 
         # Get paths to storage directories and set up dictionary
-        dsets = {os.path.join(self.write_loc, 'train'): fnames_train,
-                 os.path.join(self.write_loc, 'validation'): fnames_val,
-                 os.path.join(self.write_loc, 'test'): fnames_test}
+        dsets = {
+            os.path.join(self.write_loc, "train"): fnames_train,
+            os.path.join(self.write_loc, "validation"): fnames_val,
+            os.path.join(self.write_loc, "test"): fnames_test,
+        }
 
         return dsets
 
@@ -157,14 +162,15 @@ class Controller(IController):
         # matching 3Dircadb1.*
         if not self.__filenames:
             filenames = []
-            for path in Path(self.read_loc).rglob('3Dircadb1.*'):
+            for path in Path(self.read_loc).rglob("3Dircadb1.*"):
                 if not path.is_dir():
                     continue
 
                 # Get the files in the directory
-                path = os.path.join(path, 'PATIENT_DICOM')
-                filenames.extend([os.path.join(path, fname)
-                                  for fname in os.listdir(path)])
+                path = os.path.join(path, "PATIENT_DICOM")
+                filenames.extend(
+                    [os.path.join(path, fname) for fname in os.listdir(path)]
+                )
 
             self.__filenames = filenames
 
@@ -174,8 +180,8 @@ class Controller(IController):
         """
         Creates the directories to which the data will be written.
         """
-        datasets = ['train', 'test', 'validation']
-        data_types = ['scans', 'masks']
+        datasets = ["train", "test", "validation"]
+        data_types = ["scans", "masks"]
         for dset in datasets:
             for dtype in data_types:
                 # Make the directory. If it exists, delete it and
@@ -200,9 +206,7 @@ class Controller(IController):
                 item.unlink()
         directory.rmdir()
 
-    def _write(self,
-               path: str,
-               filenames: List[str]):
+    def _write(self, path: str, filenames: List[str]):
         """
         Writes the masks and scans to the provided path.
 

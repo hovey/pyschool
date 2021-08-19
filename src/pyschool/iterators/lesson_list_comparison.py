@@ -4,7 +4,7 @@
 
 # Skills: lists, list comprehension
 
-# There are three students, Alice, Bob, Cali, enrolled in the 
+# There are three students, Alice, Bob, Cali, enrolled in the
 # Python course. The teacher of the course has a roster of the first names:
 roster = ["Alice", "Bob", "Cali"]
 print(f"The roster of students: {roster}")
@@ -16,4 +16,3 @@ print(f"The students currently in attendance: {attendance}")
 # The teacher compares the list of present students to the roster:
 present = [item in attendance for item in roster]
 print(f"The roster converted to a Boolean list: {present}")
-

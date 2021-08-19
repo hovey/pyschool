@@ -1,11 +1,11 @@
 # getting started with matplotlib
-# reference: 
+# reference:
 # https://matplotlib.org/examples/showcase/anatomy.html
-# https://realpython.com/python-matplotlib-guide/  
+# https://realpython.com/python-matplotlib-guide/
 # future items:
 # https://realpython.com/python-itertools/
 # https://dbader.org/blog/python-first-class-functions
-# 
+#
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.ticker import AutoMinorLocator, MultipleLocator, FuncFormatter
@@ -13,17 +13,19 @@ from matplotlib.ticker import AutoMinorLocator, MultipleLocator, FuncFormatter
 np.random.seed(19680801)
 
 X = np.linspace(0.5, 3.5, 100)
-Y1 = 3+np.cos(X)
-Y2 = 1+np.cos(1+X/0.75)/2
+Y1 = 3 + np.cos(X)
+Y2 = 1 + np.cos(1 + X / 0.75) / 2
 Y3 = np.random.uniform(Y1, Y2, len(X))
 
-fig = plt.figure(figsize=(8, 8)) # 8 inches wide, 8 inches tall
+fig = plt.figure(figsize=(8, 8))  # 8 inches wide, 8 inches tall
 ax = fig.add_subplot(1, 1, 1, aspect=1)
+
 
 def minor_tick(x, pos):
     if not x % 1.0:
         return ""
     return "%.2f" % x
+
 
 ax.xaxis.set_major_locator(MultipleLocator(1.000))
 ax.xaxis.set_minor_locator(AutoMinorLocator(4))
@@ -34,34 +36,53 @@ ax.xaxis.set_minor_formatter(FuncFormatter(minor_tick))
 ax.set_xlim(0, 4)
 ax.set_ylim(0, 4)
 
-ax.tick_params(which='major', width=1.0)
-ax.tick_params(which='major', length=10)
-ax.tick_params(which='minor', width=1.0, labelsize=10)
-ax.tick_params(which='minor', length=5, labelsize=10, labelcolor='0.25')
+ax.tick_params(which="major", width=1.0)
+ax.tick_params(which="major", length=10)
+ax.tick_params(which="minor", width=1.0, labelsize=10)
+ax.tick_params(which="minor", length=5, labelsize=10, labelcolor="0.25")
 
-ax.grid(linestyle="--", linewidth=0.5, color='0.25', zorder=-10)
+ax.grid(linestyle="--", linewidth=0.5, color="0.25", zorder=-10)
 
 ax.plot(X, Y1, c=(0.25, 0.25, 1.00), lw=2, label="Blue signal", zorder=10)
 ax.plot(X, Y2, c=(1.00, 0.25, 0.25), lw=2, label="Red signal")
-ax.plot(X, Y3, linewidth=0, marker='o', markerfacecolor='w', markeredgecolor='k')
+ax.plot(X, Y3, linewidth=0, marker="o", markerfacecolor="w", markeredgecolor="k")
 
-ax.set_title("Anatomy of a figure", fontsize=20, verticalalignment='bottom')
+ax.set_title("Anatomy of a figure", fontsize=20, verticalalignment="bottom")
 ax.set_xlabel("X axis label")
 ax.set_ylabel("Y axis label")
 
 ax.legend()
 
+
 def circle(x, y, radius=0.15):
     from matplotlib.patches import Circle
     from matplotlib.patheffects import withStroke
-    circle = Circle((x, y), radius, clip_on=False, zorder=10, linewidth=1,
-        edgecolor='black', facecolor=(0, 0, 0, 0.0125),
-        path_effects=[withStroke(linewidth=5, foreground='w')])
+
+    circle = Circle(
+        (x, y),
+        radius,
+        clip_on=False,
+        zorder=10,
+        linewidth=1,
+        edgecolor="black",
+        facecolor=(0, 0, 0, 0.0125),
+        path_effects=[withStroke(linewidth=5, foreground="w")],
+    )
     ax.add_artist(circle)
 
+
 def text(x, y, text):
-    ax.text(x, y, text, backgroundcolor="white",
-        ha='center', va='top', weight='bold', color='blue')
+    ax.text(
+        x,
+        y,
+        text,
+        backgroundcolor="white",
+        ha="center",
+        va="top",
+        weight="bold",
+        color="blue",
+    )
+
 
 # Minor tick
 circle(0.50, -0.10)
@@ -111,7 +132,7 @@ text(3.00, 2.80, "Grid")
 circle(3.70, 3.80)
 text(3.70, 3.60, "Legend")
 
-# Axes 
+# Axes
 circle(0.5, 0.5)
 text(0.5, 0.3, "Axes")
 
@@ -119,25 +140,34 @@ text(0.5, 0.3, "Axes")
 circle(-0.3, 0.5)
 text(-0.3, 0.3, "Figure")
 
-color = 'blue'
-ax.annotate('Spines', xy=(4.0, 0.35), xycoords='data',
-    xytext=(3.3, 0.5), textcoords='data',
-    weight='bold', color=color, 
-    arrowprops=dict(arrowstyle='->',
-        connectionstyle="arc3",
-        color=color))
+color = "blue"
+ax.annotate(
+    "Spines",
+    xy=(4.0, 0.35),
+    xycoords="data",
+    xytext=(3.3, 0.5),
+    textcoords="data",
+    weight="bold",
+    color=color,
+    arrowprops=dict(arrowstyle="->", connectionstyle="arc3", color=color),
+)
 
-ax.annotate('', xy=(3.15, 0.0), xycoords='data',
-    xytext=(3.45, 0.45), textcoords='data',
-    weight='bold', color=color,
-    arrowprops=dict(arrowstyle='->',
-        connectionstyle="arc3",
-        color=color))
+ax.annotate(
+    "",
+    xy=(3.15, 0.0),
+    xycoords="data",
+    xytext=(3.45, 0.45),
+    textcoords="data",
+    weight="bold",
+    color=color,
+    arrowprops=dict(arrowstyle="->", connectionstyle="arc3", color=color),
+)
 
-ax.text(4.0, -0.4, "Made with https://matplotlib.org",
-    fontsize=10, ha="right", color='0.5')
+ax.text(
+    4.0, -0.4, "Made with https://matplotlib.org", fontsize=10, ha="right", color="0.5"
+)
 
 plt.show()
 
 fig.savefig("anatomy_of_figure.pdf")
-fig.savefig("anatomy_of_figure_tight.pdf", bbox_inches='tight')
+fig.savefig("anatomy_of_figure_tight.pdf", bbox_inches="tight")

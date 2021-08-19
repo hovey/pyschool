@@ -1,7 +1,8 @@
-#from abc import ABCMeta
+# from abc import ABCMeta
 import abc
 
-class Animal():
+
+class Animal:
 
     __metaclass__ = abc.ABCMeta
 
@@ -11,20 +12,20 @@ class Animal():
 
     @abc.abstractmethod
     def speak(self):
-        print('I am an abstract animal.')
+        print("I am an abstract animal.")
 
     def say_name(self):
-        sentence = f'My name is {self.name}.'
+        sentence = f"My name is {self.name}."
         print(sentence)
+
 
 # Dog class
 class Dog(Animal):
-
     def speak(self):
-        print('Bark! Bark! I am a dog.')
+        print("Bark! Bark! I am a dog.")
+
 
 # Goat class
 class Goat(Animal):
-
     def speak(self):
-        print('Baa! Baa! I am a goat.')
+        print("Baa! Baa! I am a goat.")

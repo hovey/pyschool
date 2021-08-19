@@ -7,16 +7,16 @@ import json
 
 def main(argv):
 
-    help_string = '$ python client_experiment.py input_file.json'
+    help_string = "$ python client_experiment.py input_file.json"
 
     try:
         input_file = argv[0]
-        input_file_base = input_file.split('.')[0]
+        input_file_base = input_file.split(".")[0]
     except IndexError as error:
-        print(f'Error: {error}.')
-        print('Check script pattern: ' + help_string)
-        print('Abnormal script termination.')
-        sys.exit('No input file specified.')
+        print(f"Error: {error}.")
+        print("Check script pattern: " + help_string)
+        print("Abnormal script termination.")
+        sys.exit("No input file specified.")
 
     with open(input_file) as f:
         model = json.load(f)
@@ -35,10 +35,12 @@ def main(argv):
     eigenvalues = linalg.eigvals(K, M)
     frequencies = np.sqrt(eigenvalues)
 
-    print('Initial frequency and period content:')
+    print("Initial frequency and period content:")
     for i, freq in enumerate(frequencies, start=1):
         period = 2 * np.pi / np.real(freq)
-        print(f'  frequency {i}: {freq} radians/second    \n=>   period {i}: {period} seconds.')
+        print(
+            f"  frequency {i}: {freq} radians/second    \n=>   period {i}: {period} seconds."
+        )
 
     # period_max = 2 * np.pi / np.real(np.min(frequencies))  # second
 
@@ -57,14 +59,18 @@ def main(argv):
     t_start = model.get("time_start", 0.0)  # seconds
     # t_stop = model.get("time_stop", 0.5 * period_max)  # seconds
     t_stop = model.get("time_stop", 1.0)  # seconds
-    dt = model.get("time_step", 0.1)  # seconds, delta_t time step; 10 Hz equivalent default
+    dt = model.get(
+        "time_step", 0.1
+    )  # seconds, delta_t time step; 10 Hz equivalent default
 
     if t_stop > t_start:
         nts = int((t_stop - t_start) / dt)
     else:
-        print(f'Time start and stop error.  Assure t_stop = {t_stop} > t_start = {t_start}')
-        sys.exit('Error in time parameters input.')  # early exit 
-    
+        print(
+            f"Time start and stop error.  Assure t_stop = {t_stop} > t_start = {t_start}"
+        )
+        sys.exit("Error in time parameters input.")  # early exit
+
     t = np.linspace(t_start, t_stop, num=nts, endpoint=True)
 
     # collect parameters and initial conditions
@@ -72,7 +78,7 @@ def main(argv):
     # initial_conditions = [u1_at_0, u2_at_0, u1dot_at_0, u2dot_at_0]
 
     # solver_odeint = 0
-    
+
     # if solver_odeint:
     #     # solution = odeint(dudt_rhs, initial_conditions, t, args=(parameters,), atol=abs_error, rtol=rel_error)
     #     # solution = odeint(dudt_rhs, initial_conditions, t, args=(parameters,), atol=abs_error, rtol=rel_error, printmessg=1)
@@ -93,7 +99,7 @@ def main(argv):
     #     # unpack displacements
     #     u1 = solution_ivp.y[0, :]
     #     u2 = solution_ivp.y[1, :]
-    
+
     #     # unpack velocities
     #     u1dot = solution_ivp.y[2, :]
     #     u2dot = solution_ivp.y[3, :]
@@ -102,7 +108,9 @@ def main(argv):
     # u1ddot = np.gradient(u1dot, t, edge_order=2)
     # u2ddot = np.gradient(u2dot, t, edge_order=2)
 
-    use_surrogate_experiment = 1  #  0 for real experimental data, 1 for stand-in temporary data
+    use_surrogate_experiment = (
+        1  #  0 for real experimental data, 1 for stand-in temporary data
+    )
 
     if use_surrogate_experiment:
         # f1, f2 = 0.9, 2  # frequencies, per interval between t_start and t_stop
@@ -126,9 +134,9 @@ def main(argv):
 
         frequencies_check = [omega_mode_1, omega_mode_2]
 
-        print('Frequency verification check with Rao 2011:')
+        print("Frequency verification check with Rao 2011:")
         for i, freq in enumerate(frequencies_check, start=1):
-            print(f'  frequency {i}: {freq} radians/second.')
+            print(f"  frequency {i}: {freq} radians/second.")
 
         r1 = k2 / (-m2 * omega_squared_mode_1 + k2)  # r1 in Rao 2011 Eq 5.11
         r2 = k2 / (-m2 * omega_squared_mode_2 + k2)  # r2 in Rao 2011 Eq 5.11
@@ -137,15 +145,23 @@ def main(argv):
         X1_mode_1b = (-r2 * u1dot_at_0 + u2dot_at_0) / omega_mode_1
 
         # X1_mode_1 = 1.0 / (r2 - r1) * np.sqrt( np.power(X1_mode_1a, 2) + np.power(X1_mode_1b, 2) )
-        X1_mode_1 = -1.0 / (r2 - r1) * np.sqrt( np.power(X1_mode_1a, 2) + np.power(X1_mode_1b, 2) )
+        X1_mode_1 = (
+            -1.0
+            / (r2 - r1)
+            * np.sqrt(np.power(X1_mode_1a, 2) + np.power(X1_mode_1b, 2))
+        )
         # X1_mode_1 = 1.0 / (r2 - r1) * np.sqrt( np.power(r2 * u1_at_0 - u2_at_0, 2) + np.power(-r2 * u1dot_at_0 - u2dot_at_0, 2) / omega_squared_mode_1 )
         # X1_mode_1 = np.abs( 1.0 / (r2 - r1) * np.sqrt( np.power(r2 * u1_at_0 - u2_at_0, 2) + np.power(-r2 * u1dot_at_0 - u2dot_at_0, 2) / omega_squared_mode_1 ))
 
         X1_mode_2a = -r1 * u1_at_0 + u2_at_0
         X1_mode_2b = (r1 * u1dot_at_0 - u2dot_at_0) / omega_mode_2
-        
+
         # X1_mode_2 = 1.0 / (r2 - r1) * np.sqrt( np.power(X1_mode_2a, 2) + np.power(X1_mode_2b, 2) )
-        X1_mode_2 = -1.0 / (r2 - r1) * np.sqrt( np.power(X1_mode_2a, 2) + np.power(X1_mode_2b, 2) )
+        X1_mode_2 = (
+            -1.0
+            / (r2 - r1)
+            * np.sqrt(np.power(X1_mode_2a, 2) + np.power(X1_mode_2b, 2))
+        )
         # X1_mode_2 = 1.0 / (r2 - r1) * np.sqrt( np.power(-r1 * u1_at_0 + u2_at_0, 2) + np.power(r1 * u1dot_at_0 - u2dot_at_0, 2) / omega_squared_mode_2 )
         # X1_mode_2 = np.abs(1.0 / (r2 - r1) * np.sqrt( np.power(-r1 * u1_at_0 + u2_at_0, 2) + np.power(r1 * u1dot_at_0 - u2dot_at_0, 2) / omega_squared_mode_2 ))
 
@@ -155,16 +171,19 @@ def main(argv):
         amplitudes_check = [X1_mode_1, X1_mode_2]
         phases_check = [phi_1, phi_2]
 
-        print('Amplitude and phase check with Rao 2011:')
+        print("Amplitude and phase check with Rao 2011:")
         for i, amp in enumerate(amplitudes_check, start=1):
-            print(f'  amplitude {i}: {amp} meters.')
+            print(f"  amplitude {i}: {amp} meters.")
         for i, phase in enumerate(phases_check, start=1):
-            print(f'  phase {i}: {phase} radians.')
+            print(f"  phase {i}: {phase} radians.")
 
         # displacements
-        u1 = X1_mode_1 * np.cos(omega_mode_1 * t + phi_1) + X1_mode_2 * np.cos(omega_mode_2 * t + phi_2)
-        u2 = r1 * X1_mode_1 * np.cos(omega_mode_1 * t + phi_1) + r2 * X1_mode_2 * np.cos(omega_mode_2 * t + phi_2)
-
+        u1 = X1_mode_1 * np.cos(omega_mode_1 * t + phi_1) + X1_mode_2 * np.cos(
+            omega_mode_2 * t + phi_2
+        )
+        u2 = r1 * X1_mode_1 * np.cos(
+            omega_mode_1 * t + phi_1
+        ) + r2 * X1_mode_2 * np.cos(omega_mode_2 * t + phi_2)
 
     # # energies
     # ke1 = 0.5 * m1 * np.multiply(u1dot, u1dot)  # 1/2 m v^2
@@ -185,10 +204,10 @@ def main(argv):
     channel_strings = ["u1", "u2"]
 
     for str in channel_strings:
-        file_string = input_file_base + '_t_' + str + '.csv'
-        np.savetxt(file_string, np.transpose([t, eval(str)]), delimiter=',')
-        print(f'Saved file: {file_string}')
+        file_string = input_file_base + "_t_" + str + ".csv"
+        np.savetxt(file_string, np.transpose([t, eval(str)]), delimiter=",")
+        print(f"Saved file: {file_string}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main(sys.argv[1:])

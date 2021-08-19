@@ -12,10 +12,10 @@ y = np.linspace(1e-9, 1e9, 100)
 
 fig, ax = plt.subplots()
 # ax.plot(range(2003, 2012, 1), range(200300, 201200, 100))
-#ax.ticklabel_format(axis='x', style='scientific')
+# ax.ticklabel_format(axis='x', style='scientific')
 # ax.ticklabel_format(axis='y', style='scientific')
 
-ax.ticklabel_format(axis='y', style='scientific', scilimits=(0,0))
+ax.ticklabel_format(axis="y", style="scientific", scilimits=(0, 0))
 # ax.ticklabel_format(useOffset=False, style='plain')
 ax.plot(x, y)
 
@@ -26,7 +26,6 @@ bottom, top = ax.get_ylim()
 scale = 10
 ax2.set_ylim(scale * bottom, scale * top)
 ax2.yaxis.tick_right()
-ax2.yaxis.set_label_position('right')
+ax2.yaxis.set_label_position("right")
 
 plt.show()
-

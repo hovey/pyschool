@@ -8,6 +8,7 @@ from PySide2.QtCore import Slot
 def say_hello():
     print("Button clicked, Hello!")
 
+
 app = QApplication(sys.argv)
 
 button = QPushButton("Click me")

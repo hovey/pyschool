@@ -1,6 +1,7 @@
 import sys
 import random
 from PySide2 import QtCore, QtWidgets, QtGui
+
 # import PySide2.QtWidgets
 # from PySide2.QtWidgets import (QApplication, QLabel, QPushButton, QVBoxLayout, QWidget)
 # from PySide2.QtCore import Slot, Qt
@@ -34,7 +35,8 @@ class MyWidget(QtWidgets.QWidget):
         # self.text.setText(self.hello[self.counter])
         # self.counter += 1
 
-if __name__ == "__main__": 
+
+if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     # app = QtWidgets.QApplication(sys.argv)
 

@@ -4,6 +4,7 @@ This module defines the View object for our shapes.
 
 from importlib import import_module
 
+
 class View:
     """
     The View class creates and stores the models
@@ -11,8 +12,8 @@ class View:
     Attributes:
         _models ([model_base.Shape]): The shapes managed by the View
     """
-    def __init__(self,
-                 config=None):
+
+    def __init__(self, config=None):
         """
         The init method of the View class
 
@@ -37,8 +38,8 @@ class View:
         """
         models = []
         for k, v in config.items():
-            model_module = import_module(f'{k}.model')
-            model_class = getattr(model_module, 'Model')
+            model_module = import_module(f"{k}.model")
+            model_class = getattr(model_module, "Model")
             models.append(model_class(**v))
 
         return models

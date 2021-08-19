@@ -1,6 +1,7 @@
 import sys
 
-from PySide2.QtWidgets import (QApplication, QDialog, QLineEdit, QPushButton, QVBoxLayout)
+from PySide2.QtWidgets import QApplication, QDialog, QLineEdit, QPushButton, QVBoxLayout
+
 
 class Form(QDialog):
     def __init__(self, parent=None):
@@ -22,7 +23,7 @@ class Form(QDialog):
         print("Hello %s" % self.edit.text())
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     app = QApplication(sys.argv)
 

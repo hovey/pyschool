@@ -7,6 +7,7 @@ import json
 
 from pubsub.reader_base import ReaderBase
 
+
 class Reader(ReaderBase):
     """
     A reader for json data.
@@ -15,8 +16,8 @@ class Reader(ReaderBase):
         file_path (str): The path to the file containing the data.
         _data (dict): The data read from the file.
     """
-    def __init__(self,
-                 file_path: str):
+
+    def __init__(self, file_path: str):
         """
         The init method of the dicom.Reader class.
 

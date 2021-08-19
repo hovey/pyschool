@@ -41,9 +41,20 @@
 import sys
 from PySide2.QtCore import Qt, Slot
 from PySide2.QtGui import QPainter
-from PySide2.QtWidgets import (QAction, QApplication, QHeaderView, QHBoxLayout, QLabel, QLineEdit,
-                               QMainWindow, QPushButton, QTableWidget, QTableWidgetItem,
-                               QVBoxLayout, QWidget)
+from PySide2.QtWidgets import (
+    QAction,
+    QApplication,
+    QHeaderView,
+    QHBoxLayout,
+    QLabel,
+    QLineEdit,
+    QMainWindow,
+    QPushButton,
+    QTableWidget,
+    QTableWidgetItem,
+    QVBoxLayout,
+    QWidget,
+)
 from PySide2.QtCharts import QtCharts
 
 
@@ -53,9 +64,17 @@ class Widget(QWidget):
         self.items = 0
 
         # Example data
-        self._data = {"Water": 24.5, "Electricity": 55.1, "Rent": 850.0,
-                      "Supermarket": 230.4, "Internet": 29.99, "Bars": 21.85,
-                      "Public transportation": 60.0, "Coffee": 22.45, "Restaurants": 120}
+        self._data = {
+            "Water": 24.5,
+            "Electricity": 55.1,
+            "Rent": 850.0,
+            "Supermarket": 230.4,
+            "Internet": 29.99,
+            "Bars": 21.85,
+            "Public transportation": 60.0,
+            "Coffee": 22.45,
+            "Restaurants": 120,
+        }
 
         # Left
         self.table = QTableWidget()
@@ -93,7 +112,7 @@ class Widget(QWidget):
         # QWidget Layout
         self.layout = QHBoxLayout()
 
-        #self.table_view.setSizePolicy(size)
+        # self.table_view.setSizePolicy(size)
         self.layout.addWidget(self.table)
         self.layout.addLayout(self.right)
 
@@ -205,4 +224,3 @@ if __name__ == "__main__":
 
     # Execute application
     sys.exit(app.exec_())
-    

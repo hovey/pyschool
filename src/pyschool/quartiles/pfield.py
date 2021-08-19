@@ -2,6 +2,7 @@
 import os
 import sys
 import getpass
+
 # import ctypes
 # import exodus
 import matplotlib.pyplot as plt
@@ -12,7 +13,6 @@ user_name = getpass.getuser()  # expect this to be 'chovey' or 'rjterps'
 
 
 class PostProcField:
-
     def __init__(self, folder):
         home = os.getcwd()
         # print(f'pfield.py ProtProcField() server initialized from folder: {home}')
@@ -42,10 +42,8 @@ if __name__ == "__main__":
         pp = PostProcField(sys.argv[1])
 
     except IndexError as error:
-        print('Error' + str(error))
-        print('Error: no input folder target specified.')
-        help_string = './pfield.py <input_folder>'
-        print('Check script pattern: ' + help_string)
+        print("Error" + str(error))
+        print("Error: no input folder target specified.")
+        help_string = "./pfield.py <input_folder>"
+        print("Check script pattern: " + help_string)
         sys.exit()  # early return because no target folder specified
-
-

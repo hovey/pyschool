@@ -7,61 +7,71 @@ from abc import ABC, abstractmethod
 
 # Shape Service
 
-class Shape(ABC):
 
+class Shape(ABC):
     def __init__(self, dx=1, dy=1):
         super().__init__()
-        self._name = 'Shape (abstract)'
-        print(self.name + f' constructor called with length={dx}, width={dy}.')
+        self._name = "Shape (abstract)"
+        print(self.name + f" constructor called with length={dx}, width={dy}.")
         self._dx = dx
         self._dy = dy
 
     def metrics(self):
-        print(f'Metrics for {self.name}:')
-        print(f'  x-dimension is {self.dx}.')
-        print(f'  y-dimension is {self.dy}.')
-        print(f'  area is {self.area()}.')
-        print(f'  perimeter is {self.perimeter()}.\n')
+        print(f"Metrics for {self.name}:")
+        print(f"  x-dimension is {self.dx}.")
+        print(f"  y-dimension is {self.dy}.")
+        print(f"  area is {self.area()}.")
+        print(f"  perimeter is {self.perimeter()}.\n")
 
     @abstractmethod
-    def area(self): pass
+    def area(self):
+        pass
 
     @abstractmethod
-    def perimeter(self): pass
+    def perimeter(self):
+        pass
 
     @property
-    def name(self): return self._name
+    def name(self):
+        return self._name
 
     @name.setter
-    def name(self, value): self._name = value
+    def name(self, value):
+        self._name = value
 
     @property
-    def dx(self): return self._dx
+    def dx(self):
+        return self._dx
 
     @dx.setter
     def dx(self, value):
         if value > 0:
             self._dx = value
         else:
-            raise ValueError('Dimension cannot be set to a negative value.  No change to existing dimension.')
+            raise ValueError(
+                "Dimension cannot be set to a negative value.  No change to existing dimension."
+            )
 
     @property
-    def dy(self): return self._dy
+    def dy(self):
+        return self._dy
 
     @dy.setter
     def dy(self, value):
         if value > 0:
             self._dy = value
         else:
-            raise ValueError('Dimension cannot be set to a negative value.  No change to existing dimension.')
+            raise ValueError(
+                "Dimension cannot be set to a negative value.  No change to existing dimension."
+            )
 
 
 class Rectangle(Shape):
     def __init__(self, dx=1, dy=1):
-    # def __init__(self):
+        # def __init__(self):
         super().__init__(dx, dy)
-        self.name = 'Rectangle'  # use the setter
-        print(self.name + f' constructor called with length={dx}, width={dy}.')
+        self.name = "Rectangle"  # use the setter
+        print(self.name + f" constructor called with length={dx}, width={dy}.")
 
     def area(self):  # override
         return self._dx * self._dy
@@ -73,8 +83,8 @@ class Rectangle(Shape):
 class Square(Rectangle):
     def __init__(self, dx=1):
         super().__init__(dx, dx)
-        self.name = 'Square'  # use the setter
-        print(self.name + f' constructor called with length={dx}.')
+        self.name = "Square"  # use the setter
+        print(self.name + f" constructor called with length={dx}.")
 
     @property
     def dx(self):
@@ -94,23 +104,24 @@ class Square(Rectangle):
         self._dy = value
         self._dx = value  # enforce a square is always a square
 
+
 # Shape Factory
 
-_items = {
-    'rectangle': Rectangle,
-    'square': Square
-}
+_items = {"rectangle": Rectangle, "square": Square}
+
 
 class ShapeFactory(object):
-
     @staticmethod
     def create(item):
         instance = _items.get(item, None)
         if instance:
             return instance()
         else:
-            print(f'Warning: {item} requested but not provided by this factory, returning None.')
+            print(
+                f"Warning: {item} requested but not provided by this factory, returning None."
+            )
             return None
+
 
 # Client
 
@@ -134,15 +145,15 @@ s.metrics()
 # Client now uses with a factory for object creation
 sf = ShapeFactory()
 
-r = sf.create('square')
+r = sf.create("square")
 r.metrics()
 
-c = sf.create('circle')
-# c.metrics()  # This will cause an error because c = None, clients may want to check for None, but 
-               # there is a better way shown below.
+c = sf.create("circle")
+# c.metrics()  # This will cause an error because c = None, clients may want to check for None, but
+# there is a better way shown below.
 
 # The better way:
-items = ['rectangle', 'square', 'circle']
+items = ["rectangle", "square", "circle"]
 objects = []
 
 for item in items:
@@ -150,7 +161,7 @@ for item in items:
     if object:
         objects.append(object)
     else:
-        print('Item is None from factory, so not added to Client object list.')
+        print("Item is None from factory, so not added to Client object list.")
 
 for object in objects:
     object.dx = 2

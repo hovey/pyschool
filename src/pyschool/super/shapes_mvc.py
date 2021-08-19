@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import os
 import numpy as np
+
 # import matplotlib as mpl
 from matplotlib import rc
 import matplotlib.pyplot as plt
@@ -8,14 +9,14 @@ from matplotlib.ticker import MultipleLocator
 from abc import ABC
 
 
-rc('font', **{'family': 'serif', 'serif': ['Computer Modern Roman']})
-rc('text', usetex=True)
+rc("font", **{"family": "serif", "serif": ["Computer Modern Roman"]})
+rc("text", usetex=True)
 
 # Illustration of Model-View-Controller (MVC) and (eventually) RTTI attribution.
 
 # =========
 class Model(ABC):
-# =========
+    # =========
     def __init__(self):
         # origin
         self._X0, self._Y0 = 0, 0
@@ -27,7 +28,7 @@ class Model(ABC):
     def points(self):
         return [self._X0, self._Y0]
 
-    @points.setter  
+    @points.setter
     def points(self, value):
         self._X0 = value[0]
         self._Y0 = value[1]
@@ -41,7 +42,7 @@ class AxisModel(Model):
         if direction == 1:
             self._X = np.array([0, 1])
             self._Y = np.array([0, 0])
-        else:   # direction is y-axis
+        else:  # direction is y-axis
             self._X = np.array([0, 0])
             self._Y = np.array([0, 1])
 
@@ -85,54 +86,71 @@ class BodyModel(Model):
         self._X = value[0][1:]
         self._Y = value[1][1:]
 
+
 # ========
 class View(ABC):
-# ========
+    # ========
     def __init__(self):
-        self._color = 'red'
+        self._color = "red"
 
     @property
     def color(self):
         return self._color
 
-    @color.setter  
+    @color.setter
     def color(self, value):
         self._color = value
 
 
 class AxisView(View):
-    def __init__(self, model, axis, color='blue'):
+    def __init__(self, model, axis, color="blue"):
         super().__init__()
         self._color = color
-        self._color_origin = 'black'
+        self._color_origin = "black"
         x, y = model.points
-        axis.plot(x, y, '-', marker='o', color=self._color, markevery=[-1])  # plot the x-axis or y-axis, depending on model
+        axis.plot(
+            x, y, "-", marker="o", color=self._color, markevery=[-1]
+        )  # plot the x-axis or y-axis, depending on model
 
         x0, y0 = model.origin()
-        axis.plot(x0, y0, 'o', color=self._color_origin)
+        axis.plot(x0, y0, "o", color=self._color_origin)
 
 
 class BodyView(View):
-    def __init__(self, model, axis, color='magenta'):
+    def __init__(self, model, axis, color="magenta"):
         super().__init__()
         self._color = color
-        self._fs = 'none'  # fillstyle
+        self._fs = "none"  # fillstyle
         self._linealpha = 0.5
         x0, y0 = model.origin()
         x, y = model.perimeter()
 
-        axis.plot(x, y, 'o-', color=self._color, fillstyle=self._fs)  # boundary
-        axis.plot([x0, x[0]], [y0, y[0]], 'o-', color='red', fillstyle=self._fs, markevery=[-1])  # tracking line on original x-axis
-        y_axis_index = int((model.number_of_points() - 1)/4)
-        axis.plot([x0, x[y_axis_index]], [y0, y[y_axis_index]], 'o-', color='green', fillstyle=self._fs, markevery=[-1])  # tracking line on original y-axis
-        axis.plot(x0, y0, 'o', color='black', fillstyle=self._fs)  # body origin
+        axis.plot(x, y, "o-", color=self._color, fillstyle=self._fs)  # boundary
+        axis.plot(
+            [x0, x[0]],
+            [y0, y[0]],
+            "o-",
+            color="red",
+            fillstyle=self._fs,
+            markevery=[-1],
+        )  # tracking line on original x-axis
+        y_axis_index = int((model.number_of_points() - 1) / 4)
+        axis.plot(
+            [x0, x[y_axis_index]],
+            [y0, y[y_axis_index]],
+            "o-",
+            color="green",
+            fillstyle=self._fs,
+            markevery=[-1],
+        )  # tracking line on original y-axis
+        axis.plot(x0, y0, "o", color="black", fillstyle=self._fs)  # body origin
 
 
 # ===========
 # Controllers
 # ===========
 def offset(points, offsets=[0, 0]):
-    """ Given a list of reference points [X, Y], offset them in 
+    """Given a list of reference points [X, Y], offset them in
     the x-axis and the y-axis.
     """
     # x = X + offset_x
@@ -142,8 +160,9 @@ def offset(points, offsets=[0, 0]):
     y = points[1] + offsets[1]
     return [x, y]
 
+
 def simple_shear(points, shear_12=0):
-    """ Given a list of reference points [X, Y], simple shear them in 
+    """Given a list of reference points [X, Y], simple shear them in
     the x-axis by distance shear_x (Length) to the current points [x, y].
     """
     # x = X + shear_12 * Y
@@ -153,8 +172,9 @@ def simple_shear(points, shear_12=0):
     y = points[1]
     return [x, y]
 
+
 def rotate(points, angle=0):
-    """ Given list of reference points [X, Y], rotate them about the 
+    """Given list of reference points [X, Y], rotate them about the
     z-axis by angle R (radians) to the current points [x, y].
     """
     # x = np.cos(R) * X - np.sin(R) * Y
@@ -165,10 +185,11 @@ def rotate(points, angle=0):
     y = np.sin(angle) * X + np.cos(angle) * Y
     return [x, y]
 
+
 def stretch(points, stretches=[1, 1]):
-    """ Given a list of reference points [X, Y], simple stretch j
-    by factor stretches[0] in the x-direction and 
-    by factor stretches[1] in the y-direction 
+    """Given a list of reference points [X, Y], simple stretch j
+    by factor stretches[0] in the x-direction and
+    by factor stretches[1] in the y-direction
     to the current points [x, y].
     """
     x = stretches[0] * points[0]
@@ -182,56 +203,56 @@ def stretch(points, stretches=[1, 1]):
 fig = plt.figure(figsize=(6, 6))  # inches, (wide, tall)
 ax = fig.add_subplot(1, 1, 1)
 
-RADTODEG = 180.0/np.pi
-DEGTORAD = 1.0/RADTODEG
+RADTODEG = 180.0 / np.pi
+DEGTORAD = 1.0 / RADTODEG
 
 xaxis = AxisModel(direction=1)  # create
 p = xaxis.points  # read
 o = [-5, -4]  # offset
 xaxis.points = offset(p, o)  # update
-gb = AxisView(xaxis, ax, 'red')  # view
+gb = AxisView(xaxis, ax, "red")  # view
 
 yaxis = AxisModel(direction=2)  # create
 p = yaxis.points  # read
 yaxis.points = offset(p, o)  # update
-gb = AxisView(yaxis, ax, 'green')  # view
+gb = AxisView(yaxis, ax, "green")  # view
 
 body = BodyModel()  # create
-gb = BodyView(body, ax, 'dimgray')  # view
+gb = BodyView(body, ax, "dimgray")  # view
 
 body = BodyModel()  # create
 r = 30 * DEGTORAD  # radians
 body.points = rotate(body.points, r)  # read then update
 o = [4, 3]  # offset
 body.points = offset(body.points, o)  # read then update
-gb = BodyView(body, ax, 'blue')  # view
+gb = BodyView(body, ax, "blue")  # view
 
 body = BodyModel()  # create
 s = 1  # shear
 body.points = simple_shear(body.points, s)  # read then update
 o = [-3, 2]  # offset
 body.points = offset(body.points, o)  # read then update
-gb = BodyView(body, ax, 'magenta')  # view
+gb = BodyView(body, ax, "magenta")  # view
 
 body = BodyModel()  # create
 s = [1.5, 2]  # stretches
 body.points = stretch(body.points, s)  # read then update
 o = [3, -4]  # offset
 body.points = offset(body.points, o)  # read then update
-gb = BodyView(body, ax, 'orange')  # view
+gb = BodyView(body, ax, "orange")  # view
 
-ax.axis('equal')
+ax.axis("equal")
 
 # major axes
 ax.xaxis.set_major_locator(MultipleLocator(1.0))
 ax.yaxis.set_major_locator(MultipleLocator(1.0))
-ax.grid(b=True, which='major', linestyle=':')
+ax.grid(b=True, which="major", linestyle=":")
 
 # minor axes
 # no operations
 
-ax.set_xlabel(r'reference configuration $X_1, x_1$')
-ax.set_ylabel(r'reference configuration $X_2, x_2$')
+ax.set_xlabel(r"reference configuration $X_1, x_1$")
+ax.set_ylabel(r"reference configuration $X_2, x_2$")
 a = 8
 b = a
 ax.set_xlim(-a, a)
@@ -245,6 +266,5 @@ print_to_pdf = 0
 if print_to_pdf:
     script_name = os.path.basename(__file__)
     figure_name = os.path.splitext(script_name)[0]
-    print(f'Saving figure as {figure_name}.pdf')
-    fig.savefig(figure_name + '.pdf', bbox_inches='tight')
-
+    print(f"Saving figure as {figure_name}.pdf")
+    fig.savefig(figure_name + ".pdf", bbox_inches="tight")

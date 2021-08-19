@@ -6,54 +6,55 @@ from abc import ABC, abstractmethod
 
 
 class IPublisher(ABC):
-    """ The Interface class for publishers in the publish-subscribe design pattern. """
+    """The Interface class for publishers in the publish-subscribe design pattern."""
+
     def __init__(self, **kwargs):
-        """ The init method of the IPublisher class. """
+        """The init method of the IPublisher class."""
         super().__init__()
 
     @abstractmethod
-    def connect(self, ISubscriber, callback:str=None):
-        """ 
-        Connects the subscriber with the callback string, 
-        which is the same as the subsriber's callback method. 
+    def connect(self, ISubscriber, callback: str = None):
+        """
+        Connects the subscriber with the callback string,
+        which is the same as the subsriber's callback method.
 
-        If no callback is specified, then default callback 
+        If no callback is specified, then default callback
         "update" is used.
 
-        The ISubscriber interface requires implementation of 
+        The ISubscriber interface requires implementation of
         the "udpate" method.
         """
         pass
 
     @abstractmethod
     def disconnect(self, ISubscriber):
-        """ 
-        Disconnects the subscriber from the publisher's subscriber list. 
+        """
+        Disconnects the subscriber from the publisher's subscriber list.
         """
         pass
 
     @abstractmethod
     def publish(self):
-        """ Notifes subscribers through a subscriber's callback. """ 
+        """Notifes subscribers through a subscriber's callback."""
         pass
 
     @property
     @abstractmethod
     def name(self):
-        """ Returns the string name given to identify a class instance. """
+        """Returns the string name given to identify a class instance."""
 
     @property
     @abstractmethod
     def subscribers(self):
-        """ Returns a dictionary of the subscribers and callbacks. """
+        """Returns a dictionary of the subscribers and callbacks."""
         pass
 
     @property
     @abstractmethod
     def subscriber_count(self):
-        """ (int) Returns the number of subscribers this publisher has.
-        """
+        """(int) Returns the number of subscribers this publisher has."""
         pass
+
 
 class PublisherBase(IPublisher):
     def __init__(self, **kwargs):
@@ -61,9 +62,9 @@ class PublisherBase(IPublisher):
         _kwargs = kwargs
         self._name = kwargs.get("name", "Unknown Name")
         self._subscribers = dict()
-        print(f'PublisherBase.__init__() for {self.name}')
+        print(f"PublisherBase.__init__() for {self.name}")
 
-    def connect(self, subscriber, callback:str=None):
+    def connect(self, subscriber, callback: str = None):
         if callback == None:
             callback = "update"
         self._subscribers[subscriber] = callback

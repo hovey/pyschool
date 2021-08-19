@@ -8,6 +8,7 @@ import numpy as np
 # from pyschool.pubsub import IReader
 from pubsub.ireader import IReader
 
+
 class ReaderBase(IReader):
     """
     The Base class for readers.
@@ -16,8 +17,8 @@ class ReaderBase(IReader):
         file_path (str): The path to the file containing the data.
         _data (dict or np.ndarray): The data read from the file.
     """
-    def __init__(self,
-                 file_path: str):
+
+    def __init__(self, file_path: str):
         """
         The init method of the ReaderBase class.
 

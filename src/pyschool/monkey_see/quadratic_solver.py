@@ -1,6 +1,7 @@
 import math
 
-__author__ = 'Apollo'
+__author__ = "Apollo"
+
 
 class quadratic_solver:
     def demo(self):
@@ -21,10 +22,9 @@ class quadratic_solver:
                 print(root1, root2)
 
             else:
-                print('error: no real number roots found. ')
+                print("error: no real number roots found. ")
 
-            solve = int(input('Enter \'1\' to continue, or \'0\' to exit. '))
+            solve = int(input("Enter '1' to continue, or '0' to exit. "))
 
 
 quadratic_solver().demo()
-

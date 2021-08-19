@@ -16,8 +16,8 @@ class IReader(ABC):
         # _data (np.ndarray): The data read from the file.
         _data (dict or np.ndarray): The data read from the file.
     """
-    def __init__(self,
-                 file_path: str):
+
+    def __init__(self, file_path: str):
         """
         The init method of the IReader class.
 
@@ -28,7 +28,7 @@ class IReader(ABC):
 
     @property
     @abstractmethod
-    #def data(self) -> np.ndarray:
+    # def data(self) -> np.ndarray:
     def data(self):
         """
         Reads the file if not already read. Else returns it.

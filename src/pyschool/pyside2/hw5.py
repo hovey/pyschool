@@ -1,6 +1,7 @@
 import sys
 
 from PySide2.QtUiTools import QUiLoader
+
 # from PySide2.QtWidgets import QApplication, QMainWindow
 from PySide2.QtWidgets import QApplication
 from PySide2.QtCore import QFile, QIODevice

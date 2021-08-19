@@ -1,7 +1,7 @@
 import sys
 from PySide2 import QtWidgets, QtCore
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     qApp = QtWidgets.QApplication(sys.argv)
 
     mainWidget = QtWidgets.QWidget()
@@ -9,7 +9,7 @@ if __name__ == '__main__':
     mainLayout = QtWidgets.QGridLayout(mainWidget)
 
     blue = QtWidgets.QWidget(mainWidget)
-    blue.setStyleSheet('background-color: blue')
+    blue.setStyleSheet("background-color: blue")
     blue.setFixedSize(100, 100)
     edit = QtWidgets.QTextEdit(mainWidget)
 

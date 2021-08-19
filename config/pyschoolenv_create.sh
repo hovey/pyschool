@@ -24,6 +24,8 @@ conda update --yes -n base -c defaults conda
 echo "Should it already exist, this environment will be removed:" 
 echo $environ
 conda env remove --name $environ
+echo "(Re)creating the conda environment:"
+conda create --yes --name $environ
 
 conda init bash
 eval "$(conda shell.bash hook)"
@@ -44,6 +46,8 @@ conda install --yes -c anaconda scipy
 
 echo "Upgrading pip"
 python -m pip install --upgrade pip
+python -m pip install pyyaml
+python -m pip install pytest-bdd
 #
 
 echo "Installing the pyschool module in developer mode..."
