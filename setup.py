@@ -20,5 +20,5 @@ setuptools.setup(
     py_modules=[splitext(basename(path))[0] for path in glob("src/*.py")],
     python_requires=">=3.9",
     url="https://github.com/hovey/pyschool",
-    version="0.0.2",
+    version="0.0.3",
 )
