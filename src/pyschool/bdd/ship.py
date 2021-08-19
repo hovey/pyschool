@@ -1,0 +1,1 @@
+"""Define the Ship class."""
