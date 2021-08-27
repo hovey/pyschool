@@ -4,11 +4,15 @@ from typing import Iterable, Iterator, NamedTuple, Tuple, Union
 # Reference: recursive type hinting:
 # https://stackoverflow.com/questions/53845024/defining-a-recursive-type-hint-in-python
 # Garthoks = Union[Garthok, Iterable['Garthoks']]
+# and
+# Forward references:
+# https://www.python.org/dev/peps/pep-0484/#forward-reference
 # Quads = Union[Iterable["Quads"], tuple[Quad, ...]]  # support for recursive type hint
 # Meshes = Union[Iterable["Meshes"], tuple[Mesh, ...]]
 # Ints = Union[Iterable["Ints"], Tuple[int, ...]]
 # Ints = Union[Iterable["Ints"], "tuple[int, ...]"]
 NestedInts = Union[Tuple[int], Iterable["NestedInts"]]
+# NestedInts = Union[Tuple[int], Iterable[Tuple[int, ...]]]
 
 
 class Coordinate(NamedTuple):
