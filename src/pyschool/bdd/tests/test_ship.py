@@ -29,7 +29,7 @@ def a_ship():
 @given("The ship is nearly dead")
 def a_ship_is_nearly_dead(ship):
     ship._hit_map[(0, 1)] = True
-    ship._hit_map[(0, 2)] = True
+    # ship._hit_map[(0, 2)] = True
 
 
 @when("The ship is hit")
