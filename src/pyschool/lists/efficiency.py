@@ -80,6 +80,22 @@ def square_list_recursion():
 
 
 if __name__ == "__main__":
+    vec = (2, 4, 6)
+
+    # Functional
+    squared_vec = tuple(map(lambda x: x ** 2, filter(lambda x: x % 2 == 0, vec)))
+
+    # Pythonic
+    def _is_even(x):
+        return x % 2 == 0
+    squared_vec = tuple((x ** 2 for x in vec if _is_even(x)))
+
+    # Better pythonic
+    def _square(x):
+        return x ** 2
+    squared_vec = tuple((_square(x) for x in vec if _is_even(x)))
+
+    # Timing different techniques.
     v0 = square_list_append()
     v1 = square_list_map()
     v2 = square_list_comprehension_lambda()
