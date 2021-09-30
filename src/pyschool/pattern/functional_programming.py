@@ -329,7 +329,7 @@ We make use `ages` tuple:
 """
 
 """
-The next example is a reshuffle (or reorganizaiton) of the existing scientists tuple
+The next example is a reshuffle (or reorganization) of the existing scientists tuple
 into a new dictionary that holds the field of study as keys and the corresponding
 names of the scientists as values.  We want this as our final result:
 
