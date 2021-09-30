@@ -7,7 +7,6 @@ class Kinematics:
     def __init__(self, *, initial_position: np.ndarray, initial_velocity: np.ndarray):
         self._position = initial_position  # meters
         self._velocity = initial_velocity  # meters per second
-        aa = 4
 
     @property
     def position(self) -> np.ndarray:
@@ -67,16 +66,17 @@ def main(argv):
 
     xf, yf = 1040, 2060  # meters
 
-    k1.update_shows_bug(delta_t=dt)  # will trigger error
-    new_position_with_bug = k1.position
-    assert new_position_with_bug[0] == xf  # meters, succeeds
-    assert new_position_with_bug[1] == yf  # meters, succeeds
+    # k1.update_shows_bug(delta_t=dt)  # will trigger error
+    # new_position_with_bug = k1.position
+    # assert new_position_with_bug[0] == xf  # meters, succeeds
+    # assert new_position_with_bug[1] == yf  # meters, succeeds
 
     k2.update_fixes_bug(delta_t=dt)
     new_position_without_bug = k2.position
     assert new_position_without_bug[0] == xf  # meters, succeeds
     assert new_position_without_bug[1] == yf  # meters, succeeds
-    aa = 4
+
+    print("Finished.")
 
 
 if __name__ == "__main__":
