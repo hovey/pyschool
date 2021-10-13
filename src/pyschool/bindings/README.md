@@ -2,6 +2,8 @@
 
 ## Getting started
 
+See also *[CPython](cpython.md)* and *[Extending Python with C or C++](https://docs.python.org/3/extending/extending.html)*
+
 Install Cython into your conda environment (example shown on macOS).
 
 ```bash
@@ -124,4 +126,5 @@ Cython is 56.136003036631905 times faster than Python.
 * [Cython](https://cython.readthedocs.io/en/latest/src/userguide/language_basics.html) Language Basics
 * sentdex, [video](https://youtu.be/mXuEoqK4bEc) Cython Tutorial - Bridging between Python and C/C++ for performance gains, 10 Jul 2017.
 * [Musings on Cython](https://notes-on-cython.readthedocs.io/en/latest/index.html)
-
+* [Python Bindings: Calling C or C++ from Python](https://realpython.com/python-bindings-overview/#calling-the-function)
+* [Python Bindings Github Repo](https://github.com/realpython/materials/tree/master/python-bindings)

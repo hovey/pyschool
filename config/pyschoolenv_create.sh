@@ -50,6 +50,7 @@ echo "Upgrading pip"
 python -m pip install --upgrade pip
 python -m pip install pyyaml
 python -m pip install pytest-bdd
+python -m pip install invoke
 #
 
 echo "Installing the pyschool module in developer mode..."
