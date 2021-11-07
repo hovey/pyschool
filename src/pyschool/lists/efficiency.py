@@ -88,11 +88,13 @@ if __name__ == "__main__":
     # Pythonic
     def _is_even(x):
         return x % 2 == 0
+
     squared_vec = tuple((x ** 2 for x in vec if _is_even(x)))
 
     # Better pythonic
     def _square(x):
         return x ** 2
+
     squared_vec = tuple((_square(x) for x in vec if _is_even(x)))
 
     # Timing different techniques.
