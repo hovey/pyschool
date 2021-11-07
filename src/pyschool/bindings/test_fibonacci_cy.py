@@ -1,3 +1,12 @@
+"""
+This module demonstrates the timing differences between Fibonacci calculation in
+Python versus in Cython.
+
+We comment out this entire test file for now, as we do not want to it be tested
+as part of continuos integration on check into the repository.
+"""
+
+"""
 import timeit
 
 
@@ -17,3 +26,4 @@ print(f"Python: {py} seconds")
 print("Relative times:")
 ratio: float = py / cy
 print(f"Cython is {ratio} times faster than Python.")
+"""
