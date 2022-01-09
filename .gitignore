@@ -11,3 +11,5 @@ tags
 # egg files
 *.egg-info
 
+# python notebook
+.ipynb_checkpoints
