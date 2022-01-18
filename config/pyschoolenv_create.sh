@@ -45,6 +45,7 @@ conda install --yes -c anaconda pytest-cov
 conda install --yes -c anaconda seaborn
 conda install --yes -c anaconda scikit-image
 conda install --yes -c anaconda scipy
+conda install --yes -c anaconda flask
 
 echo "Upgrading pip"
 python -m pip install --upgrade pip
