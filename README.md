@@ -20,6 +20,7 @@ The **pyschool** repository demonstrates
   * [C.R.U.D.](doc/crud.md)
 * [Client and Service](doc/client_service.md)
 * Production
+  * [Git Summary](doc/git_summary.md)
   * Style (with Black)
   * Test (with Pytest)
   * [Coverage](doc/coverage.md)
