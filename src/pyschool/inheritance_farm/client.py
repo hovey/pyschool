@@ -1,10 +1,7 @@
-#!/usr/bin/env python
-# client
-# from animal import *
-# from animal_factory import *
+"""The client general entry point to exercise the OOP style of Animals."""
 import animal_factory as af
 
-af_instance = af.Animal_Factory()
+af_instance = af.AnimalFactory()
 animals = []  # collection of animals
 
 animals.append(af_instance.create_animal("dog", "Sam"))

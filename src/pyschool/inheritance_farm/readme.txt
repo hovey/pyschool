@@ -32,9 +32,3 @@ API is just "speak()"
 
 dog.speak() returns "bark"
 goat.speak() returns "baa"
-
-Other ideas:
-FEA
-client as graphics program
-elements.draw()
-elements themselves know how to draw themselves, the client need not know this.
