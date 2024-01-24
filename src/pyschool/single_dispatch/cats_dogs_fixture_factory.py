@@ -1,3 +1,15 @@
+"""This module demonstrates a factory, which encapsulates RTTI and eliminates
+the client-side RTTI burden.  The client need only to provide data structures
+serialized to .yml files that can be built by the factory.  Python's built-in
+single dispatch are used.
+
+cd ~/pyschool
+source .venv/bin/activate.fish
+cd src/pyschool/single_dispatch/
+python cats_dogs_fixture_factory.py
+"""
+
+
 from functools import singledispatch
 from pathlib import Path
 from typing import NamedTuple
@@ -76,6 +88,13 @@ def animal_factory(spec: Path) -> Cat | Dog | None:
     return None
 
 
+def name_and_trait(x: Cat | Dog) -> None:
+    """Helper function to print item common to both Cats and Dogs."""
+
+    print(f"My name is {x.trait.name}.")
+    print(f"My language is {x.trait.language}.")
+
+
 @singledispatch
 def paint(arg) -> None:
     """The generic form of a function to be overloaded."""
@@ -87,22 +106,20 @@ def paint(arg) -> None:
 def _(x: Dog) -> None:
     """The paint function that operates on Dogs."""
 
-    print(f"My name is {x.trait.name}")
-    print(f"My language is {x.trait.language}")
+    name_and_trait(x)
 
     # This function makes calls to that are unique to the Dogs data structure.
-    print(f"My colors are red: {x.red}, green: {x.green}, and blue: {x.blue}")
+    print(f"My colors are red: {x.red}, green: {x.green}, and blue: {x.blue}.")
 
 
 @paint.register
 def _(x: Cat) -> None:
     """The paint function that operates on Cats."""
 
-    print(f"My name is {x.trait.name}")
-    print(f"My language is {x.trait.language}")
+    name_and_trait(x)
 
     # This function makes calls to that are unique to the Cats data structure.
-    print(f"I have no colors, but my grayscale is {x.grayscale}")
+    print(f"I have no colors, but my grayscale is {x.grayscale}.")
 
 
 # def test_factory_zoo(fido, selvester):
