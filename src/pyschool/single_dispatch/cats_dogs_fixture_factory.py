@@ -49,7 +49,7 @@ def animal_factory(spec: Path) -> Cat | Dog | None:
     # File IO, read in two yml files to create two databases
     with open(spec, "r", encoding="utf-8") as stream:
         try:
-            db = yaml.safe_load(stream)  # overwrite empty dictionary
+            db = yaml.safe_load(stream)
 
             if db.get("grayscale", False):
                 # only a Cat type has a grayscale
