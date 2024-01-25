@@ -1,7 +1,7 @@
 """This module demonstrates a factory, which encapsulates RTTI and eliminates
 the client-side RTTI burden.  The client need only to provide data structures
 serialized to .yml files that can be built by the factory.  Python's built-in
-single dispatch are used.
+single dispatch is used.
 
 cd ~/pyschool
 source .venv/bin/activate.fish
@@ -89,7 +89,7 @@ def animal_factory(spec: Path) -> Cat | Dog | None:
 
 
 def name_and_trait(x: Cat | Dog) -> None:
-    """Helper function to print item common to both Cats and Dogs."""
+    """Helper function to print item common to both a Cat and a Dog."""
 
     print(f"My name is {x.trait.name}.")
     print(f"My language is {x.trait.language}.")
@@ -104,37 +104,39 @@ def paint(arg) -> None:
 # The overloaded functions
 @paint.register
 def _(x: Dog) -> None:
-    """The paint function that operates on Dogs."""
+    """The paint function that operates on a Dog."""
 
     name_and_trait(x)
 
-    # This function makes calls to that are unique to the Dogs data structure.
-    print(f"My colors are red: {x.red}, green: {x.green}, and blue: {x.blue}.")
+    # This function makes calls to that are unique to the Dog data structure.
+    print(
+        f"I have no grayscale, but my colors are red: {x.red}, green: {x.green}, and blue: {x.blue}."
+    )
 
 
 @paint.register
 def _(x: Cat) -> None:
-    """The paint function that operates on Cats."""
+    """The paint function that operates on a Cat."""
 
     name_and_trait(x)
 
-    # This function makes calls to that are unique to the Cats data structure.
+    # This function makes calls to that are unique to the Cat data structure.
     print(f"I have no colors, but my grayscale is {x.grayscale}.")
 
 
 # def test_factory_zoo(fido, selvester):
 def test_factory_zoo(animals: tuple[Path, ...]) -> None:
-    """Tests that both dogs and cats can be created from a generic
+    """Tests that both a Dog and a Cat can be created from a specific
     animal.yml file."""
 
     # The client
     # A client orders from the Animal factory by providing two different
-    # file specifications that consistent with the data type of objects the
-    # factory can produce
+    # file specifications that are consistent with the data type of objects the
+    # factory can produce.
     aa = [animal_factory(x) for x in animals]
 
     for a in aa:
-        paint(a)
+        paint(a)  # The magic of single dispatch occurs here!
 
     # manual tests
     assert isinstance(aa[0], Dog)  # is it a Dog
