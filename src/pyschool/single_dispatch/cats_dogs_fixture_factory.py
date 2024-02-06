@@ -1,14 +1,21 @@
 """This module demonstrates a factory, which encapsulates RTTI and eliminates
 the client-side RTTI burden.  The client need only to provide data structures
 serialized to .yml files that can be built by the factory.  Python's built-in
-single dispatch is used.
+single dispatch is used.  The factory uses 'match' (PEP 622 - Structural
+Pattern Matching https://peps.python.org/pep-0622/) and therefore the module
+requires Python 3.10 or greater.
 
 cd ~/pyschool
 source .venv/bin/activate.fish
 cd src/pyschool/single_dispatch/
 python cats_dogs_fixture_factory.py
-"""
 
+References:
+
+* Matt Wright, A Gentle Introduction to the Python Match Statement,
+  https://www.wrighters.io/intro-to-python-match-statement/
+
+"""
 
 from functools import singledispatch
 from pathlib import Path
@@ -63,24 +70,49 @@ def animal_factory(spec: Path) -> Cat | Dog | None:
         try:
             db = yaml.safe_load(stream)
 
-            if db.get("grayscale", False):
-                # only a Cat type has a grayscale
-                cc = Cat(
-                    Trait(name=db["name"], language=db["language"]),
-                    grayscale=db["grayscale"],
-                )
-                return cc
-            elif db.get("red", False) and db.get("green") and db.get("blue"):
-                # only a Dog has RGB values
-                dd = Dog(
-                    Trait(db["name"], language=db["language"]),
-                    red=db["red"],
-                    green=db["green"],
-                    blue=db["blue"],
-                )
-                return dd
-            else:
-                raise ValueError(f"Unable to create a Dog or a Cat from spec {spec}.")
+            # # Previous manner, without match of Python 3.10
+            # # if db.get("grayscale", False):
+            # if "grayscale" in db:
+            #     # only a Cat type has a grayscale
+            #     cc = Cat(
+            #         Trait(name=db["name"], language=db["language"]),
+            #         grayscale=db["grayscale"],
+            #     )
+            #     return cc
+            # # elif db.get("red", False) and db.get("green") and db.get("blue"):
+            # elif "red" in db and "green" in db and "blue" in db:
+            #     # only a Dog has RGB values
+            #     dd = Dog(
+            #         Trait(db["name"], language=db["language"]),
+            #         red=db["red"],
+            #         green=db["green"],
+            #         blue=db["blue"],
+            #     )
+            #     return dd
+            # else:
+            #     raise ValueError(f"Unable to create a Dog or a Cat from spec {spec}.")
+
+            # New way, with match of Python 3.10
+            match db:
+                case {"grayscale": int(gg)}:  # only a Cat type has a grayscale
+                    cc = Cat(
+                        Trait(name=db["name"], language=db["language"]),
+                        grayscale=gg,
+                    )
+                    return cc
+                case {"red": int(rr), "green": int(gg), "blue": int(bb)}:
+                    # only a Dog has RGB values
+                    dd = Dog(
+                        Trait(db["name"], language=db["language"]),
+                        red=rr,
+                        green=gg,
+                        blue=bb,
+                    )
+                    return dd
+                case _:
+                    raise ValueError(
+                        f"Unable to create a Cat or a Dog from spec {spec}."
+                    )
 
         except yaml.YAMLError as exc:
             print(exc)
@@ -110,7 +142,7 @@ def _(x: Dog) -> None:
 
     # This function makes calls to that are unique to the Dog data structure.
     print(
-        f"I have no grayscale, but my colors are red: {x.red}, green: {x.green}, and blue: {x.blue}."
+        f"I have no grayscale, but my colors are red: {x.red}, green: {x.green}, and blue: {x.blue}.\n"
     )
 
 
@@ -121,7 +153,7 @@ def _(x: Cat) -> None:
     name_and_trait(x)
 
     # This function makes calls to that are unique to the Cat data structure.
-    print(f"I have no colors, but my grayscale is {x.grayscale}.")
+    print(f"I have no colors, but my grayscale is {x.grayscale}.\n")
 
 
 # def test_factory_zoo(fido, selvester):
