@@ -10,6 +10,14 @@ source .venv/bin/activate.fish
 cd src/pyschool/single_dispatch/
 python cats_dogs_fixture_factory.py
 
+Output:
+My name is Fido.
+My language is bark.
+I have no grayscale, but my colors are red: 11, green: 22, and blue: 33.
+My name is Sylvester.
+My language is meow.
+I have no colors, but my grayscale is 128.
+
 References:
 
 * Matt Wright, A Gentle Introduction to the Python Match Statement,
